@@ -11,8 +11,8 @@
 |
 */
 
-Route::any("/", array(
-    "as" => "user/login",
-    "uses" => "UserController@loginAction"
-    )
-);
+$app->router->any("/{param?}", function($param=""){
+    $response = Response::make("hello",200);
+    $response->headers->set('our key', 'our value');
+    return $response->headers;
+});
