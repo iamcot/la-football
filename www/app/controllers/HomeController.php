@@ -19,8 +19,5 @@ class HomeController extends BaseController {
 	{
 		return View::make('hello');
 	}
-    public function about($id){
-        echo $id;
-    }
 
 }

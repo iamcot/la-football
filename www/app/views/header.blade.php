@@ -1,5 +1,4 @@
 @section('header')
-<div>
-    This is header
+<div id="header">
 </div>
 @show

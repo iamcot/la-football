@@ -1,5 +1,4 @@
 @section('footer')
-<div>
-    This is footer!
+<div id="footer">
 </div>
 @show
