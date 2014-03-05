@@ -11,8 +11,11 @@
 |
 */
 
-$app->router->any("/{param?}", function($param=""){
-    $response = Response::make("hello",200);
-    $response->headers->set('our key', 'our value');
-    return $response->headers;
-});
+Route::any("/", array(
+        'before' => array('birthday'),
+        'after' => 'christmas',
+        function () {
+            return View::make("hello");
+        }
+    )
+);
