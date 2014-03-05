@@ -12,10 +12,11 @@
 */
 
 Route::any("/", array(
-        'before' => array('birthday'),
-        'after' => 'christmas',
+        'before' => 'test:12/12',
+//        'after' => 'test',
         function () {
             return View::make("hello");
+
         }
     )
 );

@@ -79,13 +79,7 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('birthday',function(){
-    if(date("d/m"=='02/03')){
-        return View::make("birthday");
-    }
+Route::filter('test',function($route,$request,$response){
+    return ($response);
 });
-Route::filter('christmas',function(){
-   if(true){
-       return View::make("birthday");
-   }
-});
+
