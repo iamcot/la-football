@@ -20,3 +20,6 @@ Route::any("/", array(
         }
     )
 );
+Route::any('shop','ShopController@index');
+Route::any('shop/{function}','ShopController@{function}');
+
