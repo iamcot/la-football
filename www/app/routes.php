@@ -11,15 +11,9 @@
 |
 */
 
-Route::any("/", array(
-        'before' => 'test:12/12',
-//        'after' => 'test',
-        function () {
-            return View::make("hello");
+Route::any('/','ShopController@index');
+Route::any('football','FootballController@index');
+Route::any('football/admin','FootballController@admin');
+Route::any('football/admin/giai','FootballController@admingiai');
 
-        }
-    )
-);
-Route::any('shop','ShopController@index');
-Route::any('shop/{function}','ShopController@{function}');
 
