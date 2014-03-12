@@ -4,7 +4,8 @@
     <title>{{$title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="src/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    {{HTML::style('src/bootstrap/css/bootstrap-responsive.css')}}
+    {{HTML::style('src/football-style.css')}}
 </head>
 <body>
 @include('header')
@@ -13,6 +14,6 @@
 </div>
 @include('footer')
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="src/bootstrap/js/bootstrap.min.js"></script>
+{{HTML::script('src/bootstrap/js/bootstrap.min.js')}}
 </body>
 </html>
