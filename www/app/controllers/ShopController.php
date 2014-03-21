@@ -2,7 +2,7 @@
 
 class ShopController extends BaseController
 {
-    public function index(){
+    public function get_index(){
         echo 'index';
     }
     public function product(){

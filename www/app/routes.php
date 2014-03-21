@@ -11,8 +11,7 @@
 |
 */
 
-Route::any('football','FootballController@index');
-Route::any('football/admin','FootballController@admin');
-Route::any('football/admin/giai','FootballController@admingiai');
+Route::any('/','ShopController@get_index');
+
 
 
