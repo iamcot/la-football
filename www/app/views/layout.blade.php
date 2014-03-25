@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{isset($pretitle)?$pretitle:Config::get('shop.pretitle')}} {{isset($title)?$title:Config::get('shop.title')}} {{isset($suftitle)?$suftitle:Config::get('shop.suftitle')}}</title>
+    <title>{{isset($pretitle)?$pretitle:Config::get('shop.pretitle')}}
+        {{isset($title)?$title:Config::get('shop.title')}}
+        {{isset($suftitle)?$suftitle:Config::get('shop.suftitle')}}
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     {{HTML::style('src/bootstrap/css/bootstrap-responsive.css')}}
