@@ -11,7 +11,7 @@
 |
 */
 
-Route::any('/','ShopController@get_index');
+Route::controller('/','ShopController');
 
 
 
