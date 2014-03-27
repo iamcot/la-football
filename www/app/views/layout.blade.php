@@ -15,6 +15,13 @@
 @include('header')
 @endif
 <div class="content">
+
+    @if (isset($typeEnd) && $typeEnd=='admin')
+        @include('admin/topnav')
+    @else
+    @include('topnav')
+    @endif
+
     @yield('body')
 </div>
 @include('footer')

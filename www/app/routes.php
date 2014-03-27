@@ -11,6 +11,8 @@
 |
 */
 
+Route::controller('admin','ShopAdminController');
+
 Route::controller('/','ShopController');
 
 
