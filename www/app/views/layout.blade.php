@@ -7,6 +7,7 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
+    {{HTML::style('src/bootstrap/css/bootstrap.css')}}
     {{HTML::style('src/bootstrap/css/bootstrap-responsive.css')}}
     {{HTML::style('src/style.css')}}
 </head>
@@ -14,14 +15,15 @@
 @if (isset($haveHeader) && $haveHeader == 1)
 @include('header')
 @endif
-<div class="content">
+
 
     @if (isset($typeEnd) && $typeEnd=='admin')
         @include('admin/topnav')
     @else
     @include('topnav')
     @endif
-
+<div class="clearfix"></div>
+<div class="container-fluid body">
     @yield('body')
 </div>
 @include('footer')
@@ -29,3 +31,4 @@
 {{HTML::script('src/bootstrap/js/bootstrap.min.js')}}
 </body>
 </html>
+@yield('jscript')
