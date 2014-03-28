@@ -7,4 +7,6 @@ return array(
     'LDOrder'   =>  'Đơn hàng',
     'LDcreate'  =>  'Thêm / Sửa',
     'LDview'    =>  'Xem',
+    'LDFactor'    =>  'Nhà Sản xuất',
+    'LDSale'    =>  'Khuyến mãi',
 );

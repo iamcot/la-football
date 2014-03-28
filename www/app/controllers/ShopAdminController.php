@@ -32,7 +32,7 @@ class ShopAdminController extends BaseController
                 $dbCat->laurl = $input['laurl'];
                 $dbCat->lainfo = $input['lainfo'];
                 $dbCat->laparent_id = $input['laparent_id'];
-                $dbCat->laorder = $input['laparent_id'];
+                $dbCat->laorder = $input['laorder'];
                 $dbCat->save();
 
                 $id = $dbCat->id;
@@ -46,6 +46,10 @@ class ShopAdminController extends BaseController
                             mkdir($destinationPath, 0777, true);
                         }
                         $ext = strtolower($file->getClientOriginalExtension());
+                        if ($input['id'] > 0) {
+                            if (file_exists($destinationPath . '/' . $dbCat->laimage))
+                                unlink($destinationPath . '/' . $dbCat->laimage);
+                        }
                         $filename = trim(str_random(32) . '.' . ($ext));
                         $pathupload = $file->move($destinationPath, $filename);
                         if ($pathupload) {
@@ -53,37 +57,24 @@ class ShopAdminController extends BaseController
                             $dbCat->laimage = $filename;
                             $dbCat->save();
                             $flag = 'view';
-                        }
-                        else {
+                        } else {
                             $flag = 'create';
                         }
                     }
-                }
-                else {
+                } else {
                     $flag = 'create';
                 }
-            }
-            catch (Exception $ex) {
+            } catch (Exception $ex) {
                 echo $ex;
             }
         }
-        $catdb = new Category();
-        $cats = $catdb->treecat()->get();
-        echo '<pre>';
-        var_dump($cats);
-
-//        if ($flag == 'view') {
-//            $this->data['cats'] = $cats;
-//        }
-//        else {
-//            $arrcat = array("0" => 'Thư mục gốc');
-//            foreach ($cats as $cat) {
-//                $arrcat[$cat->id] = $cat->latitle;
-//            }
-//            $this->data['cats'] = $arrcat;
-//        }
-//
-//        return View::make('admin/cat', $this->data);
+        $cats = Category::getCategoriesTree();
+        if ($flag == 'view') {
+            $this->data['cats'] = Category::adminListCat($cats);
+        } else {
+            $this->data['cats'] = Category::adminSelectCat($cats,false, 0);
+        }
+        return View::make('admin/cat', $this->data);
     }
 
     public function getEditcat($id)
@@ -91,26 +82,193 @@ class ShopAdminController extends BaseController
         $dbCat = Category::find($id);
         $this->data['actCat'] = 'cat';
         $this->data['sidecat'] = 'create';
-        $cats = Category::all();
-        $arrcat = array("0" => 'Thư mục gốc');
-        foreach ($cats as $cat) {
-            $arrcat[$cat->id] = $cat->latitle;
-        }
-        $this->data['cats'] = $arrcat;
+        $cats = Category::getCategoriesTree();
         if ($dbCat != null) {
             $this->data['catedit'] = $dbCat;
-        }
-        else {
+            $this->data['cats'] = Category::adminSelectCat($cats,false, $dbCat->laparent_id);
+        } else {
             $this->data['catedit'] = null;
+            $this->data['cats'] = Category::adminSelectCat($cats,false, 0);
         }
         return View::make('admin/cat', $this->data);
     }
 
-    public function anyProduct()
+    public function anyFactor($sidecat = "")
+    {
+        $this->data['actCat'] = 'factor';
+        if ($sidecat != "")
+            $this->data['sidecat'] = $sidecat;
+        else $this->data['sidecat'] = 'view';
+        $flag = $this->data['sidecat'];
+        $input = Input::all();
+        if (count($input) > 0) {
+            try {
+                if ($input['id'] == '')
+                    $dbCat = new Factory();
+                else {
+                    $dbCat = Factory::find($input['id']);
+                    if ($dbCat == null)
+                        return Redirect::to('admin/factor');
+                }
+                $dbCat->latitle = $input['latitle'];
+                $dbCat->laurl = $input['laurl'];
+                $dbCat->lainfo = $input['lainfo'];
+                $dbCat->laorder = $input['laorder'];
+                $dbCat->save();
+
+                $id = $dbCat->id;
+                $flag = 'view';
+                if ($id > 0) {
+                    if (Input::hasFile('laimage')) {
+                        $file = Input::file('laimage');
+                        $destinationPath = 'uploads/factor/' . $id;
+
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0777, true);
+                        }
+                        $ext = strtolower($file->getClientOriginalExtension());
+                        if ($input['id'] > 0) {
+                            if (file_exists($destinationPath . '/' . $dbCat->laimage))
+                                unlink($destinationPath . '/' . $dbCat->laimage);
+                        }
+                        $filename = trim(str_random(32) . '.' . ($ext));
+                        $pathupload = $file->move($destinationPath, $filename);
+                        if ($pathupload) {
+                            $dbCat->find($id);
+                            $dbCat->laimage = $filename;
+                            $dbCat->save();
+                            $flag = 'view';
+                        } else {
+                            $flag = 'create';
+                        }
+                    }
+                } else {
+                    $flag = 'create';
+                }
+            } catch (Exception $ex) {
+                echo $ex;
+            }
+        }
+
+        if ($flag == 'view') {
+            $cats = Factory::all();
+            $this->data['cats'] = $cats;
+        } else {
+        }
+        return View::make('admin/factor', $this->data);
+    }
+
+    public function getEditfactor($id)
+    {
+        $dbCat = Factory::find($id);
+        $this->data['actCat'] = 'factor';
+        $this->data['sidecat'] = 'create';
+        if ($dbCat != null) {
+            $this->data['catedit'] = $dbCat;
+        } else {
+            $this->data['catedit'] = null;
+        }
+        return View::make('admin/factor', $this->data);
+    }
+
+
+    public function anyProduct($sidecat = "")
     {
         $this->data['actCat'] = 'product';
-        return View::make('admin/start', $this->data);
+        if ($sidecat != "")
+            $this->data['sidecat'] = $sidecat;
+        else $this->data['sidecat'] = 'view';
+        $flag = $this->data['sidecat'];
+        $input = Input::all();
+        if (count($input) > 0) {
+            try {
+                if ($input['id'] == '')
+                    $dbCat = new Product();
+                else {
+                    $dbCat = Product::find($input['id']);
+                    if ($dbCat == null)
+                        return Redirect::to('admin/product');
+                }
+                $dbCat->latitle = $input['latitle'];
+                $dbCat->laurl = $input['laurl'];
+                $dbCat->lakeyword = $input['lakeyword'];
+                $dbCat->lashortinfo = $input['lashortinfo'];
+                $dbCat->lauseguide = $input['lauseguide'];
+                $dbCat->laoldprice = $input['laoldprice'];
+                $dbCat->laprice = $input['laprice'];
+                $dbCat->laamount = $input['laamount'];
+                $dbCat->ladatenew = strtotime($input['ladatenew']);
+                $dbCat->lainfo = $input['lainfo'];
+                $dbCat->lacategory_id = $input['lacategory_id'];
+                $dbCat->lamanufactor_id = $input['lamanufactor_id'];
+                $dbCat->save();
+
+                $id = $dbCat->id;
+                $flag = 'view';
+                if ($id > 0) {
+                    if (Input::hasFile('laimage')) {
+                        $file = Input::file('laimage');
+                        $destinationPath = 'uploads/product/' . $id;
+
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0777, true);
+                        }
+                        $ext = strtolower($file->getClientOriginalExtension());
+                        if ($input['id'] > 0) {
+                            if (file_exists($destinationPath . '/' . $dbCat->laimage))
+                                unlink($destinationPath . '/' . $dbCat->laimage);
+                        }
+                        $filename = trim(str_random(32) . '.' . ($ext));
+                        $pathupload = $file->move($destinationPath, $filename);
+                        if ($pathupload) {
+                            $dbCat->find($id);
+                            $dbCat->laimage = $filename;
+                            $dbCat->save();
+                            $flag = 'view';
+                        } else {
+                            $flag = 'create';
+                        }
+                    }
+                } else {
+                    $flag = 'create';
+                }
+            } catch (Exception $ex) {
+                echo $ex;
+            }
+        }
+        $cats = Category::getCategoriesTree();
+        $this->data['factors'] = Factory::adminSelectFactor();
+        if ($flag == 'view') {
+            $this->data['cats'] = Category::adminSelectCat($cats,true);
+            $this->data['products'] = Product::with("Category")->get();
+            echo '<pre>';
+            print_r($this->data['products']);
+        } else {
+            $this->data['cats'] = Category::adminSelectCat($cats,true);
+        }
+        return View::make('admin/product', $this->data);
     }
+
+    public function getEditproduct($id)
+    {
+        $dbCat = Product::find($id);
+        $this->data['actCat'] = 'product';
+        $this->data['sidecat'] = 'create';
+        $cats = Category::getCategoriesTree();
+        if ($dbCat != null) {
+            $this->data['catedit'] = $dbCat;
+            $dbCat->ladatenew = date("d/m/Y",$dbCat->ladatenew);
+            $this->data['cats'] = Category::adminSelectCat($cats, true,$dbCat->lacategory_id);
+            $this->data['factors'] = Factory::adminSelectFactor($dbCat->lamanufactor_id);
+        } else {
+            $this->data['catedit'] = null;
+            $this->data['cats'] = Category::adminSelectCat($cats, true, 0);
+            $this->data['factors'] = Factory::adminSelectFactor(0);
+
+        }
+        return View::make('admin/product', $this->data);
+    }
+
 
     public function anyOrder()
     {

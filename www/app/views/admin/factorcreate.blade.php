@@ -3,24 +3,19 @@
 @endif
 {{ Form::open(
     array(
-    'url'=>'admin/cat',
+    'url'=>'admin/factor',
     'files' => true)
 ) }}
 <div class="span4">
     {{ Form::hidden('id',(($catedit != null)?$catedit->id:'')) }}
     <div class="input-group">
-    {{ Form::label('laurl','Tên Thư mục',array("class"=>"input-group-addon")) }}
+    {{ Form::label('laurl','Nhà sản xuất',array("class"=>"input-group-addon")) }}
     {{ Form::text('latitle',(($catedit != null)?$catedit->latitle:''),array("class"=>"form-control" ) ) }}
     </div>
     <br>
     <div class="input-group">
     {{ Form::label('laurl','URL ',array("class"=>"input-group-addon"),array("class"=>"input-group-addon")) }}
     {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control" ) ) }}
-    </div>
-    <br>
-    <div class="input-group">
-    {{ Form::label('laparent_id','Thư mục cha ',array("class"=>"input-group-addon")) }}
-    <select name="laparent_id" class="form-control">{{$cats}}</select>
     </div>
     <br>
     <div class="input-group">
@@ -47,6 +42,6 @@
 </div>
 <div class="span3">
     @if ($catedit != null && $catedit->laimage!='')
-        {{HTML::image('uploads/cat/'.$catedit->id.'/'.$catedit->laimage)}}
+        {{HTML::image('uploads/factor/'.$catedit->id.'/'.$catedit->laimage)}}
     @endif
 </div>

@@ -2,8 +2,8 @@
 @section('body')
     <div class="span3">
         <div class="list-group">
-                <a class="list-group-item @if(!isset($sidecat) || $sidecat=='view') active @endif" href="{{url('admin/cat')}}">Xem<i class="icon-chevron-right"></i></a>
-                <a class="list-group-item @if(isset($sidecat) && $sidecat=='create') active @endif"  href="{{url('admin/cat/create')}}">Tạo / Sửa <i class="icon-chevron-right"></i></a>
+                <a class="list-group-item @if(!isset($sidecat) || $sidecat=='view') active @endif" href="{{url('admin/product')}}">Xem<i class="icon-chevron-right"></i></a>
+                <a class="list-group-item @if(isset($sidecat) && $sidecat=='create') active @endif"  href="{{url('admin/product/create')}}">Tạo / Sửa <i class="icon-chevron-right"></i></a>
         </div>
     </div>
     <div class="span9 panel panel-default">
@@ -13,9 +13,9 @@
         <div class="panel-heading">{{trans('common.LD'.$sidecat)}} {{trans('common.'.$strActCat['title'])}}</div>
         <div class="panel-body">
             @if (!isset($sidecat) || $sidecat=='view')
-            @include('admin/catview')
+            @include('admin/productview')
             @else
-            @include('admin/catcreate')
+            @include('admin/productcreate')
             @endif
         </div>
 

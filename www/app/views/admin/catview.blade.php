@@ -2,25 +2,14 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Title</th>
+            <th>Tên thư mục</th>
             <th>URL</th>
-            <th></th>
-            <th>Info</th>
-            <th>IMG</th>
-            <th>Order</th>
+            <th>Thông tin</th>
+            <th>Ảnh</th>
+            <th>Thứ tự</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($cats as $cat)
-        <tr>
-            <td>{{$cat->id}}</td>
-            <td>{{ link_to('admin/editcat/'.$cat->id,$cat->latitle) }}</td>
-            <td>{{$cat->laurl}}</td>
-            <td>{{$cat->laparent_id}}</td>
-            <td>{{$cat->lainfo}}</td>
-            <td class="imgthumb">{{HTML::image('uploads/cat/'.$cat->id.'/'.$cat->laimage,'IMG')}}</td>
-            <td>{{$cat->laorder}}</td>
-        </tr>
-        @endforeach
+        {{$cats}}
     </tbody>
 </table>

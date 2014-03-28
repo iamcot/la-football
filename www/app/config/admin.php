@@ -14,6 +14,11 @@ return array(
             'url'    =>  'cat',
             'title' =>  'LDCat'
         ),
+        'factor'   =>  array(
+            'id'    =>  'factor',
+            'url'    =>  'factor',
+            'title' =>  'LDFactor'
+        ),
         'product'   =>  array(
             'id'    =>  'product',
             'url'    =>  'product',
@@ -23,6 +28,11 @@ return array(
             'id'    =>  'order',
             'url'    =>  'order',
             'title' =>  'LDOrder'
+        ),
+        'sale'     =>  array(
+            'id'    =>  'sale',
+            'url'    =>  'sale',
+            'title' =>  'LDSale'
         ),
 
     ),
