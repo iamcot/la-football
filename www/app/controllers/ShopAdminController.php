@@ -16,15 +16,19 @@ class ShopAdminController extends BaseController
 
         $input = Input::all();
         if(count($input)>0){
-                 $file = Input::file($input['laimage']);
-                $destinationPath = 'uploads';
-                $filename = str_random(12);
-//                $upload_success = Input::upload($input['laimage'],$destinationPath,$filename);
-                $upload_success = $file->move($destinationPath, $filename);
-                if($upload_success){
-                    echo Input::file($input['laimage'])->getRealPath();
+            try{
+                $file = Input::file('laimage');
+                $destinationPath = 'uploads/cat';
+                $ext = strtolower($file->getClientOriginalExtension());
+                $filename = str_random(32).'.'.($ext);
+                $pathupload = $file->move($destinationPath, $filename );
+                if($pathupload){
+                    echo $filename;
                 }
+            }catch(Exception $ex){
+                    echo $ex;
 
+            }
 
         }
         return View::make('admin/cat',$this->data);

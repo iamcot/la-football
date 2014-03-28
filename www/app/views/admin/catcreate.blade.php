@@ -1,4 +1,6 @@
-{{ Form::open() }}
+{{ Form::open(
+    array('files' => true)
+) }}
 {{ Form::hidden('id','') }}
 {{ Form::label('latitle','Tên Thư mục') }}
 {{ Form::text('latitle','') }}
