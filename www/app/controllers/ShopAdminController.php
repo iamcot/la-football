@@ -17,13 +17,33 @@ class ShopAdminController extends BaseController
         $input = Input::all();
         if(count($input)>0){
             try{
-                $file = Input::file('laimage');
-                $destinationPath = 'uploads/cat';
-                $ext = strtolower($file->getClientOriginalExtension());
-                $filename = str_random(32).'.'.($ext);
-                $pathupload = $file->move($destinationPath, $filename );
-                if($pathupload){
-                    echo $filename;
+                $dbCat = new Category();
+                $dbCat->latitle = $input['latitle'];
+                $dbCat->laurl = $input['laurl'];
+                $dbCat->lainfo = $input['lainfo'];
+                $dbCat->laparent_id = $input['laparent_id'];
+                $dbCat->laorder = $input['laparent_id'];
+                $dbCat->save();
+
+                $id = $dbCat->id;
+                if($id>0){
+                    if(Input::hasFile('laimage')){
+                        $file = Input::file('laimage');
+                        $destinationPath = 'uploads/cat/'.$id;
+
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0777, true);
+                        }
+                        $ext = strtolower($file->getClientOriginalExtension());
+                        $filename = trim(str_random(32).'.'.($ext));
+                        $pathupload = $file->move($destinationPath, $filename );
+                        if($pathupload){
+                            $dbCat->find($id);
+                            $dbCat->laimage = $filename;
+                            $dbCat->save();
+                        }
+                    }
+
                 }
             }catch(Exception $ex){
                     echo $ex;
@@ -31,6 +51,7 @@ class ShopAdminController extends BaseController
             }
 
         }
+
         return View::make('admin/cat',$this->data);
     }
     public function anyProduct(){
