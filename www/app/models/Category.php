@@ -8,9 +8,7 @@ class Category extends Eloquent
 //            ->leftJoin($this->table . ' as d2', 'd2.laparent_id', '=', 'd1.id')
 //            ->select('d.latitle as title', 'd1.latitle as title1', 'd2.latitle as title2')
 //            ->where('d.laparent_id', '0')->get();
-    public function Product() {
-        return $this->belongsToMany('Product')->select(array("latitle as catname"));
-    }
+
     public static function getCategoriesTree($id = 0, $path = '', $last_path = '')
     {
         $categories_array = array();
@@ -83,6 +81,17 @@ class Category extends Eloquent
 
         }
 
+        return $html;
+    }
+    public static function shopCatTree($categories){
+        $html="<ul>";
+        foreach ($categories as $cat) {
+                $html .= "<li><a href='" . $cat['laurl'] . "' >
+                    ". $cat['latitle'] . "
+                </a></li>";
+                $html .= Category::shopCatTree($cat['children']);
+        }
+        $html.="</ul>";
         return $html;
     }
 

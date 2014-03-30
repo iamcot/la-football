@@ -4,7 +4,7 @@
             <ul class="nav navbar-nav">
                 @foreach (Config::get('admin.adminnav') as $navitem)
                 <li
-                    @if (!isset($actCat) || $actCat == $navitem['id'])
+                    @if (isset($actCat) && $actCat == $navitem['id'])
                       class="active"
                     @endif
                 >

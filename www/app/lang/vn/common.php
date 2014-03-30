@@ -9,4 +9,5 @@ return array(
     'LDview'    =>  'Xem',
     'LDFactor'    =>  'Nhà Sản xuất',
     'LDSale'    =>  'Khuyến mãi',
+    'LDConfig' => 'Cấu hình',
 );

@@ -1,4 +1,6 @@
 <?php
+use Myhelper\UploadHandler;
+
 class ShopAdminController extends BaseController
 {
     private $data = array(
@@ -72,7 +74,7 @@ class ShopAdminController extends BaseController
         if ($flag == 'view') {
             $this->data['cats'] = Category::adminListCat($cats);
         } else {
-            $this->data['cats'] = Category::adminSelectCat($cats,false, 0);
+            $this->data['cats'] = Category::adminSelectCat($cats, false, 0);
         }
         return View::make('admin/cat', $this->data);
     }
@@ -85,10 +87,10 @@ class ShopAdminController extends BaseController
         $cats = Category::getCategoriesTree();
         if ($dbCat != null) {
             $this->data['catedit'] = $dbCat;
-            $this->data['cats'] = Category::adminSelectCat($cats,false, $dbCat->laparent_id);
+            $this->data['cats'] = Category::adminSelectCat($cats, false, $dbCat->laparent_id);
         } else {
             $this->data['catedit'] = null;
-            $this->data['cats'] = Category::adminSelectCat($cats,false, 0);
+            $this->data['cats'] = Category::adminSelectCat($cats, false, 0);
         }
         return View::make('admin/cat', $this->data);
     }
@@ -175,77 +177,70 @@ class ShopAdminController extends BaseController
     public function anyProduct($sidecat = "")
     {
         $this->data['actCat'] = 'product';
-        if ($sidecat != "")
-            $this->data['sidecat'] = $sidecat;
-        else $this->data['sidecat'] = 'view';
-        $flag = $this->data['sidecat'];
+//        if ($sidecat != "")
+//            $this->data['sidecat'] = $sidecat;
+//        else $this->data['sidecat'] = 'view';
+        if ($sidecat == '') $sidecat = 'view';
+        $flag = $sidecat;
         $input = Input::all();
-        if (count($input) > 0) {
-            try {
-                if ($input['id'] == '')
-                    $dbCat = new Product();
-                else {
-                    $dbCat = Product::find($input['id']);
-                    if ($dbCat == null)
-                        return Redirect::to('admin/product');
-                }
-                $dbCat->latitle = $input['latitle'];
-                $dbCat->laurl = $input['laurl'];
-                $dbCat->lakeyword = $input['lakeyword'];
-                $dbCat->lashortinfo = $input['lashortinfo'];
-                $dbCat->lauseguide = $input['lauseguide'];
-                $dbCat->laoldprice = $input['laoldprice'];
-                $dbCat->laprice = $input['laprice'];
-                $dbCat->laamount = $input['laamount'];
-                $dbCat->ladatenew = strtotime($input['ladatenew']);
-                $dbCat->lainfo = $input['lainfo'];
-                $dbCat->lacategory_id = $input['lacategory_id'];
-                $dbCat->lamanufactor_id = $input['lamanufactor_id'];
+        if (count($input) > 0 && isset($input['_token'])) {
+
+            if ($input['id'] == '')
+                $dbCat = new Product();
+            else {
+                $dbCat = Product::find($input['id']);
+                if ($dbCat == null)
+                    return Redirect::to('admin/product');
+            }
+            $dbCat->latitle = $input['latitle'];
+            $dbCat->laurl = $input['laurl'];
+            $dbCat->lakeyword = $input['lakeyword'];
+            $dbCat->lashortinfo = $input['lashortinfo'];
+            $dbCat->lauseguide = $input['lauseguide'];
+            $dbCat->laoldprice = $input['laoldprice'];
+            $dbCat->laprice = $input['laprice'];
+            $dbCat->laamount = $input['laamount'];
+            $dbCat->ladatenew = strtotime($input['ladatenew']);
+            $dbCat->lainfo = $input['lainfo'];
+            $dbCat->lacategory_id = $input['lacategory_id'];
+            $dbCat->lamanufactor_id = $input['lamanufactor_id'];
+//            $v = $dbCat->validate($input);
+            if ($input['latitle'] != '') {
                 $dbCat->save();
 
                 $id = $dbCat->id;
                 $flag = 'view';
                 if ($id > 0) {
-                    if (Input::hasFile('laimage')) {
-                        $file = Input::file('laimage');
-                        $destinationPath = 'uploads/product/' . $id;
-
-                        if (!file_exists($destinationPath)) {
-                            mkdir($destinationPath, 0777, true);
-                        }
-                        $ext = strtolower($file->getClientOriginalExtension());
-                        if ($input['id'] > 0) {
-                            if (file_exists($destinationPath . '/' . $dbCat->laimage))
-                                unlink($destinationPath . '/' . $dbCat->laimage);
-                        }
-                        $filename = trim(str_random(32) . '.' . ($ext));
-                        $pathupload = $file->move($destinationPath, $filename);
-                        if ($pathupload) {
-                            $dbCat->find($id);
-                            $dbCat->laimage = $filename;
-                            $dbCat->save();
-                            $flag = 'view';
-                        } else {
-                            $flag = 'create';
+                    $dbCat->find($id);
+                    $dbCat->laimage = $input['laimage'];
+                    $dbCat->save();
+                    for ($i = 0; $i <= $input['currmorepic']; $i++) {
+                        if (isset($input['morepic' . $i]) && $input['morepic' . $i] != '' && $input['mprepictype' . $i] == 'new') {
+                            $dbImg = new Image();
+                            $dbImg->latitle = $input['morepictext' . $i];
+                            $dbImg->lapic = $input['morepic' . $i];
+                            $dbImg->laproduct_id = $id;
+                            $dbImg->save();
                         }
                     }
-                } else {
-                    $flag = 'create';
+                    $flag = 'view';
                 }
-            } catch (Exception $ex) {
-                echo $ex;
+            } else {
+                $this->data['notice'] = 'Lỗi nhập liệu';
+                $flag = 'create';
             }
+
         }
         $cats = Category::getCategoriesTree();
         $this->data['factors'] = Factory::adminSelectFactor();
         if ($flag == 'view') {
-            $this->data['cats'] = Category::adminSelectCat($cats,true);
-            $this->data['products'] = Product::with("Category")->get();
-            echo '<pre>';
-            print_r($this->data['products']);
+            $this->data['cats'] = Category::adminSelectCat($cats, true);
+            $this->data['products'] = Product::adminViewProduct();
         } else {
-            $this->data['cats'] = Category::adminSelectCat($cats,true);
+//            $upload_handler = new UploadHandler\UploadHandler();
+            $this->data['cats'] = Category::adminSelectCat($cats, true);
         }
+        $this->data['sidecat'] = $flag;
         return View::make('admin/product', $this->data);
     }
 
@@ -257,9 +252,10 @@ class ShopAdminController extends BaseController
         $cats = Category::getCategoriesTree();
         if ($dbCat != null) {
             $this->data['catedit'] = $dbCat;
-            $dbCat->ladatenew = date("d/m/Y",$dbCat->ladatenew);
-            $this->data['cats'] = Category::adminSelectCat($cats, true,$dbCat->lacategory_id);
+            $dbCat->ladatenew = date("d/m/Y", $dbCat->ladatenew);
+            $this->data['cats'] = Category::adminSelectCat($cats, true, $dbCat->lacategory_id);
             $this->data['factors'] = Factory::adminSelectFactor($dbCat->lamanufactor_id);
+            $this->data['morepics'] = Image::where('laproduct_id', '=', $dbCat->id)->get();
         } else {
             $this->data['catedit'] = null;
             $this->data['cats'] = Category::adminSelectCat($cats, true, 0);
@@ -274,5 +270,28 @@ class ShopAdminController extends BaseController
     {
         $this->data['actCat'] = 'order';
         return View::make('admin/start', $this->data);
+    }
+
+    public function anyConfig()
+    {
+        $this->data['actCat'] = 'config';
+        $input = Input::all();
+        if (count($input) > 0 && isset($input['_token'])) {
+            $db = Myconfig::where('lavar', '=', 'slide')->get();
+            $count = $db->count();
+            if ($count == 0) {
+                $db = new Myconfig();
+                $db->lavar = 'slide';
+            }
+            else{
+                $first =  $db[0];
+                $db = Myconfig::find($first->id);
+            }
+            $db->lavalue = $input['listpic'];
+            $db->save();
+
+        }
+        $this->data['slide'] = Myconfig::where('lavar', '=', 'slide')->get();
+        return View::make('admin/config', $this->data);
     }
 }

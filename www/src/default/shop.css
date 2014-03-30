@@ -1,0 +1,48 @@
+#header{
+    height: 80px;
+}
+    #header .left{
+        width: 70%;
+        float:left
+    }
+    #header .right{
+        width:30%;
+        float:right;
+    }
+.wrap{
+    width: 90%;
+}
+.nav-pink{
+    background-image: -webkit-linear-gradient(top,#f06d9b 0, #ff77a4 100%);
+    background-image: linear-gradient(to bottom,#f06d9b 0,#ff77a4 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f06d9b', endColorstr='#ff77a4', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.nav-pink a{
+    color:#fff;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.nav-pink .nav>li>a:focus,
+.nav-pink .active,
+.nav-pink .nav>li>a:hover{
+    background-color: #e06791 !important;
+}
+#sidebar{
+    float:left;
+    width:30%;
+    padding: 10px 0.01%;
+}
+#sidebar.left{
+    margin-right:2%;
+}
+#sidebar.right{
+    margin-left:2%;
+}
+#content{
+    float:left;
+    width:67%;
+    padding: 10px 0.01%;
+}

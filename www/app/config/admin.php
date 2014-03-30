@@ -34,6 +34,11 @@ return array(
             'url'    =>  'sale',
             'title' =>  'LDSale'
         ),
+        'config'     =>  array(
+            'id'    =>  'config',
+            'url'    =>  'config',
+            'title' =>  'LDConfig'
+        ),
 
     ),
 );
