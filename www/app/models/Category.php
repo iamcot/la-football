@@ -25,6 +25,7 @@ class Category extends Eloquent
                 'laorder' => $categorie->laorder,
                 'lainfo' => $categorie->lainfo,
                 'laparent_id' => $categorie->laparent_id,
+                'laicon' => $categorie->laicon,
                 'laimage' => $categorie->laimage,
                 'path' => $path . $categorie->latitle,
 
@@ -83,13 +84,13 @@ class Category extends Eloquent
 
         return $html;
     }
-    public static function shopCatTree($categories){
-        $html="<ul>";
+    public static function shopCatTree($categories,$level = 0){
+        $html="<ul class='".(($level==0)?'menu':'')."'>";
         foreach ($categories as $cat) {
                 $html .= "<li><a href='" . $cat['laurl'] . "' >
-                    ". $cat['latitle'] . "
-                </a></li>";
-                $html .= Category::shopCatTree($cat['children']);
+                    ".(($level==0)?'<i class="'.$cat['laicon'].'"></i>':'')." ". $cat['latitle'] . " <span>340</span>
+            </a> </li>";
+                $html .= Category::shopCatTree($cat['children'],$level+1);
         }
         $html.="</ul>";
         return $html;

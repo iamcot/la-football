@@ -7,3 +7,6 @@ body,html{
 img{
     width: 100%;
 }
+.strike{
+    text-decoration: line-through;
+}

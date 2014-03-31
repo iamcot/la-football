@@ -24,7 +24,11 @@ array(
         {{ Form::text('latitle',(($catedit != null)?$catedit->latitle:''),array("class"=>"form-control" ) ) }}
     </div>
     <br>
-
+    <div class="input-group">
+        {{ Form::label('laurl','URL ',array("class"=>"input-group-addon")) }}
+        {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control",'title'=>'Đường dẫn seo' ) ) }}
+    </div>
+    <br>
     <div class="input-group">
         {{ Form::label('lacategory_id','Thư mục',array("class"=>"input-group-addon")) }}
         <select name="lacategory_id" class="form-control">{{$cats}}</select>
@@ -41,7 +45,7 @@ array(
     <br>
 
     <div class="input-group">
-        {{ Form::label('laamount','Số lượng',array("class"=>"input-group-addon"),array("class"=>"input-group-addon")) }}
+        {{ Form::label('laamount','Số lượng',array("class"=>"input-group-addon")) }}
         {{ Form::text('laamount',(($catedit != null)?$catedit->laamount:''),array("class"=>"form-control" ) ) }}
     </div>
     <br>
@@ -57,10 +61,12 @@ array(
 
 </div>
 <div class="span5">
-    <div class="input-group">
-        {{ Form::label('laurl','URL ',array("class"=>"input-group-addon"),array("class"=>"input-group-addon")) }}
-        {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control",'title'=>'Đường dẫn seo' ) ) }}
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="ladeleted" {{((isset($catedit) && $catedit->ladeleted==1)?'':'checked=checked')}}> Kích hoạt
+        </label>
     </div>
+
     <br>
 
     <div class="input-group">
@@ -69,19 +75,19 @@ array(
     </div>
     <br>
     <div class="input-group">
-        {{ Form::label('laoldprice','Giá cũ ',array("class"=>"input-group-addon"),array("class"=>"input-group-addon"))
+        {{ Form::label('laoldprice','Giá cũ ',array("class"=>"input-group-addon"))
         }}
         {{ Form::text('laoldprice',(($catedit != null)?$catedit->laoldprice:''),array("class"=>"form-control",'title'=>'Giá cũ, dùng để hiện % giảm' ) ) }}
     </div>
     <br>
     <div class="input-group">
-        {{ Form::label('ladatenew','Ngày hàng mới',array("class"=>"input-group-addon"),array("class"=>"input-group-addon"))
+        {{ Form::label('ladatenew','Ngày hàng mới',array("class"=>"input-group-addon"))
         }}
         {{ Form::text('ladatenew',(($catedit != null)?$catedit->ladatenew:''),array("class"=>"form-control",'title'=>'Sản phẩm sẽ hiện "mới" cho tới ngày này' ) ) }}
     </div>
     <br>
     <div class="input-group">
-        {{ Form::label('lakeyword','Từ khóa',array("class"=>"input-group-addon"),array("class"=>"input-group-addon")) }}
+        {{ Form::label('lakeyword','Từ khóa',array("class"=>"input-group-addon")) }}
         {{ Form::text('lakeyword',(($catedit != null)?$catedit->lakeyword:''),array("class"=>"form-control",'title'=>'Các tag và keywords sẽ hiện trong meta, phân cách bằng dấu phẩy' ) ) }}
     </div>
     <br>

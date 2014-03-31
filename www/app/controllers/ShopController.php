@@ -5,6 +5,7 @@ class ShopController extends BaseController
     private $data = array(
         'typeEnd' => 'shop',
         'haveHeader'=> 1,
+        'sidebartype' => 'sright',  //sright - sleft - none
 
     );
     function __construct(){
@@ -13,10 +14,7 @@ class ShopController extends BaseController
     }
     public function getIndex(){
         $this->data['title'] = 'Thái Boutique';
-        $sqlslide = Myconfig::where('lavar','=','slide')->get();
-        $sqlslide = $sqlslide[0];
-        $this->data['slider']= Myconfig::buildSlider($sqlslide->lavalue);
-        return View::make(Config::get('shop.theme')."/start",$this->data);
+        return View::make(Config::get('shop.theme')."/start/start",$this->data);
     }
 
 }

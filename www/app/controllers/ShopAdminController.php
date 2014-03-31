@@ -204,6 +204,9 @@ class ShopAdminController extends BaseController
             $dbCat->lainfo = $input['lainfo'];
             $dbCat->lacategory_id = $input['lacategory_id'];
             $dbCat->lamanufactor_id = $input['lamanufactor_id'];
+            if(isset($input['ladeleted']) && $input['ladeleted']=='on')
+                $dbCat->ladeleted = 0;
+            else $dbCat->ladeleted = 1;
 //            $v = $dbCat->validate($input);
             if ($input['latitle'] != '') {
                 $dbCat->save();
@@ -277,6 +280,7 @@ class ShopAdminController extends BaseController
         $this->data['actCat'] = 'config';
         $input = Input::all();
         if (count($input) > 0 && isset($input['_token'])) {
+            //save slider
             $db = Myconfig::where('lavar', '=', 'slide')->get();
             $count = $db->count();
             if ($count == 0) {
@@ -289,9 +293,24 @@ class ShopAdminController extends BaseController
             }
             $db->lavalue = $input['listpic'];
             $db->save();
+            //save sidebar ads
+            $db=null;
+            $db = Myconfig::where('lavar', '=', 'sidebarads')->get();
+            $count = $db->count();
+            if ($count == 0) {
+                $db = new Myconfig();
+                $db->lavar = 'sidebarads';
+            }
+            else{
+                $first =  $db[0];
+                $db = Myconfig::find($first->id);
+            }
+            $db->lavalue = $input['sidebarads'];
+            $db->save();
 
         }
         $this->data['slide'] = Myconfig::where('lavar', '=', 'slide')->get();
+        $this->data['sidebarads'] = Myconfig::where('lavar', '=', 'sidebarads')->get();
         return View::make('admin/config', $this->data);
     }
 }

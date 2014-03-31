@@ -15,7 +15,7 @@
         @foreach($products as $product)
             <tr>
                 <td>{{$product->id}}</td>
-                <td>{{link_to('admin/editproduct/' . $product->id, $product->latitle)}}</td>
+                <td><span class="{{(($product->ladeleted==1)?'strike':'')}}">{{link_to('admin/editproduct/' . $product->id, $product->latitle)}}</span></td>
                 <td>{{$product->laurl}}</td>
                 <td>{{number_format($product->laprice,0,',','.')}}</td>
                 <td>{{$product->catname}}</td>

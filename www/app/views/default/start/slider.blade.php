@@ -1,8 +1,13 @@
+{{--*/ $slider=Myconfig::buildSlider() /*--}}
+@if($slider!='')
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        {{--*/ $i = 0 /*--}}
+        @foreach($slider as $itemslide)
+            <li data-target="#carousel-example-generic" data-slide-to="{{$i}}" ></li>
+        {{--*/ $i +=1 /*--}}
+        @endforeach
     </ol>
 
     <!-- Wrapper for slides -->
@@ -33,3 +38,4 @@
 </script>
 
 @stop
+@endif
