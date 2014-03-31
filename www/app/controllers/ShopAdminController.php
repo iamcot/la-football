@@ -50,7 +50,10 @@ class ShopAdminController extends BaseController
                         $ext = strtolower($file->getClientOriginalExtension());
                         if ($input['id'] > 0) {
                             if (file_exists($destinationPath . '/' . $dbCat->laimage))
-                                unlink($destinationPath . '/' . $dbCat->laimage);
+                                try{
+                                    unlink($destinationPath . '/' . $dbCat->laimage);
+                                }
+                                catch(Exception $ex){}
                         }
                         $filename = trim(str_random(32) . '.' . ($ext));
                         $pathupload = $file->move($destinationPath, $filename);

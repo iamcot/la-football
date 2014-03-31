@@ -1,3 +1,16 @@
+body{
+    background: rgba(255, 119, 164, 0.05);
+}
+.bgwhite{
+    background: #fff;
+}
+.bgpink {
+    background: #ff77a4;
+    color: #fff !important;
+}
+.bgpink a{
+    color: #fff !important;
+}
 #header{
     height: 80px;
 }
@@ -54,6 +67,9 @@
 #content{
     float:left;
     width: 100%;
+}
+#content.sleft{
+    float:right;
 }
 #content.sright,
 #content.sleft{
@@ -224,16 +240,50 @@
     clear:both;
     display: block;
     margin-top: 10px;
-    border-top: 1px solid rgba(145, 64, 98, 0.86);
+    border-top: 10px solid rgba(255, 119, 164, 0.59);
     min-height: 200px;
-    background-image: -webkit-linear-gradient(top,#f06d9b 0, #ff77a4 100%);
-    background-image: linear-gradient(to bottom,#f06d9b 0,#ff77a4 100%);
+    background-image: -webkit-linear-gradient(top, 0,#ff77a4 #f06d9b 100%);
+    background-image: linear-gradient(to bottom,#ff77a4 0,#f06d9b 100%);
     background-repeat: repeat-x;
     overflow: hidden;
+    padding-top: 20px;
+}
+#footer dt{
+    color: #fff;
+    font-size: 140%;
+}
+#footer dd,
+#footer dl,
+#footer dd a{
+    color: #eee;
+}
+#footer dd a:hover{
+    color: #fff;
+    cursor: pointer;
 }
 #copyright{
     position: absolute;
     bottom:10px;
     margin: auto;
     color:#eee;
+}
+.randcat img{
+    width: 100%;
+}
+.randcat{
+    overflow: hidden;
+    margin-top:10px;
+    padding: 10px;
+}
+.randproduct {
+    text-align: center;
+}
+.randproduct img{
+    box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+}
+
+.factorslist img{
+    max-height: 80px;
 }

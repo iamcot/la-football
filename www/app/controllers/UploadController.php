@@ -12,7 +12,8 @@ class UploadController extends  BaseController{
             'upload_dir' => base_path().'/uploads/thumbnails/'.$cat.'/',
             'upload_url' => URL::to('/') . '/uploads/thumbnails/'.$cat.'/',
             'max_width' => 200,
-            'max_height' => 200
+            'max_height' => 200,
+            'crop' => true
         );
         $upload_handler = new UploadHandler\UploadHandler($configs,false);
        $content = $upload_handler->uploadpost();

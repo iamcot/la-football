@@ -3,5 +3,6 @@
 <div>
 
     @include(Config::get('shop.theme').'/start/slider')
+    @include(Config::get('shop.theme').'/start/randcat')
 </div>
 @stop

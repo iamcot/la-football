@@ -9,8 +9,7 @@ class ShopController extends BaseController
 
     );
     function __construct(){
-        $tree = Category::getCategoriesTree();
-        $this->data['cattree'] = Category::shopCatTree($tree);
+
     }
     public function getIndex(){
         $this->data['title'] = 'Thái Boutique';

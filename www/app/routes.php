@@ -13,6 +13,8 @@
 
 Route::controller('admin','ShopAdminController');
 Route::controller('upload','UploadController');
+Route::controller('list','ListController');
+
 Route::controller('/','ShopController');
 
 

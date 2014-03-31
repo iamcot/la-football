@@ -33,7 +33,9 @@
 <div class=" body">
     @yield('body')
 </div>
+@if (isset($typeEnd) && $typeEnd!='admin')
 @include(Config::get('shop.theme').'/layout/footer')
+@endif
 <script src="http://code.jquery.com/jquery.js"></script>
 {{HTML::script('src/bootstrap/js/bootstrap.min.js')}}
 {{HTML::script('src/bootstrap/js/bootstrap-datepicker.js')}}
