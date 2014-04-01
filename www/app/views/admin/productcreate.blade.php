@@ -43,12 +43,13 @@ array(
         {{ Form::text('laprice',(($catedit != null)?$catedit->laprice:''),array("class"=>"form-control",'title'=>'Giá hiển thị' ) ) }}
     </div>
     <br>
-
     <div class="input-group">
-        {{ Form::label('laamount','Số lượng',array("class"=>"input-group-addon")) }}
-        {{ Form::text('laamount',(($catedit != null)?$catedit->laamount:''),array("class"=>"form-control" ) ) }}
+        {{ Form::label('laoldprice','Giá cũ ',array("class"=>"input-group-addon"))
+        }}
+        {{ Form::text('laoldprice',(($catedit != null)?$catedit->laoldprice:''),array("class"=>"form-control",'title'=>'Giá cũ, dùng để hiện % giảm' ) ) }}
     </div>
     <br>
+
 
     <div class="input-group">
         {{ Form::label('lashortinfo','Thông tin ngắn',array("class"=>"input-group-addon")) }}
@@ -75,11 +76,11 @@ array(
     </div>
     <br>
     <div class="input-group">
-        {{ Form::label('laoldprice','Giá cũ ',array("class"=>"input-group-addon"))
-        }}
-        {{ Form::text('laoldprice',(($catedit != null)?$catedit->laoldprice:''),array("class"=>"form-control",'title'=>'Giá cũ, dùng để hiện % giảm' ) ) }}
+        {{ Form::label('laamount','Số lượng',array("class"=>"input-group-addon")) }}
+        {{ Form::text('laamount',(($catedit != null)?$catedit->laamount:''),array("class"=>"form-control" ) ) }}
     </div>
     <br>
+
     <div class="input-group">
         {{ Form::label('ladatenew','Ngày hàng mới',array("class"=>"input-group-addon"))
         }}

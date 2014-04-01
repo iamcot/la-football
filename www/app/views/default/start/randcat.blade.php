@@ -3,17 +3,19 @@
 
 <div>
     @foreach($randCats as $cat)
-        <div class="randcat {{(($toggle%2==0)?'':'bgpink')}}">
+        <div class="randcat {{(($toggle%2==0)?'':'bgpink marginoverleft')}}">
             <div class="col-xs-5 {{(($toggle%2==0)?'pull-left':'pull-right')}} ">
                 {{HTML::image("/uploads/cat/".$cat['cat']->id.'/'.$cat['cat']->laimage,'',array('class'=>'img-rounded')) }}
             </div>
             <div class="col-xs-7 {{(($toggle%2==0)?'pull-left':'pull-right')}} ">
-            <h2>{{link_to('/list/'.$cat['cat']->laurl,$cat['cat']->latitle)}}</h2>
+            <h1>{{link_to('/'.$cat['cat']->laurl,$cat['cat']->latitle)}}</h1>
                 <p>{{$cat['cat']->lainfo}}</p>
                 @foreach($cat['product'] as $product)
                     <div class="col-xs-4 randproduct">
+                        <a href="{{URL::to('/'.$product->cat1url.'/'.$product->laurl.'.html')}}">
                         {{HTML::image("/uploads/thumbnails/product/".$product->laimage,'',array('class'=>'img-circle')) }}
-                        <p>{{link_to($product->laurl,$product->latitle)}}</p>
+                        <p>{{$product->latitle}}</p>
+                        </a>
                     </div>
                 @endforeach
             </div>

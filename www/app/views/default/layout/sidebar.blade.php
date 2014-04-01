@@ -1,5 +1,6 @@
 <div id="sidebar" class="{{$sidebartype}}">
-    {{--*/ $cattree = Vcategory::shopCatTree() /*--}}
+
+    {{--*/ $cattree = Vcategory::shopCatTree(0,$categories) /*--}}
     {{$cattree}}
     <div class="clearfix"></div>
     {{--*/ $sidebarads = Myconfig::buildSidebarads() /*--}}

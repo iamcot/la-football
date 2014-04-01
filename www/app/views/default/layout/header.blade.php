@@ -10,7 +10,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Tên sản phẩm, mã đơn hàng...">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" style="font-size: 20px"></span></button>
                       </span>
                 </div>
                 <!-- /input-group -->

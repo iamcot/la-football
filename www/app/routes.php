@@ -13,9 +13,10 @@
 
 Route::controller('admin','ShopAdminController');
 Route::controller('upload','UploadController');
-Route::controller('list','ListController');
+Route::get('/{cat}/{product}.html','DetailsController@showDetails');
+Route::get('/{cat}','ListController@showList');
 
-Route::controller('/','ShopController');
+Route::get('/','ShopController@getIndex');
 
 
 

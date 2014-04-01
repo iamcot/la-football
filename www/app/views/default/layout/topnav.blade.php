@@ -1,4 +1,4 @@
-<div class="navbar nav-pink navbar-static-top" role="navigation">
+<div class="navbar nav-pink navbar-static-top " role="navigation">
     <div class="container-fluid wrap">
         <div class="navbar-inner">
             <ul class="nav navbar-nav">

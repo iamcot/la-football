@@ -5,7 +5,7 @@ return array(
     'pretitle' => '',
     'suftitle' => '- Mỹ phẩm, không đơn giản là kinh doanh',
     'treecatdeep' => 1,
-    'tablepp'    =>  10,
+    'tablepp'    =>  18,
     'theme' => 'default',
     'topnav' => array(
         'home' => array(

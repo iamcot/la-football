@@ -218,6 +218,7 @@ class ShopAdminController extends BaseController
                 $flag = 'view';
                 if ($id > 0) {
                     $dbCat->find($id);
+                    if(isset($input['laimage']))
                     $dbCat->laimage = $input['laimage'];
                     $dbCat->save();
                     for ($i = 0; $i <= $input['currmorepic']; $i++) {
