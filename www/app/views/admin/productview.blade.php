@@ -7,8 +7,9 @@
             <th>Giá</th>
             <th>Thư mục</th>
             <th>Nhà SX</th>
-            <th>Thông tin ngắn</th>
+            <th style="width: 30%">Thông tin ngắn</th>
             <th>Ảnh</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,13 @@
                 <td>{{$product->factorname}}</td>
                 <td>{{$product->lashortinfo}}</td>
                 <td class='imgthumb'>{{ HTML::image('uploads/thumbnails/product/' . $product->laimage, 'IMG') }}</td>
+                <td>
+                    @if($product->lavariant_id == 0)
+                    {{link_to('admin/editproduct/' . $product->id.'/1', 'Tạo biến thể')}}
+                    @else
+                    SP Gốc: {{$product->lavariant_id}}
+                    @endif
+                </td>
             </tr>
         @endforeach
     </tbody>

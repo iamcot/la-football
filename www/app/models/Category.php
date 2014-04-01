@@ -53,7 +53,7 @@ class Category extends Eloquent
                     <td>" . $cat['id'] . "</td>
                     <td>" . $sLevel . " " . link_to('admin/editcat/' . $cat['id'], $cat['latitle']) . "</td>
                     <td>" . $cat['laurl'] . "</td>
-                    <td>" . $cat['lainfo'] . "</td>
+                    <td>" . str_limit($cat['lainfo'],40) . "</td>
                     <td class='imgthumb'>" . HTML::image('uploads/cat/' . $cat['id'] . '/' . $cat['laimage'], 'IMG') . "</td>
                     <td>" . $cat['laorder'] . "</td>
                 </tr>";

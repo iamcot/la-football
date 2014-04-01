@@ -206,6 +206,10 @@ class ShopAdminController extends BaseController
             $dbCat->ladatenew = strtotime($input['ladatenew']);
             $dbCat->lainfo = $input['lainfo'];
             $dbCat->lacategory_id = $input['lacategory_id'];
+            $dbCat->lakhoiluong = $input['lakhoiluong'];
+            $dbCat->ladungtich = $input['ladungtich'];
+            $dbCat->lachucnang = $input['lachucnang'];
+            $dbCat->lavariant_id = $input['lavariant_id'];
             $dbCat->lamanufactor_id = $input['lamanufactor_id'];
             if(isset($input['ladeleted']) && $input['ladeleted']=='on')
                 $dbCat->ladeleted = 0;
@@ -248,14 +252,16 @@ class ShopAdminController extends BaseController
             $this->data['cats'] = Category::adminSelectCat($cats, true);
         }
         $this->data['sidecat'] = $flag;
+        $this->data['variant'] = 0;
         return View::make('admin/product', $this->data);
     }
 
-    public function getEditproduct($id)
+    public function getEditproduct($id,$variant=0)
     {
         $dbCat = Product::find($id);
         $this->data['actCat'] = 'product';
         $this->data['sidecat'] = 'create';
+        $this->data['variant'] = $variant;
         $cats = Category::getCategoriesTree();
         if ($dbCat != null) {
             $this->data['catedit'] = $dbCat;

@@ -4,7 +4,7 @@
             <th>ID</th>
             <th>Tên nhà sản xuất</th>
             <th>URL</th>
-            <th>Thông tin</th>
+            <th style="width: 40%">Thông tin</th>
             <th>Ảnh</th>
             <th>Thứ tự</th>
         </tr>

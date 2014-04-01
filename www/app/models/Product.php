@@ -19,4 +19,9 @@ class Product extends Eloquent
 
         return Validator::make($input, $rules);
     }
+    public static  function getVariants($id){
+        return Product::where("lavariant_id","=",$id)
+            ->where("ladeleted",'!=','1')
+            ->get();
+    }
 }

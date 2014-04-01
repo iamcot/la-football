@@ -14,7 +14,8 @@
 Route::controller('admin','ShopAdminController');
 Route::controller('upload','UploadController');
 Route::get('/{cat}/{product}.html','DetailsController@showDetails');
-Route::get('/{cat}','ListController@showList');
+Route::any('/{cat}','ListController@showList');
+Route::controller('ajax','AjaxController');
 
 Route::get('/','ShopController@getIndex');
 

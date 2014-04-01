@@ -18,7 +18,7 @@ array(
 <br>
 @endif
 <div class="span5">
-    {{ Form::hidden('id',(($catedit != null)?$catedit->id:'')) }}
+    {{ Form::hidden('id',(($catedit != null && $variant==0)?$catedit->id:'')) }}
     <div class="input-group">
         {{ Form::label('laurl','Tên sản phẩm',array("class"=>"input-group-addon")) }}
         {{ Form::text('latitle',(($catedit != null)?$catedit->latitle:''),array("class"=>"form-control" ) ) }}
@@ -49,11 +49,23 @@ array(
         {{ Form::text('laoldprice',(($catedit != null)?$catedit->laoldprice:''),array("class"=>"form-control",'title'=>'Giá cũ, dùng để hiện % giảm' ) ) }}
     </div>
     <br>
+    <div class="input-group">
+        {{ Form::label('lakhoiluong','Khối lượng ',array("class"=>"input-group-addon"))
+        }}
+        {{ Form::text('lakhoiluong',(($catedit != null)?$catedit->lakhoiluong:''),array("class"=>"form-control",'title'=>'đơn vị gram' ) ) }}
+    </div>
+    <br>
+    <div class="input-group">
+        {{ Form::label('ladungtich','Dung tích',array("class"=>"input-group-addon"))
+        }}
+        {{ Form::text('ladungtich',(($catedit != null)?$catedit->ladungtich:''),array("class"=>"form-control",'title'=>'đơn vị ml' ) ) }}
+    </div>
+    <br>
 
 
     <div class="input-group">
         {{ Form::label('lashortinfo','Thông tin ngắn',array("class"=>"input-group-addon")) }}
-        {{ Form::textarea('lashortinfo',(($catedit != null)?$catedit->lashortinfo:'') ,array('rows'=>3,"class"=>"form-control",'title'=>'Thông tin ngắn về sản phẩm, sẽ hiện trong mục description') )
+        {{ Form::textarea('lashortinfo',(($catedit != null  && $variant == 0)?$catedit->lashortinfo:'') ,array('rows'=>3,"class"=>"form-control",'title'=>'Thông tin ngắn về sản phẩm, sẽ hiện trong mục description') )
         }}
     </div>
 
@@ -67,9 +79,7 @@ array(
             <input type="checkbox" name="ladeleted" {{((isset($catedit) && $catedit->ladeleted==1)?'':'checked=checked')}}> Kích hoạt
         </label>
     </div>
-
     <br>
-
     <div class="input-group">
         {{ Form::label('lamanufactor_id','Nhà sản xuất',array("class"=>"input-group-addon")) }}
         <select name="lamanufactor_id" class="form-control">{{$factors}}</select>
@@ -92,10 +102,30 @@ array(
         {{ Form::text('lakeyword',(($catedit != null)?$catedit->lakeyword:''),array("class"=>"form-control",'title'=>'Các tag và keywords sẽ hiện trong meta, phân cách bằng dấu phẩy' ) ) }}
     </div>
     <br>
-
+    <div class="input-group">
+        {{ Form::label('lachucnang','Chức năng',array("class"=>"input-group-addon"))
+        }}
+        {{ Form::text('lachucnang',(($catedit != null)?$catedit->lachucnang:''),array("class"=>"form-control",'title'=>'chức năng của sản phẩm' ) ) }}
+    </div>
+    <br>
+    <div class="input-group">
+        {{ Form::label('lavariant_id','Sản phẩm gốc',array("class"=>"input-group-addon"))
+        }}
+        @if($catedit != null)
+            @if($variant == 1)
+                {{--*/ $variant_id = $catedit->id /*--}}
+            @else
+            {{--*/ $variant_id = $catedit->lavariant_id /*--}}
+            @endif
+        @else
+        {{--*/ $variant_id = 0 /*--}}
+        @endif
+        {{ Form::text('lavariant_id',$variant_id,array("class"=>"form-control",'title'=>'ID của Sản phẩm gốc' ) ) }}
+    </div>
+    <br>
     <div class="input-group">
         {{ Form::label('lauseguide','HDSD',array("class"=>"input-group-addon")) }}
-        {{ Form::textarea('lauseguide',(($catedit != null)?$catedit->lauseguide:'') ,array('rows'=>3,"class"=>"form-control") )
+        {{ Form::textarea('lauseguide',(($catedit != null  && $variant == 0)?$catedit->lauseguide:'') ,array('rows'=>3,"class"=>"form-control") )
         }}
     </div>
 
@@ -111,33 +141,35 @@ array(
 </div>
 <table id="uploadlinks" style="width: 100%">
     {{--*/ $currmorepic = 0 /*--}}
-    @if(isset($morepics))
-    @foreach($morepics as $pic)
-    <tr id='tr{{$currmorepic}}'>
-        <td style='padding: 3px;'>
-            <input type='radio' name='laimage' value='{{$pic->lapic}}' {{(($pic->lapic == $catedit->laimage)?'checked=checked':'')}}>
-            <input type='hidden' name='mprepictype{{$currmorepic}}' value="old">
-            <img style='max-height: 50px;max-width: 50px;' src='{{URL::to('/uploads/thumbnails/product/'.$pic->lapic)}}'>
-            </td><td  style='padding: 3px;'>
-             <input style='width: 100%' type='text' name='morepic{{$currmorepic}}' value='{{$pic->lapic}}'>
-             <input style='width: 100%' type='text' name='morepictext{{$currmorepic}}' value='{{$pic->latitle}}'>
+    @if($variant == 0)
+        @if(isset($morepics))
+        @foreach($morepics as $pic)
+        <tr id='tr{{$currmorepic}}'>
+            <td style='padding: 3px;'>
+                <input type='radio' name='laimage' value='{{$pic->lapic}}' {{(($pic->lapic == $catedit->laimage)?'checked=checked':'')}}>
+                <input type='hidden' name='mprepictype{{$currmorepic}}' value="old">
+                <img style='max-height: 50px;max-width: 50px;' src='{{URL::to('/uploads/thumbnails/product/'.$pic->lapic)}}'>
+                </td><td  style='padding: 3px;'>
+                 <input style='width: 100%' type='text' name='morepic{{$currmorepic}}' value='{{$pic->lapic}}'>
+                 <input style='width: 100%' type='text' name='morepictext{{$currmorepic}}' value='{{$pic->latitle}}'>
+                </td>
+            <td>
+                <input style='width: 100%' type='text'  value='{{URL::to("/uploads/product/".$pic->lapic)}}'>
+                <input style='width: 100%' type='text'  value='{{URL::to("/uploads/thumbnails/product/".$pic->lapic)}}'>
             </td>
-        <td>
-            <input style='width: 100%' type='text'  value='{{URL::to("/uploads/product/".$pic->lapic)}}'>
-            <input style='width: 100%' type='text'  value='{{URL::to("/uploads/thumbnails/product/".$pic->lapic)}}'>
-        </td>
-                <td>
-             <a href='javascript:delpic("{{$pic->lapic}}",{{$currmorepic}})'><span class='glyphicon glyphicon-trash'></span></a>
-            </td></tr>
-    {{--*/ $currmorepic += 1 /*--}}
-    @endforeach
+                    <td>
+                 <a href='javascript:delpic("{{$pic->lapic}}",{{$currmorepic}})'><span class='glyphicon glyphicon-trash'></span></a>
+                </td></tr>
+        {{--*/ $currmorepic += 1 /*--}}
+        @endforeach
+        @endif
     @endif
 </table>
 <input type="hidden" id="currmorepic" name="currmorepic" value="{{$currmorepic}}">
 <br>
 <div class="">
     {{ Form::label('lainfo','Thông tin ',array()) }}
-    {{ Form::textarea('lainfo',(($catedit != null)?$catedit->lainfo:'') ,array("class"=>"ckeditor") )
+    {{ Form::textarea('lainfo',(($catedit != null && $variant == 0)?$catedit->lainfo:'') ,array("class"=>"ckeditor") )
     }}
 </div>
 <br>
