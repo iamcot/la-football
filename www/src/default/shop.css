@@ -98,6 +98,10 @@ img{
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f06d9b', endColorstr='#ff77a4', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
     z-index: 98;
+    box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+    border: none;
 }
 .nav-pink a{
     color:#fff;
