@@ -1,5 +1,8 @@
-html,body{
+body{
     background: #fff;
+    font: normal 16px/26px Arial, adelle-sans, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 .imgthumb img{
     max-width: 40px;
@@ -17,4 +20,7 @@ img{
     width: 600px;
     height: 450px;
     margin: 0 auto;
+}
+.btn{
+    font-size: 20px;
 }
