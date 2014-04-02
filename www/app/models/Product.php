@@ -24,4 +24,10 @@ class Product extends Eloquent
             ->where("ladeleted",'!=','1')
             ->get();
     }
+    public static function getProductNews($id){
+        return Product::where('laproduct_id','like',$id.',%')
+            ->orwhere('laproduct_id','like','%,'.$id.',%')
+            ->orwhere('laproduct_id','=','all')
+            ->orwhere('laproduct_id','like','%,'.$id)->get();
+    }
 }

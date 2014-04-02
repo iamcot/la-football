@@ -6,6 +6,7 @@ body{
 }
 a{
     color: #ff77a4;
+    cursor: pointer;
 }
 img{
     width: 100%;
@@ -44,6 +45,49 @@ img{
     #info{
         color: #838383;
     }
+    .bag{
+        background: url(img/bagblue.png) no-repeat center;
+        min-width: 50px;
+        height: 70px;
+        z-index: 99;
+        text-align: center;
+        line-height: 70px;
+        vertical-align: middle;
+        top:20px;
+    }
+    .cartinfo{
+
+    }
+    .bag .badge{
+        background: #ff77a4 ;
+    }
+    .cartinfo .cartsum{
+        /*padding-right:55px;*/
+    }
+    .nopaddingright{
+        padding-right: 0;
+    }
+    .flybasketcontent{
+        background: #fff;
+        box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+        -webkit-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
+    }
+
+    #basketflybox{
+        display: none;
+        z-index: 100;
+        position: absolute;
+        min-width: 300px;
+        right: 0;
+        margin-top: 4px;
+    }
+    .flybutton{
+        color: #fff;
+        position: absolute;
+        top:-5px;
+    }
+
 .wrap{
     width: 90%;
 }
@@ -53,6 +97,7 @@ img{
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f06d9b', endColorstr='#ff77a4', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    z-index: 98;
 }
 .nav-pink a{
     color:#fff;

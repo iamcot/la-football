@@ -33,6 +33,7 @@
     </a>
 </div>
 @section('jscript')
+@parent
 <script>
     $('.carousel').carousel();
 </script>

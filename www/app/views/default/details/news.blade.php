@@ -2,9 +2,11 @@
 @section('pagecontent')
 <div id="details" class="text-justify">
     <h1>{{$oProduct->latitle}}</h1>
+    @if($oProduct->lashortinfo !='')
     <blockquote>
         <p>{{$oProduct->lashortinfo}}</p>
     </blockquote>
+    @endif
     <div id="newsimage">
         @if($oProduct->laimage !='')
               {{HTML::image('/uploads/product/'.$oProduct->laimage,$oProduct->latitle)}}

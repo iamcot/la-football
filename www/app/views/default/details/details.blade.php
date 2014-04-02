@@ -75,10 +75,6 @@
                     <button id="addtocart" class="btn btn-default btn-success" {{(($oProduct->sumvariant > 0)?'disabled="disabled"':'')}} ><span class="glyphicon glyphicon-shopping-cart"></span> Mua</button>
                     </div>
                     {{ Form::close() }}
-                    {{--*/ $session = Session::all() /*--}}
-                    <pre>
-                        {{ print_r($session) }}
-                    </pre>
 
                 </div>
              <dl class="dl-horizontal">
@@ -135,10 +131,7 @@
                 <div class="fb-comments" data-href="{{Request::url()}}" data-numposts="5" data-colorscheme="light"></div>
             </div>
             <div class="tab-pane" id="tabnews">
-                {{--*/ $productNews = Product::where('laproduct_id','like',$oProduct->id.',%')
-                ->orwhere('laproduct_id','like','%,'.$oProduct->id.',%')
-                ->orwhere('laproduct_id','=','all')
-                ->orwhere('laproduct_id','like','%,'.$oProduct->id)->get() /*--}}
+                {{--*/ $productNews = Product::getProductNews($oProduct->id) /*--}}
                 @if(count($productNews)>0)
                 @foreach($productNews as $news)
                 <div class="media">
@@ -165,6 +158,7 @@
 </div>
 @stop
 @section('jscript')
+    @parent
  <script>
      $('#myTab a').click(function (e) {
          e.preventDefault()
