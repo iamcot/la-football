@@ -35,6 +35,9 @@ class ShopAdminController extends BaseController
                 $dbCat->lainfo = $input['lainfo'];
                 $dbCat->laparent_id = $input['laparent_id'];
                 $dbCat->laorder = $input['laorder'];
+                if(isset($input['ladeleted']) && $input['ladeleted']=='on')
+                    $dbCat->ladeleted = 0;
+                else $dbCat->ladeleted = 1;
                 $dbCat->save();
 
                 $id = $dbCat->id;
@@ -210,6 +213,7 @@ class ShopAdminController extends BaseController
             $dbCat->ladungtich = $input['ladungtich'];
             $dbCat->lachucnang = $input['lachucnang'];
             $dbCat->lavariant_id = $input['lavariant_id'];
+            $dbCat->laproduct_id = $input['laproduct_id'];
             $dbCat->lamanufactor_id = $input['lamanufactor_id'];
             if(isset($input['ladeleted']) && $input['ladeleted']=='on')
                 $dbCat->ladeleted = 0;
@@ -258,7 +262,7 @@ class ShopAdminController extends BaseController
 
     public function getEditproduct($id,$variant=0)
     {
-        $dbCat = Product::find($id);
+        $dbCat = Vproduct::find($id);
         $this->data['actCat'] = 'product';
         $this->data['sidecat'] = 'create';
         $this->data['variant'] = $variant;

@@ -74,7 +74,7 @@ App::down(function()
 |
 */
 App::missing(function(){
-    return Response::make("Page not found", 404);
+    return View::make("e404", array('typeEnd'=>'admin','error'=>'1'));
 });
 
 /*

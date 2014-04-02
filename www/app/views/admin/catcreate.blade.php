@@ -15,7 +15,7 @@
     <br>
     <div class="input-group">
     {{ Form::label('laurl','URL ',array("class"=>"input-group-addon"),array("class"=>"input-group-addon")) }}
-    {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control" ) ) }}
+    {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control",'id'=>'laurl' ) ) }}
     </div>
     <br>
     <div class="input-group">
@@ -28,6 +28,7 @@
     {{ Form::text('laorder',(($catedit != null)?$catedit->laorder:'' ),array("class"=>"form-control") ) }}
     </div>
     <br>
+
     <div class="input-group">
     {{ Form::label('lainfo','Thông tin ',array("class"=>"input-group-addon")) }}
     {{ Form::textarea('lainfo',(($catedit != null)?$catedit->lainfo:'') ,array('rows'=>3,"class"=>"form-control") ) }}
@@ -37,6 +38,10 @@
     {{ Form::label('laimage','Ảnh đại diện ') }}
     {{ Form::file('laimage','') }}
     </div>
+    <br>
+    <label>
+        <input type="checkbox" name="ladeleted" {{((isset($catedit) && $catedit->ladeleted==1)?'':'checked=checked')}}> Kích hoạt
+    </label>
     <br>
     <div class="input-group">
     {{ Form::submit("Lưu",array('class'=>'btn btn-success')) }}
@@ -50,3 +55,11 @@
         {{HTML::image('uploads/cat/'.$catedit->id.'/'.$catedit->laimage)}}
     @endif
 </div>
+@section('jscript')
+{{HTML::script('src/jquery.friendurl.js')}}
+<script>
+ $(function () {
+     $('input[name=latitle]').friendurl({id : 'laurl'});
+ });
+</script>
+@stop

@@ -38,9 +38,9 @@
             <h3>{{$oProduct->latitle}}</h3>
             <p >
                 <span class="glyphicon glyphicon-usd"></span>
-                <span id="detailsPrice">{{number_format($oProduct->laprice,0,'.',',')}}</span>
+                <span id="detailsPrice">{{number_format($oProduct->laprice,0,',','.')}}</span>
                 @if($oProduct->laprice < $oProduct->laoldprice)
-            ( <span class="detailsOldPrice"> {{number_format($oProduct->laoldprice,0,'.',',')}} </span> )
+            ( <span class="detailsOldPrice"> {{number_format($oProduct->laoldprice,0,',','.')}} </span> )
             @endif
             @if($oProduct->sumvariant > 0)
                   {{--*/ $variants = Product::getVariants($oProduct->id) /*--}}
@@ -62,11 +62,30 @@
 
                     </dd>
             </dl>
-                <input type="hidden" id="variantselect" value="">
             @endif
+                <div>
+                    {{ Form::open(array(
+                        'url' => '/cart/add',
+                        'class'=>'form-inline',
+                    )) }}
+                        {{Form::hidden('laproduct_id',$oProduct->id)}}
+                        {{Form::hidden('variantname','',array('id'=>'variantselectnameinput'))}}
+                    <div class="form-group">
+                        {{Form::text('amount',1,array('class'=>'form-control','id'=>'cartamount') ) }}
+                    <button id="addtocart" class="btn btn-default btn-success" {{(($oProduct->sumvariant > 0)?'disabled="disabled"':'')}} ><span class="glyphicon glyphicon-shopping-cart"></span> Mua</button>
+                    </div>
+                    {{ Form::close() }}
+                    {{--*/ $session = Session::all() /*--}}
+                    <pre>
+                        {{ print_r($session) }}
+                    </pre>
+
+                </div>
              <dl class="dl-horizontal">
+                 @if($oProduct->factorname != '')
                 <dt>Xuất xứ</dt>
                 <dd>{{$oProduct->factorname}}</dd>
+                 @endif
                 @if($oProduct->lachucnang != '')
                 <dt>Chức năng</dt>
                 <dd>{{$oProduct->lachucnang}}</dd>
@@ -79,7 +98,7 @@
                 <dt>Dung tích</dt>
                 <dd>{{$oProduct->ladungtich}} (ml)</dd>
                 @endif
-                @if($oProduct->lashortinfo != '')
+                @if(trim($oProduct->lashortinfo) != '')
                 <dt>Mô tả</dt>
                 <dd>{{$oProduct->lashortinfo}}</dd>
                 @endif
@@ -91,16 +110,20 @@
                 <div class="fb-like" data-href="{{Request::url()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
     </div>
+
     <div class="clearfix"></div>
+
     <div id="comment">
 
     </div>
+        <br>
     <div id="productcontent" class="clearfix">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#tabinfo" data-toggle="tab">Thông tin sản phẩm</a></li>
             <li><a href="#tabhdsd" data-toggle="tab">Hướng dẫn sử dụng</a></li>
             <li><a href="#tabcomment" data-toggle="tab">Bình luận</a></li>
+            <li><a href="#tabnews" data-toggle="tab">Tin tức liên quan </a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -110,6 +133,30 @@
             <div class="tab-pane" id="tabhdsd">{{$oProduct->lauseguide}}</div>
             <div class="tab-pane text-center" id="tabcomment">
                 <div class="fb-comments" data-href="{{Request::url()}}" data-numposts="5" data-colorscheme="light"></div>
+            </div>
+            <div class="tab-pane" id="tabnews">
+                {{--*/ $productNews = Product::where('laproduct_id','like',$oProduct->id.',%')
+                ->orwhere('laproduct_id','like','%,'.$oProduct->id.',%')
+                ->orwhere('laproduct_id','=','all')
+                ->orwhere('laproduct_id','like','%,'.$oProduct->id)->get() /*--}}
+                @if(count($productNews)>0)
+                @foreach($productNews as $news)
+                <div class="media">
+                    @if($news->laimage != '')
+                    <a class="pull-left" href="{{URL::to('/tin-tuc/'.$news->laurl)}}.html">
+                        <img class="media-object" src="{{URL::to('/uploads/thumbnails/product/'.$news->laimage)}}" alt="{{$news->latitle}}">
+                    </a>
+                    @endif
+                    <div class="media-body">
+
+                        <h2 class="media-heading"><a href="{{URL::to('/tin-tuc/'.$news->laurl)}}.html">{{$news->latitle}} </a></h2>
+
+                        {{$news->lashortinfo}}
+                    </div>
+                </div>
+                @endforeach
+
+                @endif
             </div>
         </div>
 
@@ -139,6 +186,9 @@
                  $("#variantselectname").html(msg.lashortinfo);
                  $("#variantselectname").removeClass("ajaxload");
                  $("#variantselectname").addClass("bg-warning");
+                 $("input[name=laproduct_id]").val(msg.id);
+                 $("#variantselectnameinput").val(msg.lashortinfo);
+                 $("#addtocart").removeAttr("disabled");
              }
          });
      }

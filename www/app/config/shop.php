@@ -1,9 +1,11 @@
 <?php
 
 return array(
-    'title' => 'Webmypham.com',
+    'title' => 'Webmypham',
     'pretitle' => '',
-    'suftitle' => '- Mỹ phẩm, không đơn giản là kinh doanh',
+    'suftitle' => '- WebMyPham - Chuyên cung cấp sỉ và lẻ mỹ phẩm Hàn Quốc - Thailand  - USA',
+    'description' => 'Thái Boutique - Webmypham - Chuyên sỉ và lẻ mỹ phẩm Hàn Quốc, Thai lan, USA - Kem trắng da - Trị mụn - son - trang điểm',
+    'keywords'  => 'mỹ phẩm, my pham, thai lan, thailan, the face shop, kem trắng da, kem trị mụn, kem mọc tóc, white, skin, beauty, spa, laila, mood matcher, wet n wild, nyx, revlon, kem dna ',
     'treecatdeep' => 1,
     'tablepp'    =>  18,
     'theme' => 'default',

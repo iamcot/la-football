@@ -7,7 +7,10 @@ class Vcategory extends Eloquent
     {
         $categories_array = array();
 
-        $categories = Vcategory::where('laparent_id', '=', $id)->get();
+        $categories = Vcategory::where('laparent_id', '=', $id)
+            ->orderBy('laorder')
+            ->orderBy('latitle')
+            ->get();
 
         $path .= $last_path . "/";
 
@@ -37,9 +40,11 @@ class Vcategory extends Eloquent
     {
         $html = "<ul class='" . (($level == 0) ? 'menu' : '') . "'>";
         foreach ($categories as $cat) {
-            $html .= "<li><a href='" . URL::to("/" . $cat['laurl']) . "' " . (($id == $cat['id']) ? "class='active'" : '') . ">
+            $html .= "<li>
+            <a ".(($cat['numproduct'] > 0)?"href='" . URL::to("/" . $cat['laurl']) . "' " . (($id == $cat['id']) ? "class='active'" : '') . "":"")." >
                     " . (($level == 0) ? '<i class="' . $cat['laicon'] . '"></i>' : '') . " " . $cat['latitle'] . " <span><b>" . $cat['numproduct'] . "</b></span>
-            </a> </li>";
+            </a>
+            </li>";
             $html .= Vcategory::shopCatTree($id, $cat['children'], $level + 1);
         }
         $html .= "</ul>";
@@ -67,14 +72,18 @@ class Vcategory extends Eloquent
     {
         $parentcat = DB::table('v_categories')
             ->where('laparent_id', '=', '0')
+            ->where('laurl', '!=', 'tin-tuc')
             ->orderBy(DB::raw('RAND()'))
             ->get();
         $array = array();
         foreach ($parentcat as $cat) {
             $ranproduct = DB::table('v_products')
-                ->where('cat1id', '=', $cat->id)
-                ->orwhere('cat2id', '=', $cat->id)
-                ->orwhere('cat3id', '=', $cat->id)
+                ->where('ladeleted','!=','1')
+                ->where(function($query) use ($cat){
+                    $query->where('cat1id', '=', $cat->id)
+                        ->orwhere('cat2id', '=', $cat->id)
+                        ->orwhere('cat3id', '=', $cat->id);
+                })
                 ->orderBy(DB::raw('RAND()'))
                 ->take(3)
                 ->get();

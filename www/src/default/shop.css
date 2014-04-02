@@ -1,8 +1,14 @@
 body{
     background: rgba(255, 119, 164, 0.1);
+    font: normal 16px/26px Arial, adelle-sans, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 a{
     color: #ff77a4;
+}
+img{
+    width: 100%;
 }
 .bgwhite{
     background: #fff;
@@ -298,6 +304,10 @@ a{
 .randproduct {
     text-align: center;
 }
+.randproduct p{
+    font-size: .8em;
+    line-height: 1.2em;
+}
 .randproduct img{
     box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
@@ -465,4 +475,22 @@ a{
 }
 .parentcat a img{
     width: 100%;
+}
+.author{
+    font-size: .8em;
+    color:#333;
+}
+#newsimage{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+blockquote {
+    font-style: italic;
+    font-weight: 100;
+    color: #7e7e7e;
+}
+#cartamount{
+    width: 50px !important;
+    text-align: center;
 }

@@ -21,7 +21,7 @@
                 <td>{{number_format($product->laprice,0,',','.')}}</td>
                 <td>{{$product->catname}}</td>
                 <td>{{$product->factorname}}</td>
-                <td>{{$product->lashortinfo}}</td>
+                <td>{{str_limit($product->lashortinfo,40)}}</td>
                 <td class='imgthumb'>{{ HTML::image('uploads/thumbnails/product/' . $product->laimage, 'IMG') }}</td>
                 <td>
                     @if($product->lavariant_id == 0)

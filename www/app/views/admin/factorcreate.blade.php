@@ -15,7 +15,7 @@
     <br>
     <div class="input-group">
     {{ Form::label('laurl','URL ',array("class"=>"input-group-addon"),array("class"=>"input-group-addon")) }}
-    {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control" ) ) }}
+    {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control",'id'=>'laurl' ) ) }}
     </div>
     <br>
     <div class="input-group">
@@ -45,3 +45,11 @@
         {{HTML::image('uploads/factor/'.$catedit->id.'/'.$catedit->laimage)}}
     @endif
 </div>
+@section('jscript')
+{{HTML::script('src/jquery.friendurl.js')}}
+<script>
+ $(function () {
+     $('input[name=latitle]').friendurl({id : 'laurl'});
+ });
+</script>
+@stop

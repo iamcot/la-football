@@ -7,10 +7,10 @@
         <div class="col-xs-6 col-md-3">
             <dl>
                 <dt>Thông tin</dt>
-                <dd><a><span class="glyphicon glyphicon-chevron-right"></span> Giới thiệu</a></dd>
-                <dd><a><span class="glyphicon glyphicon-chevron-right"></span> Mức phí và cách ship hàng</a></dd>
-                <dd><a><span class="glyphicon glyphicon-chevron-right"></span> Quy định đổi - trả</a></dd>
-                <dd><a><span class="glyphicon glyphicon-chevron-right"></span> Thanh toán</a></dd>
+                <dd><a href="{{URL::to('/tin-tuc/gioi-thieu.html')}}"><span class="glyphicon glyphicon-chevron-right"></span> Giới thiệu</a></dd>
+                <dd><a href="{{URL::to('/tin-tuc/ship-hang.html')}}"><span class="glyphicon glyphicon-chevron-right"></span> Mức phí và cách ship hàng</a></dd>
+                <dd><a href="{{URL::to('/tin-tuc/doi-hang.html')}}"><span class="glyphicon glyphicon-chevron-right"></span> Quy định đổi - trả</a></dd>
+                <dd><a href="{{URL::to('/tin-tuc/thanh-toan.html')}}"><span class="glyphicon glyphicon-chevron-right"></span> Thanh toán</a></dd>
             </dl>
         </div>
         <div class="col-xs-6 col-md-3">

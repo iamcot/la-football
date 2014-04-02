@@ -17,6 +17,8 @@ class ListController extends  BaseController
         $actCat = Category::where("laurl",'=',$cat)->get();
         $this->data['rootcat'] = true;
         if($actCat->count()==1){
+            $this->data['title'] =  $actCat[0]->latitle;
+            $this->data['description']=$actCat[0]->lainfo;
             if($actCat[0]->laparent_id>0){
 
                 $lists = Vproduct::where('ladeleted','!=','1')
@@ -40,6 +42,11 @@ class ListController extends  BaseController
                 $this->data['lists'] = $lists;
                 $this->data['rootcat'] = false;
             }
+            else if($cat == 'tin-tuc'){
+                $lists = Vproduct::where('cat1url','=',$cat)->paginate(Config::get('shop.tablepp'));
+                $this->data['lists'] = $lists;
+                $this->data['rootcat'] = false;
+            }
             else {
                 $catchildren = Category::where('laparent_id','=',$actCat[0]->id)
                     ->orderBy('latitle')
@@ -56,6 +63,9 @@ class ListController extends  BaseController
                 $this->data['lists'] = $ranproduct;
             }
 
+        }
+        else{
+            App::abort(404);
         }
 
         return View::make(Config::get('shop.theme')."/list/list",$this->data);

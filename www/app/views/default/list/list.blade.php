@@ -1,18 +1,38 @@
 @extends(Config::get('shop.theme').'/layout/page')
 @section('pagecontent')
 <div class="container-fluid lists">
-    @if(!$rootcat)
-    <div class="text-right">
+    @if(!$rootcat && $caturl !='tin-tuc')
+    <div class="text-right container-fluid">
         {{ Form::open() }}
              <button name="giatang" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-sort-by-attributes"></span> Giá</button>
              <button name="giagiam" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span> Giá</button>
              <button name="tentang" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-sort-by-alphabet"></span> Tên</button>
              <button name="tengiam" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Tên</button>
+        <p></p>
         {{ Form::close() }}
     </div>
+    @elseif ($caturl =='tin-tuc')
+        @if(count($lists)>0)
+            @foreach($lists as $news)
+            <div class="media">
+                @if($news->laimage != '')
+                <a class="pull-left" href="{{URL::to('/tin-tuc/'.$news->laurl)}}.html">
+                    <img class="media-object" src="{{URL::to('/uploads/thumbnails/product/'.$news->laimage)}}" alt="{{$news->latitle}}">
+                </a>
+                @endif
+                <div class="media-body">
+
+                    <h2 class="media-heading"><a href="{{URL::to('/tin-tuc/'.$news->laurl)}}.html">{{$news->latitle}} </a></h2>
+
+                    {{$news->lashortinfo}}
+                </div>
+            </div>
+            @endforeach
+            <p class="clearfix"></p>
+        @endif
     @else
         @if(isset($oActCat) && $oActCat != null)
-            <p>{{$oActCat->lainfo}}</p>
+            <blockquote>{{$oActCat->lainfo}}</blockquote>
          @endif
     @endif
 
@@ -36,7 +56,7 @@
     <div class="clearfix"></div>
     <br>
     @endif
-    @if(isset($lists) && $lists != null)
+    @if(isset($lists) && $lists != null && $caturl !='tin-tuc')
     <div class="row-fluid ">
         @foreach($lists as $list)
             @include(Config::get('shop.theme').'/list/listitem')

@@ -1,3 +1,7 @@
+/* tanner 2/4 */
+/* 1:49:16 PM localhost */ ALTER TABLE `laproducts` ADD `laproduct_id` VARCHAR(50)  NULL  DEFAULT NULL  AFTER `lavariant_id`;
+
+
 /* nha 1/4 */
 ALTER TABLE `laproducts`
   ADD COLUMN `lakhoiluong` VARCHAR(20) NULL AFTER `created_at`,

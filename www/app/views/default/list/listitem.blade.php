@@ -7,15 +7,17 @@
                 <strong>{{$list->latitle}}</strong>
             </p>
         </a>
-        <p class="price">
-            <span class="glyphicon glyphicon-usd"></span>
-            {{number_format($list->laprice,0,'.',',')}}
-        </p>
-        @if($list->laprice < $list->laoldprice)
-        <div class="oldPrice"></div>
-        @endif
-        @if($list->ladatenew > time())
-        <div class="newgif"></div>
+        @if($list->laprice>0)
+            <p class="price">
+                <span class="glyphicon glyphicon-usd"></span>
+                {{number_format($list->laprice,0,',','.')}}
+            </p>
+            @if($list->laprice < $list->laoldprice)
+            <div class="oldPrice"></div>
+            @endif
+            @if($list->ladatenew > time())
+            <div class="newgif"></div>
+            @endif
         @endif
     </div>
 </div>

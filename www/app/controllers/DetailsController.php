@@ -18,8 +18,18 @@ class DetailsController extends BaseController
             ->get();
         if($product->count()>0){
             $this->data['oProduct'] = $product[0];
+            $this->data['title'] =  $this->data['oProduct']->latitle.' - '.$this->data['oProduct']->cat1name;
+            $this->data['description']=$this->data['oProduct']->lashortinfo;
+            $this->data['keywords']=$this->data['oProduct']->lakeyword;
+        }
+        else{
+            App::abort(404);
         }
 
+        if($cat != 'tin-tuc')
+
         return View::make(Config::get('shop.theme')."/details/details",$this->data);
+        else
+        return View::make(Config::get('shop.theme')."/details/news",$this->data);
     }
 }

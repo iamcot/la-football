@@ -26,7 +26,16 @@ array(
     <br>
     <div class="input-group">
         {{ Form::label('laurl','URL ',array("class"=>"input-group-addon")) }}
-        {{ Form::text('laurl',(($catedit != null)?$catedit->laurl:''),array("class"=>"form-control",'title'=>'Đường dẫn seo' ) ) }}
+        @if($catedit != null)
+            @if($variant == 1)
+            {{--*/ $url = $catedit->laurl.($catedit->sumvariant+1) /*--}}
+            @else
+            {{--*/ $url =  $catedit->laurl /*--}}
+            @endif
+        @else
+        {{--*/ $url = '' /*--}}
+        @endif
+        {{ Form::text('laurl',$url,array("class"=>"form-control",'title'=>'Đường dẫn seo','id'=>'laurl' ) ) }}
     </div>
     <br>
     <div class="input-group">
@@ -61,7 +70,11 @@ array(
         {{ Form::text('ladungtich',(($catedit != null)?$catedit->ladungtich:''),array("class"=>"form-control",'title'=>'đơn vị ml' ) ) }}
     </div>
     <br>
-
+    <div class="input-group">
+        {{ Form::label('laproduct_id','SP liên quan',array("class"=>"input-group-addon")) }}
+        {{ Form::text('laproduct_id',(($catedit != null)?$catedit->laproduct_id:'' ),array("class"=>"form-control") ) }}
+    </div>
+    <br>
 
     <div class="input-group">
         {{ Form::label('lashortinfo','Thông tin ngắn',array("class"=>"input-group-addon")) }}
@@ -185,6 +198,7 @@ array(
 {{HTML::script('src/jupload/js/jquery.fileupload-process.js')}}
 {{HTML::script('src/ckeditor/ckeditor.js')}}
 {{HTML::script('src/ckeditor/adapters/jquery.js')}}
+{{HTML::script('src/jquery.friendurl.js')}}
 <script>
     function delpic(filename,id){
         $.ajax({
@@ -197,6 +211,7 @@ array(
         });
     }
     $(function () {
+        $('input[name=latitle]').friendurl({id : 'laurl'});
         $( '.ckeditor' ).ckeditor({
             language: 'vi',
             height:80,
