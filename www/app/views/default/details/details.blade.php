@@ -70,6 +70,8 @@
                     )) }}
                         {{Form::hidden('laproduct_id',$oProduct->id)}}
                         {{Form::hidden('variantname','',array('id'=>'variantselectnameinput'))}}
+                        {{Form::hidden('caturl',$oProduct->cat1url)}}
+                        {{Form::hidden('producturl',$oProduct->laurl)}}
                     <div class="form-group">
                         {{Form::text('amount',1,array('class'=>'form-control','id'=>'cartamount') ) }}
                     <button id="addtocart" class="btn btn-default btn-success" {{(($oProduct->sumvariant > 0)?'disabled="disabled"':'')}} ><span class="glyphicon glyphicon-shopping-cart"></span> Mua</button>

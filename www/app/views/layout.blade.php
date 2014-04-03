@@ -25,7 +25,7 @@
 </head>
 @if(!isset($error))
     <body>
-
+    <div class="supercontainer">
     @if (isset($haveHeader) && $haveHeader == 1)
         @include(Config::get('shop.theme').'/layout/header')
     @endif
@@ -40,10 +40,11 @@
     <div class=" body">
         @yield('body')
     </div>
+        <div class="clearfix"></div>
     @if (isset($typeEnd) && $typeEnd!='admin')
     @include(Config::get('shop.theme').'/layout/footer')
     @endif
-
+    </div>
     </body>
     </html>
 <script src="http://code.jquery.com/jquery.js"></script>
@@ -81,3 +82,4 @@
         @endif
 
 @endif
+{{--*/ Session::put('actionstatus', 0) /*--}}

@@ -41,24 +41,23 @@
                 {{--*/ $sumprice += ($item['amount'] * $item['laprice']) /*--}}
                 @endforeach
 
-                <tr><td colspan="2" class="text-right"><a>Thanh toán <span class="glyphicon glyphicon-play"></span></a></td></tr>
+                <tr><td colspan="2" class="text-right"><a href="{{URL::to('/cart/')}}">Thanh toán <span class="glyphicon glyphicon-play"></span></a></td></tr>
             </table>
         </div>
         @endif
 
     </div>
-
 </div>
 @section('jscript')
 <script>
-    @if(Session::get('hasnew', 0) == '1')
+    @if(Session::get('actionstatus', 0) == Config::get('actionstatus.cart_has_new'))
 
         $(document).ready(function() {
             $("#basketflybox").show();
         });
 
     @endif
-    {{--*/ Session::put('hasnew', 0) /*--}}
+
 
          function showflybasket(){
              $("#basketflybox").show();

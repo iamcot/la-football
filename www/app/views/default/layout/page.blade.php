@@ -2,7 +2,7 @@
 @section('body')
 {{--*/ $categories = Vcategory::getCategoriesTree(); /*--}}
 <div class="container-fluid wrap ">
-    <div id="content" class="{{$sidebartype}} {{(($typeEnd == 'list' || $typeEnd=='details')?'bgwhite':'')}}">
+    <div id="content" class="{{$sidebartype}} {{(($typeEnd == 'list' || $typeEnd=='details' ||  $typeEnd=='cart')?'bgwhite':'')}}">
         @if($typeEnd == 'list' || $typeEnd=='details')
         @include(Config::get('shop.theme').'/layout/barcum')
         @endif
