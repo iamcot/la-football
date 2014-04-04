@@ -36,7 +36,7 @@ class OrdersController extends BaseController
             else{
                 Session::put('cart.'.$product_id,$cart);
             }
-            Session::put('hasnew',1);
+            Session::put('actionstatus',Config::get('actionstatus.cart_has_new'));
         }
 
         return Redirect::back();

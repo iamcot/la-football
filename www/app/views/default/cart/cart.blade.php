@@ -95,7 +95,9 @@
         <br>
         <div class="input-group">
             <select class="form-control" placeholder="Tỉnh Thành phố"   name="orderprovince">
-                <option value="ship-shop">TP Hồ Chí Minh</option>
+                @foreach(Config::get('shop.province') as $province)
+                <option value="{{$province['id']}}">{{$province['title']}}</option>
+                @endforeach
             </select>
             <span class="input-group-addon">Tỉnh thành</span>
         </div>
