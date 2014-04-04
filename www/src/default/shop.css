@@ -82,6 +82,9 @@ img {
 .cartinfo {
 
 }
+#feeshippingdisplay.ajaxload{
+    background-position: right;
+}
 #cartpage{
     margin-bottom: 20px;
     min-height: 300px;

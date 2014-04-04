@@ -10,4 +10,5 @@ return array(
     'LDFactor'    =>  'Nhà Sản xuất',
     'LDSale'    =>  'Khuyến mãi',
     'LDConfig' => 'Cấu hình',
+
 );
