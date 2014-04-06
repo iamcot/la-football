@@ -8,7 +8,7 @@
     <meta name="description" content="{{((isset($description))?$description:Config::get('shop.description'))}}">
     <meta name="keywords" content="{{((isset($keywords))?$keywords:'')}},{{Config::get('shop.keywords')}}">
     <meta name="robots" content="index,follow">
-    <meta property="fb:app_id" content="141133079404451"/>
+    <meta property="fb:app_id" content="753308934688020"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <!-- Bootstrap -->
@@ -26,6 +26,7 @@
 @if(!isset($error))
     <body>
     <div class="supercontainer">
+        @yield('errorpage')
     @if (isset($haveHeader) && $haveHeader == 1)
         @include(Config::get('shop.theme').'/layout/header')
     @endif

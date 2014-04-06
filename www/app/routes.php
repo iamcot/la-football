@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('login/fb', 'FacebookController@login');
+Route::get('login/fb/callback', 'FacebookController@logincallback');
 Route::controller('admin','ShopAdminController');
 Route::controller('upload','UploadController');
 Route::controller('cart','OrdersController');
@@ -20,6 +22,8 @@ Route::any('/{cat}','ListController@showList');
 Route::controller('ajax','AjaxController');
 
 Route::get('/','ShopController@getIndex');
+
+
 
 
 

@@ -16,7 +16,7 @@ class OrdersController extends BaseController
         $product = Product::find($product_id);
         if($product->count() > 0){
             $cart = array(
-                'id' => $product->id,
+                'product_id' => $product->id,
                 'latitle' => $product->latitle,
                 'amount' => $amount,
                 'laprice' => $product->laprice,
@@ -91,12 +91,49 @@ class OrdersController extends BaseController
         Session::forget('voucher');
         return Redirect::back();
     }
-    public function postSaveorderinfo(){
+    public function postCheckout(){
         $input = Input::all();
-        if(count($input) > 0){
+        if(count($input) > 0 && $input['_token'] == Session::get('_token')){
+            if(Session::has('voucher')) {
+                $voucher = Session::get('voucher.id');
+            }
+            else $voucher = '';
+            $orderinfo = array(
+                'lashipping' => $input['shipping'],
+                'lapayment' => $input['payment'],
+                'lasumkhoiluong' => $input['sumkhoiluong'],
+                'lafeeshipping' => $input['feeshipping'],
+                'laordername' => $input['ordername'],
+                'laordertel' => $input['ordertel'],
+                'laorderemail' => $input['orderemail'],
+                'laorderaddr' => $input['orderaddr'],
+                'laorderprovince' => $input['orderprovince'],
+                'laorderdistrict' => $input['orderdistrict'],
+                'voucher' => $voucher,
 
+            );
+            if(Session::has('uid')) $orderinfo['uid'] = Session::get('uid');
+            if(Session::has('user_id')) $orderinfo['user_id'] = Session::get('user_id');
+            Session::put('order',$orderinfo);
+            $orderid = Orders::save1($orderinfo);
+            Session::put('lastorder',$orderid);
+            if(Session::has('cart')){
+                foreach(Session::get('cart') as $cart){
+                    $cart['order_id'] = $orderid;
+                    Session::put('cart.'.$cart['product_id'],$cart);
+                }
+                Orderitem::saveall(Session::get('cart'));
+            }
+            $this->data['orderinfo'] = Orders::find($orderid)->first();
+            $this->data['orderitems'] = Orderitem::where('order_id','=',$orderid)->get();
+           // Session::put('_token', md5(microtime()));
+            return View::make(Config::get('shop.theme')."/cart/checkoutinfo",$this->data);
         }
-        return Redirect::back();
+        else{
+            return Redirect::back();
+        }
+       // var_dump(Session::all());
+        //return Redirect::back();
     }
     public function getCheckshipping($shiptype){
         $payment = Config::get('shop.payment');

@@ -22,4 +22,8 @@ class Orders extends Eloquent{
         }
             return $sum;
     }
+    public static function save1($array){
+        return DB::table('laorders')->insertGetId($array);
+    }
+
 }

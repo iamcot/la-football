@@ -6,7 +6,7 @@ class User extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'lauser';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -14,5 +14,8 @@ class User extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('lapassword');
-
+    public function profiles()
+    {
+        return $this->hasMany('Profile');
+    }
 }
