@@ -29,15 +29,20 @@ return array(
             'url'    =>  'order',
             'title' =>  'LDOrder'
         ),
-        'sale'     =>  array(
-            'id'    =>  'sale',
-            'url'    =>  'sale',
-            'title' =>  'LDSale'
-        ),
+//        'sale'     =>  array(
+//            'id'    =>  'sale',
+//            'url'    =>  'sale',
+//            'title' =>  'LDSale'
+//        ),
         'config'     =>  array(
             'id'    =>  'config',
             'url'    =>  'config',
             'title' =>  'LDConfig'
+        ),
+        'user'     =>  array(
+            'id'    =>  'user',
+            'url'    =>  'user',
+            'title' =>  'LDUser'
         ),
 
     ),

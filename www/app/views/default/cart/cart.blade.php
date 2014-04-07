@@ -245,7 +245,7 @@
         if (select != 0) {
             $.ajax({
                 url: "{{URL::to('cart/checkshipping')}}/" + select,
-                type: "get",
+                type: "post",
                 success: function (msg) {
                     var result = eval(msg);
                     $.each(result['payment'], function (index, pay) {
@@ -291,7 +291,7 @@
 
                 $.ajax({
                     url: "{{URL::to('cart/checkfee')}}",
-                    type: "get",
+                    type: "post",
                     data: "province="+ province + "&klg=" + klg + "&shipping=" + shipping + "&payment=" + payment +"&district="+district+ "&token={{Session::get('_token')}}",
                     success: function (msg) {
                         var result = eval(msg);

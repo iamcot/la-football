@@ -79,8 +79,13 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('test',function($route,$request,$response){
-    return ($response);
+Route::filter('isadmin', function()
+{
+    if (Auth::check()){
+        $isadmin  = Auth::user()->isAdmin();
+        if(!$isadmin)  return Redirect::to('/');
+    }
+    else return Redirect::to('login');
 });
 
 

@@ -6,7 +6,10 @@ class ShopAdminController extends BaseController
     private $data = array(
         'typeEnd' => 'admin',
     );
-
+    public function __construct(){
+        $this->beforeFilter('isadmin');
+        $this->beforeFilter('csrf', array('on' => 'post'));
+    }
     public function getIndex()
     {
         $this->data['actCat'] = 'home';
@@ -21,7 +24,7 @@ class ShopAdminController extends BaseController
         else $this->data['sidecat'] = 'view';
         $flag = $this->data['sidecat'];
         $input = Input::all();
-        if (count($input) > 0) {
+        if (isset($input['_token'])) {
             try {
                 if ($input['id'] == '')
                     $dbCat = new Category();
@@ -109,7 +112,7 @@ class ShopAdminController extends BaseController
         else $this->data['sidecat'] = 'view';
         $flag = $this->data['sidecat'];
         $input = Input::all();
-        if (count($input) > 0) {
+        if (isset($input['_token'])) {
             try {
                 if ($input['id'] == '')
                     $dbCat = new Factory();
@@ -282,7 +285,7 @@ class ShopAdminController extends BaseController
     public function anyOrder()
     {
         $this->data['actCat'] = 'order';
-        $this->data['oOrders'] = Orders::orderBy('order_status')->orderBy('id','desc')->paginate(Config::get('tablepp'));
+        $this->data['oOrders'] = Orders::orderBy('order_status')->orderBy('id','desc')->paginate(Config::get('shop.tablepp'));
         return View::make('admin/order', $this->data);
     }
     public function getChangeorderstatus($orderid,$status){
@@ -294,6 +297,29 @@ class ShopAdminController extends BaseController
     public function getVieworderdetails($orderid){
         $data['orderitems'] = Orderitem::where('order_id',$orderid)->get();
         return Response::view('admin/orderitems',$data);
+    }
+    public function anyUser(){
+        $this->data['actCat'] = 'user';
+        $this->data['aUsers'] = User::paginate(Config::get('shop.tablepp'));
+        return View::make('admin/user',$this->data);
+    }
+    public function getChangepass($id){
+        $user = User::find($id);
+        if($user!=null){
+            $user->password = Hash::make(''.Input::get('password'));
+            $user->save();
+            echo 1;
+        }
+        else echo 0;
+    }
+    public function getCreateuser(){
+        $user = new User();
+        $user->username = Input::get('username');
+        $user->password = Hash::make(''.Input::get('username'));
+        $user->larole = Input::get('larole');
+        $user->lafullname = Input::get('lafullname');
+        $user->laemail = Input::get('laemail');
+        echo $user->save();
     }
 
     public function anyConfig()

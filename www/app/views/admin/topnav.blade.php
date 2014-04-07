@@ -13,6 +13,10 @@
                 </li>
                 @endforeach
             </ul>
+        <ul class="nav navbar-nav navbar-right" id="facebookprofile" style="color:#fff">
+            <li>{{Auth::user()->lafullname}}</li>
+            <li><a href="{{URL::to('logout')}}" style="display: inline">Logout</a> </li>
+        </ul>
     </div>
     </div>
 </div>

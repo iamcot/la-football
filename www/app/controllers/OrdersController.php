@@ -36,10 +36,10 @@ class OrdersController extends BaseController
             else{
                 Session::put('cart.'.$product_id,$cart);
             }
-            Session::put('actionstatus',Config::get('actionstatus.cart_has_new'));
+//            Session::put('actionstatus',Config::get('actionstatus.cart_has_new'));
         }
 
-        return Redirect::back();
+        return Redirect::back()->with('actionstatus',Config::get('actionstatus.cart_has_new'));
     }
     public function getChangeamout($product_id,$type){
         if(Session::has('cart.'.$product_id)){
@@ -75,19 +75,21 @@ class OrdersController extends BaseController
         if(isset($input['vouchercode']) && trim($input['vouchercode']) != '' ){
             $voucher = Voucher::checkVoucher($input['vouchercode']);
             if($voucher == null){
-                Session::put('actionstatus',Config::get('actionstatus.voucher_not_avail'));
+                $status = Config::get('actionstatus.voucher_not_avail');
             }
             else{
                 if( strtotime($voucher['to']) < time())
-                    Session::put('actionstatus',Config::get('actionstatus.voucher_expried'));
-                    else
-                Session::put('voucher',$voucher);
+                    $status = Config::get('actionstatus.voucher_expried');
+                    else{
+                        Session::put('voucher',$voucher);
+                        $status = 0;
+                    }
             }
         }
         else{
-            Session::put('actionstatus',Config::get('actionstatus.voucher_not_input'));
+            $status = Config::get('actionstatus.voucher_not_input');
         }
-         return Redirect::back();
+         return Redirect::back()->with('actionstatus',$status);
     }
     public function anyDelvoucher(){
         Session::forget('voucher');
@@ -160,7 +162,7 @@ class OrdersController extends BaseController
        // var_dump(Session::all());
         //return Redirect::back();
     }
-    public function getCheckshipping($shiptype){
+    public function anyCheckshipping($shiptype){
         $payment = Config::get('shop.payment');
         $shiplist = Config::get('shop.shipping');
         $acceptpayment = $shiplist[$shiptype]['pay_allow'];
@@ -189,7 +191,7 @@ class OrdersController extends BaseController
         $result['province'] = array_values(array_sort($provincelist, function($value) { return $value['id']; }));;
         return Response::json($result);
     }
-    public function getCheckfee(){
+    public function anyCheckfee(){
         $input = Input::all();
         $province = $input['province'];
         $klg = $input['klg'];

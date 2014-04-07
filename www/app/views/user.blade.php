@@ -1,19 +1,15 @@
 @if (Auth::check())
 {{--*/ $data = Auth::user() /*--}}
-@endif
-@if(Session::has('message'))
-@section('errorpage')
-<div class="bg-danger">
-    <div class="container-fluid wrap">
-        {{ Session::get('message')}}
-    </div>
-</div>
-@stop
-@endif
-@if (!empty($data))
-Hello, {{{ $data['name'] }}}
-<img src="{{ $data['photo']}}"> |
-<a href="logout">Logout</a>
+@if($data->isAdmin())
+<li><a href="{{URL::to('admin')}}">{{{ $data->lafullname }}}</a> </li>
 @else
-<a href="login/fb">Login with Facebook</a>
+<li>{{{ $data->lafullname }}} </li>
+@endif
+@if($data->laphoto!='')
+<li><img src="{{$data->laphoto}}"> </li>
+@endif
+<li>&nbsp;|&nbsp;<a href="{{URL::to('logout')}}">Logout</a> </li>
+
+@else
+<li><a href="login/fb">Login with Facebook</a></li>
 @endif

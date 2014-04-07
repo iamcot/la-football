@@ -104,7 +104,7 @@ return array(
         'baclieu' => array( 'id' => 'baclieu','title' =>'Bạc Liêu' ,'group' => 3,'guixe'=>'0'),
         'bentre' => array( 'id' => 'bentre','title' =>'Bến Tre' ,'group' => 3,'guixe'=>'0'),
         'binhthuan' => array( 'id' => 'binhthuan','title' =>'Bình Thuận ' ,'group' => 3,'guixe'=>'0'),
-        'camau' => array( 'id' => 'camau','title' =>'Càu Mau' ,'group' => 3,'guixe'=>'0'),
+        'camau' => array( 'id' => 'camau','title' =>'Cà Mau' ,'group' => 3,'guixe'=>'0'),
         'cantho' => array( 'id' => 'cantho','title' =>'Cần Thơ' ,'group' => 3,'guixe'=>'0'),
         'dongnai' => array( 'id' => 'dongnai','title' =>'Đồng Nai' ,'group' => 3,'guixe'=>'0'),
         'dongthap' => array( 'id' => 'dongthap','title' =>'Đồng Tháp' ,'group' => 3,'guixe'=>'0'),

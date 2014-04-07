@@ -1,5 +1,5 @@
 {{--*/ $slider=Myconfig::buildSlider() /*--}}
-@if($slider!='')
+@if($slider!=null)
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

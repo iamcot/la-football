@@ -4,6 +4,7 @@ return array(
     'LDOverview'    =>  'Tổng quan',
     'LDCat'     =>  'Thư mục',
     'LDProduct' =>  'Sản phẩm',
+    'LDUser' =>  'Thành viên',
     'LDOrder'   =>  'Đơn hàng',
     'LDcreate'  =>  'Thêm / Sửa',
     'LDview'    =>  'Xem',

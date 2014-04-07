@@ -32,7 +32,7 @@ class FacebookController extends BaseController
 
             $profile = new Profile();
             $profile->uid = $uid;
-            $profile->lausername = $me['username'];
+            $profile->username = $me['username'];
             $profile = $user->profiles()->save($profile);
         }
 

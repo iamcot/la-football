@@ -18,6 +18,7 @@
             <th>Địa chỉ</th>
             <th>Giao hàng</th>
             <th>Thanh toán</th>
+            <th>Ghi chú</th>
             <th>Trạng thái</th>
             <th>Ngày đặt</th>
             <th></th>
@@ -33,7 +34,7 @@
             {{--*/ $oPayment = Config::get('shop.payment.'.$order->lapayment) /*--}}
             {{--*/ $oProvince = Config::get('shop.province.'.$order->laorderprovince) /*--}}
             {{--*/ $oDistrict = Config::get('shop.hcm_district.'.$order->laorderdistrict) /*--}}
-            <td><a class="label label-primary" href="javascript:viewDetail({{$order->id}})"> {{$order->id}} </a></td>
+            <td><a class="label label-primary" id="a{{$order->id}}" href="javascript:viewDetail({{$order->id}})"> {{$order->id}} </a></td>
             <td><a class="sumpopup" title="{{$details}}" data-placement="right">{{number_format($order->sumsanpham - $order->giamvoucher + $order->lafeeshipping,0,',','.')}}</a></td>
             <td>{{$order->laordername}}</td>
             <td>{{$order->laordertel}}</td>
@@ -42,6 +43,7 @@
                 {{$oProvince['title']}}</td>
             <td>{{$oShipping['value']}}</td>
             <td>{{$oPayment['value']}}</td>
+            <td>{{nl2br($order->laordernote)}}</td>
             <td id="status{{$order->id}}"><span class="label label-{{Config::get('shop.orderstatus.'.$order->order_status.'.color')}}">{{Config::get('shop.orderstatus.'.$order->order_status.'.value')}}</span></td>
             <td>{{$order->created_at}}</td>
             <td>
@@ -69,11 +71,12 @@
          })
      }
      function viewDetail(orderid){
-         $.ajax({
+         if($("#append"+orderid).length <=0)
+             $.ajax({
              url:"{{URL::to('/admin/vieworderdetails/')}}/"+orderid,
              type:"get",
              success:function(msg){
-                 $("#tr"+orderid).after("<tr id='append"+orderid+"'><td><button type='button' class='close' aria-hidden='true' onclick='closetr(\""+orderid+"\")' class='close'>&times;</button></td><td colspan='9'>"+msg+"</td></tr>");
+                     $("#tr"+orderid).after("<tr id='append"+orderid+"'><td><button type='button' class='close' aria-hidden='true' onclick='closetr(\""+orderid+"\")' class='close'>&times;</button></td><td colspan='10'>"+msg+"</td></tr>");
              }
          })
      }
