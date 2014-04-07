@@ -1,4 +1,4 @@
-<div class="navbar nav-pink navbar-static-top " role="navigation">
+<div class="navbar nav-pink navbar-static-top hidden-print" role="navigation">
     <div class="container-fluid wrap">
         <div class="navbar-inner">
             <div id="facebookprofile" class="pull-right">

@@ -1,6 +1,7 @@
 @extends(Config::get('shop.theme').'/layout/page')
 @section('pagecontent')
 @if(Session::has('cart'))
+
 <div id="cartpage" class="container-fluid">
 
     <div class="col-xs-12">
@@ -11,10 +12,10 @@
         @endif
         </div>
         <h2>Thanh toán đơn hàng</h2>
-        <table class="table-responsive table carttable">
+        <table class="table table-responsive carttable table-bordered">
             <thead>
             <tr>
-                <th class="text-center">STT</th>
+                <th class="text-center col-xs-1">STT</th>
                 <th></th>
                 <th>Tên sản phẩm</th>
                 <th class="text-center">Số lượnng</th>
@@ -58,6 +59,7 @@
         </table>
     </div>
     {{--*/ $voucher = Session::get('voucher',null) /*--}}
+    {{--*/ $giamvoucher = 0 /*--}}
     @if($voucher != null )
         @if($voucher['type']=='percent')
         {{--*/ $giamvoucher = $voucher['value']*$sum/100 /*--}}
@@ -78,8 +80,8 @@
         <h3  class="text-right">Hình thức thanh toán và nhận hàng</h3>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Nhận hàng</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Nhận hàng</span>
+            <div class="col-sm-9">
             <select class="form-control" placeholder="Hình thức Nhận hàng" name="shipping"
                     onchange="checkShipping(this.value)">
                 <option value="0">Hình thức nhận hàng</option>
@@ -92,8 +94,8 @@
         <br>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Thanh toán</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Thanh toán</span>
+            <div class="col-sm-9">
             <select class="form-control" placeholder="Hình thức Thanh toán" name="payment" onchange="checkProvinceFee()">
                 <option value="0">Hình thức thanh toán</option>
                 @foreach(Config::get('shop.payment') as $payment)
@@ -107,40 +109,40 @@
         <h3 class="text-right">Thông tin ship hàng</h3>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Họ Tên</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Họ Tên</span>
+            <div class="col-sm-9">
                 <input type="text" class="form-control" placeholder="Họ tên người nhân" name="ordername">
             </div>
         </div>
         <br>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Điện thoại</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Điện thoại</span>
+            <div class="col-sm-9">
             <input type="tel" class="form-control" placeholder="Số điện thoại người nhận" name="ordertel">
             </div>
         </div>
         <br>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Email</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Email</span>
+            <div class="col-sm-9">
             <input type="email" class="form-control" placeholder="Địa chỉ Email" name="orderemail">
             </div>
         </div>
         <br>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Địa chỉ</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Địa chỉ</span>
+            <div class="col-sm-9">
             <input type="text" class="form-control" placeholder="Địa chỉ nhân hàng" name="orderaddr">
             </div>
         </div>
         <br>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Tỉnh thành</span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Tỉnh thành</span>
+            <div class="col-sm-9">
             <select class="form-control" placeholder="Tỉnh Thành phố" name="orderprovince"
                     onchange="checkProvinceFee()">
                 <option value="0">Tỉnh/Thành Phố</option>
@@ -155,8 +157,8 @@
         <br>
 
         <div class="form-group">
-            <span class="col-sm-2 control-label">Quận/Huyện </span>
-            <div class="col-sm-10">
+            <span class="col-sm-3 control-label">Quận/Huyện </span>
+            <div class="col-sm-9">
             <select class="form-control" placeholder="Quận Huyện trong TP Hồ Chí Minh" name="orderdistrict" onchange="checkProvinceFee()">
                 <option value="0">Quận/Huyện trong TP Hồ Chí Minh</option>
                 @foreach(Config::get('shop.hcm_district') as $province)
@@ -166,12 +168,19 @@
             </div>
         </div>
         <br>
+        <div class="form-group">
+            <span class="col-sm-3 control-label">Ghi chú</span>
+            <div class="col-sm-9">
+                <textarea class="form-control" placeholder="Ghi chú cho đơn hàng" name="laordernote" rows=3></textarea>
+            </div>
+        </div>
+        <br>
 
 <!--        <button class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> Lưu thông tin</button>-->
         {{Form::close()}}
     </div>
     <div class="col-xs-12 col-md-5">
-        <h3>Phiếu giảm giá</h3>
+        <h3 class="text-right">Phiếu giảm giá</h3>
         {{ Form::open(array(
         'url'=>'cart/addvoucher'
         ))}}
@@ -202,10 +211,7 @@
                         @endif
                     </td>
                     <td class="text-right">
-                        {{--*/ $giamvoucher = 0 /*--}}
-                        @if($voucher != null )
                         -{{number_format($giamvoucher,0,',','.')}}
-                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -364,7 +370,11 @@
 @stop
 @else
 <div id="cartpage" class="container-fluid">
-    <p>Chưa có sản phẩm nào trong giỏ hàng</p>
+    <p class="">Chưa có sản phẩm nào trong giỏ hàng</p>
+    <br>
+    @if(Session::has('lastorder'))
+    <p>Đơn hàng gần nhất của bạn có mã là: <strong>{{Session::get('lastorder')}}</strong>  <a href="{{URL::to('/cart/old/'.Session::get('lastorder'))}}">Xem đơn hàng</a></p>
+    @endif
 </div>
     @endif
 @stop

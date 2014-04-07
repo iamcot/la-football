@@ -4,7 +4,7 @@
         <div id="logo" class="pull-left col-xs-12 col-sm-5">
             Thái boutique
         </div>
-        <div id="search" class="pull-right col-sm-7 hidden-xs">
+        <div id="search" class="pull-right col-sm-7 hidden-xs hidden-print">
             <div>
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Tên sản phẩm, mã đơn hàng...">
@@ -13,18 +13,17 @@
                       </span>
                 </div>
                 <!-- /input-group -->
-                <a href="{{URL::to('/cart/clear')}}">Xóa giỏ hàng </a>
             </div>
         </div>
 
     </div>
-    <div class="bag pull-right col-sm-1 col-xs-4" >
+    <a title="Xem giỏ hàng" href="{{URL::to('/cart/')}}" class="bag pull-right col-sm-1 col-xs-4 hidden-print" >
         {{--*/ $sumcart = Orders::getSumCartItem()/*--}}
         @if($sumcart>0)
         <span class="badge">{{$sumcart}}</span>
         @endif
-    </div>
-    <div id="info" class="pull-right col-xs-12  col-sm-4 text-right hidden-xs nopaddingright">
+    </a>
+    <div id="info" class="pull-right col-xs-12  col-sm-4 text-right hidden-xs nopaddingright hidden-print">
         <span class="small"><span class="glyphicon glyphicon-phone-alt "> </span> Hotline: <strong>098.3717.098</strong></span>
         <div class="cartinfo">
             <span class="cartsum"><a href="javascript:showflybasket()">Đơn hàng hiện tại</a></span> <br>

@@ -1,4 +1,6 @@
-<table class="table mylist">
+    <a class="btn btn-success pull-right btn-sm"  href="{{url('admin/cat/create')}}">Tạo thư mục mới </a>
+<div class="clearfix"></div><br>
+<table class="table mylist table-bordered table-responsive">
     <thead>
         <tr>
             <th>ID</th>

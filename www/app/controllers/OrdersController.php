@@ -51,6 +51,8 @@ class OrdersController extends BaseController
             else {
                 if($oldcart['amount'] == 1){
                     Session::forget('cart.'.$product_id);
+                    if(count(Session::get('cart'))<=0)
+                        Session::forget('cart');
                 }
                 else{
                     $oldcart['amount']-= 1;
@@ -91,6 +93,22 @@ class OrdersController extends BaseController
         Session::forget('voucher');
         return Redirect::back();
     }
+    public function getOld($orderid){
+        $order = Orders::find($orderid);
+
+        if($order != null){
+            if($order->id == Session::get('lastorder',0) || $order->uid == Session::get('uid',-1) || $order->user_id == Session::get('user_id',-1)) {
+                $this->data['orderitems'] = Orderitem::where('order_id','=',$order->id)->get();
+                $this->data['title'] = 'Đơn hàng '.$order->id;
+            }
+            else{
+                $order = null;
+            }
+
+        }
+        $this->data['orderinfo'] = $order;
+        return View::make(Config::get('shop.theme')."/cart/checkoutinfo",$this->data);
+    }
     public function postCheckout(){
         $input = Input::all();
         if(count($input) > 0 && $input['_token'] == Session::get('_token')){
@@ -109,24 +127,31 @@ class OrdersController extends BaseController
                 'laorderaddr' => $input['orderaddr'],
                 'laorderprovince' => $input['orderprovince'],
                 'laorderdistrict' => $input['orderdistrict'],
+                'sumsanpham' => $input['sumsanpham'],
+                'giamvoucher' => $input['giamvoucher'],
+                'laordernote' => $input['laordernote'],
                 'voucher' => $voucher,
 
             );
             if(Session::has('uid')) $orderinfo['uid'] = Session::get('uid');
             if(Session::has('user_id')) $orderinfo['user_id'] = Session::get('user_id');
             Session::put('order',$orderinfo);
-            $orderid = Orders::save1($orderinfo);
+            $order = Orders::create($orderinfo);
+            $orderid = $order->id;
             Session::put('lastorder',$orderid);
             if(Session::has('cart')){
                 foreach(Session::get('cart') as $cart){
                     $cart['order_id'] = $orderid;
                     Session::put('cart.'.$cart['product_id'],$cart);
+                    Orderitem::create(Session::get('cart.'.$cart['product_id']));
                 }
-                Orderitem::saveall(Session::get('cart'));
             }
-            $this->data['orderinfo'] = Orders::find($orderid)->first();
+            $this->data['orderinfo'] = Orders::find($orderid);
             $this->data['orderitems'] = Orderitem::where('order_id','=',$orderid)->get();
-           // Session::put('_token', md5(microtime()));
+            $this->data['title'] = 'Đơn hàng '.$this->data['orderinfo']->id;
+            Session::put('_token', md5(microtime()));
+            Session::forget('cart');
+            Session::forget('voucher');
             return View::make(Config::get('shop.theme')."/cart/checkoutinfo",$this->data);
         }
         else{

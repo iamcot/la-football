@@ -87,7 +87,7 @@ array(
 
 </div>
 <div class="span5">
-    <div class="checkbox">
+    <div class="input-group">
         <label>
             <input type="checkbox" name="ladeleted" {{((isset($catedit) && $catedit->ladeleted==1)?'':'checked=checked')}}> Kích hoạt
         </label>

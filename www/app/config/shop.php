@@ -9,6 +9,13 @@ return array(
     'treecatdeep' => 1,
     'tablepp'    =>  18,
     'theme' => 'default',
+    'orderstatus' => array(
+        '0' => array('value'=>'Mới đặt','color'=>'danger'),
+        '1' => array('value'=>'Thanh toán','color'=>'warning'),
+        '2' => array('value'=>'Đã gửi','color'=>'info'),
+        '3' => array('value'=>'Hoàn thành','color'=>'success'),
+        '9' => array('value'=>'Đã hủy','color'=>'default'),
+    ),
     'topnav' => array(
         'home' => array(
             'id' => 'home',
@@ -18,19 +25,19 @@ return array(
         ),
         'new' => array(
             'id' => 'new',
-            'url' => '/fav/new-arrived',
+            'url' => '/fav/moi-ve',
             'title' => 'Hàng mới về',
             'icon' => 'glyphicon glyphicon-star',
         ),
         'hot' => array(
             'id' => 'hot',
-            'url' => '/fav/hot-product',
+            'url' => '/fav/dang-hot',
             'title' => 'Hàng đang hot',
             'icon' => 'glyphicon glyphicon-thumbs-up',
         ),
         'sale' => array(
             'id' => 'sale',
-            'url' => '/fav/sale-product',
+            'url' => '/fav/dang-sale',
             'title' => 'Hàng khuyến mãi',
             'icon' => 'glyphicon glyphicon-gift',
         ),

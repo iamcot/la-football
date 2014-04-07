@@ -1,4 +1,12 @@
-<table class="table mylist">
+<div class="col-xs-8">
+    {{Form::text('filter','',array('class'=>'form-control','placeholder'=>'Lọc theo tên sản phẩm, thư mục, nhà sx ','style'=>'width:50%;display:inline-block'))}}
+    <button class="btn btn-primary btn-sm">Lọc</button>
+</div>
+<div class="col-xs-4">
+    <a class="btn btn-success pull-right btn-sm"  href="{{url('admin/product/create')}}">Tạo sản phẩm mới </a>
+</div>
+<div class="clearfix"></div><br>
+<table class="table mylist table-bordered table-responsive">
     <thead>
         <tr>
             <th>ID</th>

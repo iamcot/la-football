@@ -183,9 +183,6 @@ class ShopAdminController extends BaseController
     public function anyProduct($sidecat = "")
     {
         $this->data['actCat'] = 'product';
-//        if ($sidecat != "")
-//            $this->data['sidecat'] = $sidecat;
-//        else $this->data['sidecat'] = 'view';
         if ($sidecat == '') $sidecat = 'view';
         $flag = $sidecat;
         $input = Input::all();
@@ -218,7 +215,6 @@ class ShopAdminController extends BaseController
             if(isset($input['ladeleted']) && $input['ladeleted']=='on')
                 $dbCat->ladeleted = 0;
             else $dbCat->ladeleted = 1;
-//            $v = $dbCat->validate($input);
             if ($input['latitle'] != '') {
                 $dbCat->save();
 
@@ -262,7 +258,7 @@ class ShopAdminController extends BaseController
 
     public function getEditproduct($id,$variant=0)
     {
-        $dbCat = Vproduct::find($id);
+        $dbCat = Product::find($id);
         $this->data['actCat'] = 'product';
         $this->data['sidecat'] = 'create';
         $this->data['variant'] = $variant;
@@ -286,7 +282,18 @@ class ShopAdminController extends BaseController
     public function anyOrder()
     {
         $this->data['actCat'] = 'order';
-        return View::make('admin/start', $this->data);
+        $this->data['oOrders'] = Orders::orderBy('order_status')->orderBy('id','desc')->paginate(Config::get('tablepp'));
+        return View::make('admin/order', $this->data);
+    }
+    public function getChangeorderstatus($orderid,$status){
+        $order = Orders::find($orderid);
+        $order->order_status = $status;
+        $order->save();
+        echo '<span class="label label-'.Config::get('shop.orderstatus.'.$status.'.color').'">'.Config::get('shop.orderstatus.'.$order->order_status.'.value').'</span>';
+    }
+    public function getVieworderdetails($orderid){
+        $data['orderitems'] = Orderitem::where('order_id',$orderid)->get();
+        return Response::view('admin/orderitems',$data);
     }
 
     public function anyConfig()

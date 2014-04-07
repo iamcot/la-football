@@ -1,6 +1,7 @@
 <?php
 class Orders extends Eloquent{
     protected $table = 'laorders';
+    protected $fillable = array('lashipping', 'lapayment', 'lasumkhoiluong','lafeeshipping','laordername','laordertel','laorderemail','laorderaddr','laorderprovince','laorderdistrict','sumsanpham','giamvoucher','voucher','laordernote');
 
     public static function getSumCartItem(){
         $sum = 0;

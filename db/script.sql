@@ -1,3 +1,8 @@
+/* TANNER  7/4*/
+/* 10:26:33 AM localhost */ ALTER TABLE `laorders` ADD `giamvoucher` INT  NULL  DEFAULT NULL  AFTER `voucher`;
+/* 10:26:57 AM localhost */ ALTER TABLE `laorders` ADD `sumsanpham` INT  NULL  DEFAULT NULL  AFTER `giamvoucher`;
+
+
 /* tanner 2/4 */
 /* 1:49:16 PM localhost */ ALTER TABLE `laproducts` ADD `laproduct_id` VARCHAR(50)  NULL  DEFAULT NULL  AFTER `lavariant_id`;
 

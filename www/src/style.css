@@ -22,5 +22,15 @@ img{
     margin: 0 auto;
 }
 .btn{
-    font-size: 20px;
+    /*font-size: 20px;*/
+}
+.mylist td{
+    vertical-align: middle !important;
+}
+a{
+    cursor: pointer;
+}
+.carttable td img{
+    max-width: 40px;
+    max-height: 40px;
 }

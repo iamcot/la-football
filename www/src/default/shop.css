@@ -691,3 +691,11 @@ label.error {
 #facebookprofile{
     padding-top: 10px;
 }
+.checkoutinfo strong{
+}
+
+@media print{
+    .body{
+        padding-bottom: 0;
+    }
+}

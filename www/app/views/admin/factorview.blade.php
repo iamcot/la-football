@@ -1,4 +1,6 @@
-<table class="table mylist">
+<a class="btn btn-success pull-right btn-sm"  href="{{url('admin/factor/create')}}">Tạo nhà sản xuất mới </a>
+<div class="clearfix"></div><br>
+<table class="table mylist table-bordered table-responsive">
     <thead>
         <tr>
             <th>ID</th>
