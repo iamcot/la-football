@@ -1,7 +1,7 @@
 @extends(Config::get('shop.theme').'/layout/page')
 @section('pagecontent')
 <div class="container-fluid lists">
-    @if(!$rootcat && $caturl !='tin-tuc')
+    @if(!$rootcat && $caturl !='tin-tuc' && !isset($issearch))
     <div class="text-right container-fluid">
         {{ Form::open() }}
              <button name="giatang" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-sort-by-attributes"></span> Giá</button>
@@ -67,6 +67,8 @@
         {{$lists->links()}}
         @endif
     </div>
+    @else
+    <p>Không tìm thấy sản phẩm nào phù hợp</p>
     @endif
 </div>
 @stop

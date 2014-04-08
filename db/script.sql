@@ -1,3 +1,5 @@
+ALTER TABLE  `laproducts` CHANGE  `ladatenew`  `ladatenew` VARCHAR( 50 ) NULL DEFAULT  '0';
+
 /* TANNER  7/4*/
 /* 10:26:33 AM localhost */ ALTER TABLE `laorders` ADD `giamvoucher` INT  NULL  DEFAULT NULL  AFTER `voucher`;
 /* 10:26:57 AM localhost */ ALTER TABLE `laorders` ADD `sumsanpham` INT  NULL  DEFAULT NULL  AFTER `giamvoucher`;

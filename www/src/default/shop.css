@@ -689,7 +689,7 @@ label.error {
     display: inline-block;
 }
 #facebookprofile{
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 .checkoutinfo strong{
 }
@@ -704,7 +704,7 @@ label.error {
 
 }
 #facebookprofile a{
-    display: inline;
+    display: inline-block;
 }
 @media print{
     .body{

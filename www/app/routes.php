@@ -20,6 +20,7 @@ Route::controller('upload','UploadController');
 Route::controller('cart','OrdersController');
 
 Route::get('/{cat}/{product}.html','DetailsController@showDetails');
+Route::any('/fav/{type}','ListController@showfav');
 Route::any('/{cat}','ListController@showList');
 Route::controller('ajax','AjaxController');
 

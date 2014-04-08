@@ -227,7 +227,7 @@ array(
             ]
 
         });
-        $('input[name=ladatenew]').datepicker({"format":"dd/mm/yyyy"});
+        $('input[name=ladatenew]').datepicker({"format":"yyyy-mm-dd"});
         $('.form-control').tooltip();
 
             $('#fileupload').fileupload({

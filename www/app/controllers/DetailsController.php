@@ -21,6 +21,9 @@ class DetailsController extends BaseController
             $this->data['title'] =  $this->data['oProduct']->latitle.' - '.$this->data['oProduct']->cat1name;
             $this->data['description']=$this->data['oProduct']->lashortinfo;
             $this->data['keywords']=$this->data['oProduct']->lakeyword;
+            $uproduct = Product::find($product[0]->id);
+            $uproduct->laview += 1;
+            $uproduct->save();
         }
         else{
             App::abort(404);

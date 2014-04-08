@@ -70,4 +70,32 @@ class ListController extends  BaseController
 
         return View::make(Config::get('shop.theme')."/list/list",$this->data);
     }
+    public function showfav($type){
+        if($type == 'moi-ve'){
+            $lists = Vproduct::where('cat1url','!=','tin-tuc')
+                ->where('ladatenew','>',time())
+                ->orderBy('ladatenew','DESC')
+                ->paginate(Config::get('shop.tablepp'));
+        }
+        else if($type == 'dang-hot'){
+            $lists = Vproduct::where('cat1url','!=','tin-tuc')
+                ->orderBy('numorder','DESC')
+                ->orderBy('laview','DESC')
+                ->paginate(Config::get('shop.tablepp'));
+        }
+        else if($type == 'dang-sale'){
+            $lists = Vproduct::where('cat1url','!=','tin-tuc')
+                ->where('pricechange','>','0')
+                ->orderBy('pricechange','DESC')
+                ->paginate(Config::get('shop.tablepp'));
+        }
+        else{
+            App::abort(404);
+        }
+        $this->data['caturl'] = $type;
+        $this->data['lists'] = $lists;
+        $this->data['rootcat'] = false;
+        $this->data['issearch'] = true;
+        return View::make(Config::get('shop.theme')."/list/list",$this->data);
+    }
 }
