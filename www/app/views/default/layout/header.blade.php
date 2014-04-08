@@ -26,8 +26,11 @@
     <div id="info" class="pull-right col-xs-12  col-sm-4 text-right hidden-xs nopaddingright hidden-print">
         <span class="small"><span class="glyphicon glyphicon-phone-alt "> </span> Hotline: <strong>098.3717.098</strong></span>
         <div class="cartinfo">
-            <span class="cartsum"><a href="javascript:showflybasket()">Đơn hàng hiện tại</a></span> <br>
-            <span class="cartsum"><strong class="text-success">{{$sumcart}}</strong> sản phẩm | <span class="glyphicon glyphicon-usd"></span> <strong  class="text-success">{{number_format(Orders::getSumPriceCart(),0,',','.')}}</strong></span>
+            <span class="cartsum">@if(Session::has('uid'))
+            <a href="{{ URL::to('cart/uid/'.Session::get('uid')) }}">Các đơn hàng cũ</a>
+            @endif
+            </span> <br>
+            <span class="cartsum"><a href="javascript:showflybasket()"><strong class="text-success">{{$sumcart}}</strong> sản phẩm | <span class="glyphicon glyphicon-usd"></span> <strong  class="text-success">{{number_format(Orders::getSumPriceCart(),0,',','.')}}</strong></a></span>
         </div>
         @if(Session::has('cart'))
         <div id="basketflybox">

@@ -39,6 +39,9 @@
     @endif
     <div class="clearfix"></div>
     <div class=" body">
+        @if(Session::has('message'))
+        <div class="bg-danger text-center">{{Session::get('message')}}</div>
+        @endif
         @yield('body')
     </div>
         <div class="clearfix"></div>
@@ -59,7 +62,7 @@
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
                 js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=141133079404451";
+                js.src = "https://connect.facebook.net/en_GB/all.js#xfbml=1&appId=753308934688020";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
             $(document).ready(function() {

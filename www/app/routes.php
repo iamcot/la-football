@@ -11,10 +11,10 @@
 |
 */
 
+Route::controller('facelogin','FacebookController');
 Route::any('login',array('before'=>'guest','uses'=>'UserController@login'));
 Route::any('logout','UserController@logout');
-Route::get('login/fb', 'FacebookController@login');
-Route::get('login/fb/callback', 'FacebookController@logincallback');
+
 Route::controller('admin','ShopAdminController');
 Route::controller('upload','UploadController');
 Route::controller('cart','OrdersController');

@@ -38,6 +38,8 @@ class UserController extends BaseController
     }
     public function logout() {
         Auth::logout();
+        if(Session::has('uid'))
+            Session::forget('uid');
         return Redirect::to('/');
     }
 }

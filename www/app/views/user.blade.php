@@ -3,13 +3,13 @@
 @if($data->isAdmin())
 <li><a href="{{URL::to('admin')}}">{{{ $data->lafullname }}}</a> </li>
 @else
-<li>{{{ $data->lafullname }}} </li>
+<li><a>{{{ $data->lafullname }}} </a></li>
 @endif
 @if($data->laphoto!='')
-<li><img src="{{$data->laphoto}}"> </li>
+<li style="line-height: 48px"><img src="{{$data->laphoto}}" style="max-height: 32px;max-width: 32px"> </li>
 @endif
-<li>&nbsp;|&nbsp;<a href="{{URL::to('logout')}}">Logout</a> </li>
+<li><a href="{{URL::to('logout')}}">Logout</a> </li>
 
 @else
-<li><a href="login/fb">Login with Facebook</a></li>
+<li><a href="{{URL::to('facelogin')}}">Login with Facebook</a></li>
 @endif

@@ -394,6 +394,7 @@ img {
     margin-top: 10px;
     border-top: 10px solid rgba(255, 119, 164, 0.59);
     min-height: 271px;
+    background: #ff77a4;
     background-image: -webkit-linear-gradient(top, 0, #ff77a4 #f06d9b 100%);
     background-image: linear-gradient(to bottom, #ff77a4 0, #f06d9b 100%);
     background-repeat: repeat-x;
@@ -705,6 +706,12 @@ label.error {
 }
 #facebookprofile a{
     display: inline-block;
+}
+.noproduct{
+    background: url(img/no_product.gif) no-repeat center;
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
 }
 @media print{
     .body{

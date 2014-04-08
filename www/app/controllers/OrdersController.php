@@ -136,7 +136,7 @@ class OrdersController extends BaseController
 
             );
             if(Session::has('uid')) $orderinfo['uid'] = Session::get('uid');
-            if(Session::has('user_id')) $orderinfo['user_id'] = Session::get('user_id');
+             $orderinfo['user_id'] = Auth::user()->id;
             Session::put('order',$orderinfo);
             $order = Orders::create($orderinfo);
             $orderid = $order->id;
@@ -257,5 +257,15 @@ class OrdersController extends BaseController
         }
         else $result['status'] = 'Permission Error: Request is denined ^^';
         return Response::json($result);
+    }
+    public function anyUid($uid){
+        $title = 'Các đơn hàng của '.Auth::user()->lafullname;
+        $this->data['title'] = $title;
+        $this->data['oOrders'] = Orders::where('uid',$uid)->orderBy('created_at','DESC')->paginate(Config::get('shop.tablepp'));
+        return View::make(Config::get('shop.theme')."/cart/oldorders",$this->data);
+    }
+    public function getVieworderdetails($orderid){
+        $data['orderitems'] = Orderitem::where('order_id',$orderid)->get();
+        return Response::view('admin/orderitems',$data);
     }
 }

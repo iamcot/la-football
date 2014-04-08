@@ -56,7 +56,7 @@
     <div class="clearfix"></div>
     <br>
     @endif
-    @if(isset($lists) && $lists != null && $caturl !='tin-tuc')
+    @if(isset($lists) && $lists != null && $caturl !='tin-tuc' && count($lists)>0 )
     <div class="row-fluid ">
         @foreach($lists as $list)
             @include(Config::get('shop.theme').'/list/listitem')
@@ -68,7 +68,7 @@
         @endif
     </div>
     @else
-    <p>Không tìm thấy sản phẩm nào phù hợp</p>
+    <div class="noproduct text-center"></div>
     @endif
 </div>
 @stop

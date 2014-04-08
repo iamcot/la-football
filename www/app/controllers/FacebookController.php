@@ -1,32 +1,34 @@
 <?php
 class FacebookController extends BaseController
 {
-    public function login(){
+    public function anyIndex(){
         $facebook = new Facebook(Config::get('facebook'));
         $params = array(
-            'redirect_uri' => url('/login/fb/callback'),
+            'redirect_uri' => url('facelogin/callback'),
             'scope' => 'email',
         );
         return Redirect::to($facebook->getLoginUrl($params));
     }
-    public function logincallback(){
+    public function anyCallback(){
+
         $code = Input::get('code');
         if (strlen($code) == 0) return Redirect::to('/')->with('message', 'There was an error communicating with Facebook');
 
         $facebook = new Facebook(Config::get('facebook'));
         $uid = $facebook->getUser();
-
+//        var_dump($uid);
         if ($uid == 0) return Redirect::to('/')->with('message', 'There was an error');
 
         $me = $facebook->api('/me');
-
+//        var_dump($me);
         $profile = Profile::whereUid($uid)->first();
+//        var_dump($profile);
         if (empty($profile)) {
 
             $user = new User;
             $user->lafullname = $me['first_name'].' '.$me['last_name'];
             $user->laemail = $me['email'];
-            $user->laphoto = 'https://graph.facebook.com/'.$me['username'].'/picture?type=large';
+            $user->laphoto = 'https://graph.facebook.com/'.$me['username'].'/picture?type=square';
 
             $user->save();
 

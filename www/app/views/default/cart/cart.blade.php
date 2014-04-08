@@ -41,21 +41,21 @@
             {{--*/ $sumkhoiluong += ($cart['amount']*$cart['lakhoiluong']) /*--}}
             {{--*/ $sum += ($cart['amount']*$cart['laprice']) /*--}}
             @endforeach
-            <tr>
-
-                <td class="text-right" colspan="2"></td>
-                <td style="width: 25%">
-                    <div class="input-group">
-                        <span class="input-group-addon">Tổng Klg (g)</span>
-                        <input type="text" class="form-control" placeholder="Tổng khối lượng hàng"
-                               name="showsumklg" value="{{$sumkhoiluong}}" onchange="checkProvinceFee()">
-
-                    </div>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+<!--            <tr>-->
+<!---->
+<!--                <td class="text-right" colspan="2"></td>-->
+<!--                <td style="width: 25%">-->
+<!--                    <div class="input-group">-->
+<!--                        <span class="input-group-addon">Tổng Klg (g)</span>-->
+<!--                        <input type="text" class="form-control" placeholder="Tổng khối lượng hàng"-->
+<!--                               name="showsumklg" value="{{$sumkhoiluong}}" onchange="checkProvinceFee()">-->
+<!---->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td></td>-->
+<!--                <td></td>-->
+<!--                <td></td>-->
+<!--            </tr>-->
         </table>
     </div>
     {{--*/ $voucher = Session::get('voucher',null) /*--}}
@@ -107,11 +107,10 @@
         <br>
 
         <h3 class="text-right">Thông tin ship hàng</h3>
-
         <div class="form-group">
             <span class="col-sm-3 control-label">Họ Tên</span>
             <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="Họ tên người nhân" name="ordername">
+                <input type="text" class="form-control" placeholder="Họ tên người nhân" name="ordername" value="{{Auth::user()->lafullname}}">
             </div>
         </div>
         <br>
@@ -127,7 +126,7 @@
         <div class="form-group">
             <span class="col-sm-3 control-label">Email</span>
             <div class="col-sm-9">
-            <input type="email" class="form-control" placeholder="Địa chỉ Email" name="orderemail">
+            <input type="email" class="form-control" placeholder="Địa chỉ Email" name="orderemail" value="{{Auth::user()->laemail}}">
             </div>
         </div>
         <br>
