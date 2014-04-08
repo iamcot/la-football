@@ -92,6 +92,8 @@ class ListController extends  BaseController
         else{
             App::abort(404);
         }
+        $this->data['title'] = trans('common.'.$type);
+        $this->data['actCat'] = $type;
         $this->data['caturl'] = $type;
         $this->data['lists'] = $lists;
         $this->data['rootcat'] = false;

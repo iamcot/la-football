@@ -11,5 +11,8 @@ return array(
     'LDFactor'    =>  'Nhà Sản xuất',
     'LDSale'    =>  'Khuyến mãi',
     'LDConfig' => 'Cấu hình',
+    'dang-hot' => 'Sản phẩm được mua và xem nhiều',
+    'moi-ve' => 'Sản phẩm mới về',
+    'dang-sale' => 'Sản phẩm đang có giá ưu đãi',
 
 );

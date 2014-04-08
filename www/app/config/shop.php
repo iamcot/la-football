@@ -23,20 +23,20 @@ return array(
             'title' => 'Trang chủ',
             'icon' => 'glyphicon glyphicon-home',
         ),
-        'new' => array(
-            'id' => 'new',
+        'moi-ve' => array(
+            'id' => 'moi-ve',
             'url' => '/fav/moi-ve',
             'title' => 'Hàng mới về',
             'icon' => 'glyphicon glyphicon-star',
         ),
-        'hot' => array(
-            'id' => 'hot',
+        'dang-hot' => array(
+            'id' => 'dang-hot',
             'url' => '/fav/dang-hot',
             'title' => 'Hàng đang hot',
             'icon' => 'glyphicon glyphicon-thumbs-up',
         ),
-        'sale' => array(
-            'id' => 'sale',
+        'dang-sale' => array(
+            'id' => 'dang-sale',
             'url' => '/fav/dang-sale',
             'title' => 'Hàng khuyến mãi',
             'icon' => 'glyphicon glyphicon-gift',

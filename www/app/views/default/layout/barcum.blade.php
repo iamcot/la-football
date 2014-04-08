@@ -18,6 +18,9 @@
 
             </li>
         @endfor
+        @if(isset($issearch))
+            <li>{{trans('common.'.$caturl)}}</li>
+        @endif
     @elseif(isset($typeEnd) && $typeEnd == 'details')
         @if($oProduct !=null)
         <li><a href="{{URL::to('/')}}"><span class="glyphicon glyphicon-home"></span></a></li>
