@@ -64,11 +64,18 @@
                 js.src = "https://connect.facebook.net/en_GB/all.js#xfbml=1&appId=753308934688020";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-            $(document).ready(function() {
-                    FB.Event.subscribe('comment.create', comment_callback);
-                    FB.Event.subscribe('comment.remove', comment_callback);
-            });
 
+            window.fbAsyncInit = function() {
+                // init the FB JS SDK
+                FB.init({
+                    appId      : '753308934688020',                        // App ID from the app dashboard
+                    status     : true,                                 // Check Facebook Login status
+                    xfbml      : true                                  // Look for social plugins on the page
+                });
+                FB.Event.subscribe('comment.create', comment_callback);
+                FB.Event.subscribe('comment.remove', comment_callback);
+                // Additional initialization code such as adding Event Listeners goes here
+            };
             var comment_callback = function(response) {
         //        console.log("comment_callback");
         //        console.log(response);
