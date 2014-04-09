@@ -57,6 +57,16 @@ img {
     height: 80px;
     vertical-align: middle;
 }
+#logo a{
+    background: url(img/logo.png) no-repeat top left;
+    width: 320px;
+    height: 90px;
+    position: absolute;
+    top:5px;
+    left: 0;
+    display: block;
+    z-index: 100;
+}
 
 #logo {
     line-height: 80px;
@@ -715,6 +725,10 @@ label.error {
     width: 400px;
     height: 300px;
     margin: 0 auto;
+}
+.media a img{
+    max-width: 100px;
+    max-height: 100px;
 }
 @media print{
     .body{

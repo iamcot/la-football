@@ -56,19 +56,21 @@
     <div class="clearfix"></div>
     <br>
     @endif
-    @if(isset($lists) && $lists != null && $caturl !='tin-tuc' && count($lists)>0 )
-    <div class="row-fluid ">
-        @foreach($lists as $list)
-            @include(Config::get('shop.theme').'/list/listitem')
-        @endforeach
-    </div>
-    <div class="text-center clearfix">
-        @if(!$rootcat)
-        {{$lists->links()}}
+    @if($caturl !='tin-tuc')
+        @if(isset($lists) && $lists != null && count($lists)>0 )
+        <div class="row-fluid ">
+            @foreach($lists as $list)
+                @include(Config::get('shop.theme').'/list/listitem')
+            @endforeach
+        </div>
+        <div class="text-center clearfix">
+            @if(!$rootcat)
+            {{$lists->links()}}
+            @endif
+        </div>
+        @else
+        <div class="noproduct text-center"></div>
         @endif
-    </div>
-    @else
-    <div class="noproduct text-center"></div>
     @endif
 </div>
 @stop

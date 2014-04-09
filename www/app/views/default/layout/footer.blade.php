@@ -30,7 +30,9 @@
 
     <div class="clearfix"></div>
     <div id="copyright" class="text-right container-fluid wrap">
-        <small> Copyright &copy; {{date("Y")}} by Thái Boutique - webmypham.vn </small>
+        <small> Copyright &copy; {{date("Y")}} by webmypham.vn - một sản phẩm của <a class="label label-info text-success" href="https://www.facebook.com/ThaiBoutique88">Thái Boutique</a>
+
+        </small>
     </div>
 </div>
 @show

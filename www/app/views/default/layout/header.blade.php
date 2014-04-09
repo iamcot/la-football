@@ -1,10 +1,10 @@
 <div id="header" class="container-fluid wrap">
     <div class="pull-left col-xs-8 col-sm-7">
 
-        <div id="logo" class="pull-left col-xs-12 col-sm-5">
-            Thái boutique
+        <div id="logo" class="pull-left col-xs-12 col-sm-6">
+            <a href="{{URL::to('/')}}"></a>
         </div>
-        <div id="search" class="pull-right col-sm-7 hidden-xs hidden-print">
+        <div id="search" class="pull-right col-sm-6 hidden-xs hidden-sm hidden-print">
             <div>
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Tên sản phẩm, mã đơn hàng...">
