@@ -23,8 +23,7 @@
     @endif
     @yield('morestyle')
 </head>
-@if(!isset($error))
-    <body>
+    <body class="{{((isset($error))?'bgwhite':'')}}">
     <div class="supercontainer">
         @yield('errorpage')
     @if (isset($haveHeader) && $haveHeader == 1)
@@ -85,4 +84,3 @@
         </script>
         @endif
 
-@endif

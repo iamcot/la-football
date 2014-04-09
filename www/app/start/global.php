@@ -74,7 +74,7 @@ App::down(function()
 |
 */
 App::missing(function(){
-    return View::make("e404", array('typeEnd'=>'admin','error'=>'1'));
+    return View::make("e404", array('typeEnd'=>'shop','sidebartype'=>'none','error'=>'1','haveHeader'=> 1,'title'=> 'Error 404',));
 });
 
 /*

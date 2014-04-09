@@ -268,7 +268,7 @@
     }
     function checkProvinceFee() {
         var province = $("select[name=orderprovince]").val();
-        var klg = $("input[name=showsumklg]").val();
+        var klg = $("input[name=sumkhoiluong]").val();
         var payment = $("select[name=payment]").val();
         var shipping = $("select[name=shipping]").val();
         var district = $("select[name=orderdistrict]").val();

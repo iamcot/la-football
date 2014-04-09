@@ -58,7 +58,7 @@ img {
     vertical-align: middle;
 }
 #logo a{
-    background: url(img/logo.png) no-repeat top left;
+    background: url(img/logo.png) no-repeat bottom left;
     width: 320px;
     height: 90px;
     position: absolute;
@@ -84,7 +84,7 @@ img {
     background: url(img/bagblue.png) no-repeat center;
     min-width: 50px;
     height: 70px;
-    z-index: 99;
+    z-index: 101;
     text-align: center;
     line-height: 70px;
     vertical-align: middle;
@@ -582,7 +582,7 @@ img {
 .detailsOldPriceBlock {
     position: absolute;
     top: -3px;
-    right: -40px;
+    right: -50px;
     display: block;
     height: 50px;
     border-radius: 45px;
@@ -614,7 +614,7 @@ img {
 }
 
 #productinfo .dl-horizontal dd {
-    margin-left: 100px;
+    margin-left: 150px;
 }
 
 #productcontent {
@@ -730,6 +730,13 @@ label.error {
     max-width: 100px;
     max-height: 100px;
 }
+.bg404{
+    background: url("img/error404.jpg") no-repeat center;
+    display: block;
+    width: 600px;
+    height: 450px;
+    margin: 0 auto;
+}
 @media print{
     .body{
         padding-bottom: 0;
@@ -738,5 +745,14 @@ label.error {
 @media screen and (max-width : 760px){
     #content.sleft {
         float:none;
+    }
+    #logo a{
+        background-size: 60%;
+    }
+    #productinfo .dl-horizontal dt{
+        float:left;
+    }
+    .nav-pink li{
+        display: inline-block;
     }
 }

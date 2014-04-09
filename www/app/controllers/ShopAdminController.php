@@ -261,14 +261,17 @@ class ShopAdminController extends BaseController
 
     public function getEditproduct($id,$variant=0)
     {
+        if($variant==0)
         $dbCat = Product::find($id);
+        else if($variant==1)
+            $dbCat = Vproduct::find($id);
         $this->data['actCat'] = 'product';
         $this->data['sidecat'] = 'create';
         $this->data['variant'] = $variant;
         $cats = Category::getCategoriesTree();
         if ($dbCat != null) {
             $this->data['catedit'] = $dbCat;
-            $dbCat->ladatenew = date("d/m/Y", $dbCat->ladatenew);
+//            $dbCat->ladatenew = date("d/m/Y", $dbCat->ladatenew);
             $this->data['cats'] = Category::adminSelectCat($cats, true, $dbCat->lacategory_id);
             $this->data['factors'] = Factory::adminSelectFactor($dbCat->lamanufactor_id);
             $this->data['morepics'] = Image::where('laproduct_id', '=', $dbCat->id)->get();

@@ -213,7 +213,7 @@ class OrdersController extends BaseController
                     else{
                         $group = $actProvince['group'];
                         if($group>0){
-                            $feeshipping = $price['g'.$group.'a'];
+                            $feeshipping = $price['g'.$group.'b'];
                             if($payment == 'pay_cod') $feeshipping += 15000;//fee of COD
                             $result['status'] = 1;
                             break;

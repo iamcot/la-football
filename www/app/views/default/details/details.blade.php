@@ -10,10 +10,10 @@
 
 
         @if(count($morepic)>0)
-        <div id="picbox" class="col-sm-5 col-md-5">
+        <div id="picbox" class="col xs-12 col-sm-5 col-md-5">
             <img id="mainpicimg" src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
         </div>
-            <div  class="col-sm-1 col-md-1 morepic">
+            <div  class="col-md-1 morepic hidden-sm hidden-xs">
                 <a href="javascript:changepic('{{$oProduct->laimage}}')">
                     <img src="{{URL::to('/uploads/thumbnails/product/'.$oProduct->laimage)}}">
                 </a>
@@ -25,13 +25,13 @@
 
         </div>
         @else
-        <div id="picbox" class="col-sm-5 col-md-5">
+        <div id="picbox" class="col-xs-12 col-sm-5 col-md-5">
             <img src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
         </div>
         @endif
 
         @if(count($morepic)>0)
-        <div id="productinfo" class="col-sm-6 col-md-6">
+        <div id="productinfo" class="col-xs-12 col-sm-6 col-md-6">
          @else
             <div id="productinfo" class="col-sm-7 col-md-7">
             @endif
@@ -79,6 +79,8 @@
                     {{ Form::close() }}
 
                 </div>
+                <div class="clearfix"></div>
+                <br>
              <dl class="dl-horizontal">
                  @if($oProduct->factorname != '')
                 <dt>Xuất xứ</dt>
@@ -89,12 +91,12 @@
                 <dd>{{$oProduct->lachucnang}}</dd>
                 @endif
                 @if($oProduct->lakhoiluong != '')
-                <dt>Khối lượng</dt>
+                <dt>Khối lượng (cả vỏ)</dt>
                 <dd>{{$oProduct->lakhoiluong}} (gram)</dd>
                 @endif
                 @if($oProduct->ladungtich != '')
-                <dt>Dung tích</dt>
-                <dd>{{$oProduct->ladungtich}} (ml)</dd>
+                <dt>Dung lượng</dt>
+                <dd>{{$oProduct->ladungtich}}</dd>
                 @endif
                 @if(trim($oProduct->lashortinfo) != '')
                 <dt>Mô tả</dt>

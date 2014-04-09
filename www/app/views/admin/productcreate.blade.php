@@ -59,15 +59,15 @@ array(
     </div>
     <br>
     <div class="input-group">
-        {{ Form::label('lakhoiluong','Khối lượng ',array("class"=>"input-group-addon"))
+        {{ Form::label('lakhoiluong','Khối lượng cả vỏ',array("class"=>"input-group-addon"))
         }}
-        {{ Form::text('lakhoiluong',(($catedit != null)?$catedit->lakhoiluong:''),array("class"=>"form-control",'title'=>'đơn vị gram' ) ) }}
+        {{ Form::text('lakhoiluong',(($catedit != null)?$catedit->lakhoiluong:''),array("class"=>"form-control",'title'=>'Tổng khối lượng sản phẩm cả vỏ' ) ) }}
     </div>
     <br>
     <div class="input-group">
-        {{ Form::label('ladungtich','Dung tích',array("class"=>"input-group-addon"))
+        {{ Form::label('ladungtich','Dung lượng',array("class"=>"input-group-addon"))
         }}
-        {{ Form::text('ladungtich',(($catedit != null)?$catedit->ladungtich:''),array("class"=>"form-control",'title'=>'đơn vị ml' ) ) }}
+        {{ Form::text('ladungtich',(($catedit != null)?$catedit->ladungtich:''),array("class"=>"form-control",'title'=>'dung lượng thực tế' ) ) }}
     </div>
     <br>
     <div class="input-group">
@@ -107,7 +107,7 @@ array(
     <div class="input-group">
         {{ Form::label('ladatenew','Ngày hàng mới',array("class"=>"input-group-addon"))
         }}
-        {{ Form::text('ladatenew',(($catedit != null)?$catedit->ladatenew:''),array("class"=>"form-control",'title'=>'Sản phẩm sẽ hiện "mới" cho tới ngày này' ) ) }}
+        {{ Form::text('ladatenew',(($catedit != null)?date("Y-m-d",$catedit->ladatenew):''),array("class"=>"form-control",'title'=>'Sản phẩm sẽ hiện "mới" cho tới ngày này' ) ) }}
     </div>
     <br>
     <div class="input-group">
@@ -136,11 +136,7 @@ array(
         {{ Form::text('lavariant_id',$variant_id,array("class"=>"form-control",'title'=>'ID của Sản phẩm gốc' ) ) }}
     </div>
     <br>
-    <div class="input-group">
-        {{ Form::label('lauseguide','HDSD',array("class"=>"input-group-addon")) }}
-        {{ Form::textarea('lauseguide',(($catedit != null  && $variant == 0)?$catedit->lauseguide:'') ,array('rows'=>3,"class"=>"form-control") )
-        }}
-    </div>
+
 
 
 </div>
@@ -181,6 +177,12 @@ array(
 <input type="hidden" id="currmorepic" name="currmorepic" value="{{$currmorepic}}">
 <br>
 <div class="">
+    {{ Form::label('lauseguide','HDSD') }}
+    {{ Form::textarea('lauseguide',(($catedit != null  && $variant == 0)?$catedit->lauseguide:'') ,array('rows'=>3,"class"=>"ckeditor") )
+    }}
+</div>
+<br>
+<div class="">
     {{ Form::label('lainfo','Thông tin ',array()) }}
     {{ Form::textarea('lainfo',(($catedit != null && $variant == 0)?$catedit->lainfo:'') ,array("class"=>"ckeditor") )
     }}
@@ -216,13 +218,15 @@ array(
             language: 'vi',
             height:80,
             toolbarGroups: [
+               { name: 'document',	   groups: [ 'mode', 'document' ] },
                 { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
                 { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-                { name: 'links' },
-                { name: 'insert' },
+
                 '/',
                 { name: 'styles' },
-                { name: 'colors' }
+                { name: 'colors' },
+                { name: 'links' },
+                { name: 'insert' }
 
             ]
 
