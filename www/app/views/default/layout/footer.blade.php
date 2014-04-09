@@ -30,7 +30,7 @@
 
     <div class="clearfix"></div>
     <div id="copyright" class="text-right container-fluid wrap">
-        <small> Copyright &copy; {{date("Y")}} by Thái Boutique - webmypham.net </small>
+        <small> Copyright &copy; {{date("Y")}} by Thái Boutique - webmypham.vn </small>
     </div>
 </div>
 @show

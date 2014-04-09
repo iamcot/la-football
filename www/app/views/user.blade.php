@@ -3,7 +3,7 @@
 @if($data->isAdmin())
 <li><a href="{{URL::to('admin')}}">{{{ $data->lafullname }}}</a> </li>
 @else
-<li><a>{{{ $data->lafullname }}} </a></li>
+<li><a href="{{ URL::to('cart/uid/'.Session::get('uid')) }}">{{{ $data->lafullname }}} </a></li>
 @endif
 @if($data->laphoto!='')
 <li style="line-height: 48px"><img src="{{$data->laphoto}}" style="max-height: 32px;max-width: 32px"> </li>

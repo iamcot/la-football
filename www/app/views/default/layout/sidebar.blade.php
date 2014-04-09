@@ -1,4 +1,4 @@
-<div id="sidebar" class="{{$sidebartype}}">
+<div id="sidebar" class="{{$sidebartype}} col-xs-12 col-sm-4 col-md-3">
 
     {{--*/ $cattree = Vcategory::shopCatTree(0,$categories) /*--}}
     {{$cattree}}
