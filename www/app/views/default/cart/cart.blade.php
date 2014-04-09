@@ -110,7 +110,7 @@
         <div class="form-group">
             <span class="col-sm-3 control-label">Họ Tên</span>
             <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="Họ tên người nhân" name="ordername" value="{{Auth::user()->lafullname}}">
+                <input type="text" class="form-control" placeholder="Họ tên người nhân" name="ordername" value="{{((Auth::check())?Auth::user()->lafullname:'')}}">
             </div>
         </div>
         <br>
@@ -126,7 +126,7 @@
         <div class="form-group">
             <span class="col-sm-3 control-label">Email</span>
             <div class="col-sm-9">
-            <input type="email" class="form-control" placeholder="Địa chỉ Email" name="orderemail" value="{{Auth::user()->laemail}}">
+            <input type="email" class="form-control" placeholder="Địa chỉ Email" name="orderemail" value="{{((Auth::check())?Auth::user()->laemail:'')}}">
             </div>
         </div>
         <br>
