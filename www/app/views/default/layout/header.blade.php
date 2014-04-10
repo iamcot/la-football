@@ -1,5 +1,5 @@
 <div id="header" class="container-fluid wrap">
-    <div class="pull-left col-xs-8 col-sm-7">
+    <div class="pull-left col-xs-8 col-sm-8">
 
         <div id="logo" class="pull-left col-xs-12 col-sm-6">
             <a href="{{URL::to('/')}}"></a>
@@ -7,12 +7,16 @@
         <div id="search" class="pull-right col-sm-6 hidden-xs hidden-sm hidden-print">
             <div>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Tên sản phẩm, mã đơn hàng...">
+                    {{ Form::open(array(
+                        'url' => 'search',
+                        'method'=>'post',
+                    )) }}
+                    <input type="text" class="form-control" name="search" placeholder="Tên sản phẩm, từ khóa ...">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" style=""></span></button>
+                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" style=""></span></button>
                       </span>
+                    {{Form::close()}}
                 </div>
-                <!-- /input-group -->
             </div>
         </div>
 
@@ -23,7 +27,7 @@
         <span class="badge">{{$sumcart}}</span>
         @endif
     </a>
-    <div id="info" class="pull-right col-xs-12  col-sm-4 text-right hidden-xs nopaddingright hidden-print">
+    <div id="info" class="pull-right col-xs-12  col-sm-3 text-right hidden-xs nopaddingright hidden-print">
         <span class="small"><span class="glyphicon glyphicon-phone-alt "> </span> Hotline: <strong>098.3717.098</strong></span>
         <div class="cartinfo">
             <span class="cartsum">@if(Session::has('uid'))
