@@ -87,6 +87,20 @@ class ListController extends  BaseController
         $this->data['issearch'] = true;
         return View::make(Config::get('shop.theme')."/list/list",$this->data);
     }
+    public function showtag($tag){
+        $lists = Vproduct::where('factorurl','=',$tag)
+            ->orwhere('lachucnang','like','%'.$tag.'%')
+            ->orwhere('lakeyword','like','%'.$tag.'%')
+            ->orderBy('latitle')
+            ->paginate(Config::get('shop.tablepp'));
+        $this->data['title'] = 'Tìm kiếm '.$tag;
+        $this->data['actCat'] = 'search';
+        $this->data['caturl'] = 'search';
+        $this->data['lists'] = $lists;
+        $this->data['rootcat'] = false;
+        $this->data['issearch'] = true;
+        return View::make(Config::get('shop.theme')."/list/list",$this->data);
+    }
     public function showfav($type){
         if($type == 'moi-ve'){
             $lists = Vproduct::where('cat1url','!=','tin-tuc')

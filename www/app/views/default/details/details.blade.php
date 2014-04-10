@@ -84,11 +84,22 @@
              <dl class="dl-horizontal">
                  @if($oProduct->factorname != '')
                 <dt>Xuất xứ</dt>
-                <dd>{{$oProduct->factorname}}</dd>
+                <dd><a class="label label-success" href="{{URL::to('hastag/'.$oProduct->factorurl)}}">{{$oProduct->factorname}}</a></dd>
                  @endif
                 @if($oProduct->lachucnang != '')
                 <dt>Chức năng</dt>
-                <dd>{{$oProduct->lachucnang}}</dd>
+                <dd><a class="label label-warning" href="{{URL::to('hastag/'.$oProduct->lachucnang)}}">{{$oProduct->lachucnang}}</a></dd>
+                @endif
+                @if($oProduct->lakeyword !='')
+                {{--*/ $aKeys = explode(',',$oProduct->lakeyword) /*--}}
+                    @if(count($aKeys)>0)
+                     <dt>Từ khóa</dt>
+                     <dd>
+                         @foreach($aKeys as $key)
+                         <a class="label label-primary" href="{{URL::to('hastag/'.$key)}}">{{$key}}</a>
+                         @endforeach
+                     </dd>
+                    @endif
                 @endif
                 @if($oProduct->lakhoiluong != '')
                 <dt>Khối lượng (cả vỏ)</dt>
@@ -102,6 +113,7 @@
                 <dt>Mô tả</dt>
                 <dd>{{$oProduct->lashortinfo}}</dd>
                 @endif
+
             </dl>
             @if($oProduct->laprice < $oProduct->laoldprice)
             <p class="detailsOldPriceBlock badge">{{number_format(($oProduct->laoldprice-$oProduct->laprice)/$oProduct->laoldprice*100,0,'.',',')}}%

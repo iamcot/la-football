@@ -19,6 +19,7 @@ Route::controller('admin','ShopAdminController');
 Route::controller('upload','UploadController');
 Route::controller('cart','OrdersController');
 
+Route::any('/hastag/{tag}','ListController@showtag');
 Route::post('search','ListController@showsearch');
 Route::get('/{cat}/{product}.html','DetailsController@showDetails');
 Route::any('/fav/{type}','ListController@showfav');

@@ -31,7 +31,7 @@
             <p class="clearfix"></p>
         @endif
     @else
-        @if(isset($oActCat) && $oActCat != null)
+        @if(isset($oActCat) && $oActCat != null && $oActCat->lainfo!='')
             <blockquote>{{$oActCat->lainfo}}</blockquote>
          @endif
     @endif
@@ -39,17 +39,15 @@
     @if(isset($catchildren) && $catchildren != null)
     <div class="row-fluid parentcat">
         @foreach($catchildren as $children)
-        <div class="media">
-            <a class="pull-left" href="{{URL::to($children->laurl)}}">
-                <img class="media-object" src="{{URL::to('/uploads/cat/'.$children->id.'/'.$children->laimage)}}" alt="{{$children->latitle}}">
+            <a class="col-xs-6 col-sm-6 col-md-4" href="{{URL::to($children->laurl)}}">
+                @if($children->laimage!='')
+                <img class="media-object" src="{{URL::to('/uploads/cat/'.$children->id.'/'.$children->laimage)}}" alt="{{$children->latitle}} - {{$children->lainfo}}">
+                @else
+                <img style="border: 1px solid #ddd" src="{{URL::to('/src/img/no_photo.jpg')}}">
+                @endif
+                <h4>{{$children->latitle}}</h4>
             </a>
-            <div class="media-body">
-                <h4 class="media-heading"><a class="pull-left" href="{{URL::to($children->laurl)}}">{{$children->latitle}} </a></h4>
-                <div class="clearfix"></div>
-                {{$children->lainfo}}
-            </div>
 
-        </div>
 
         @endforeach
         </div>

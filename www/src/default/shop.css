@@ -668,11 +668,21 @@ img {
 
 .parentcat a img {
     width: 100%;
+    min-height: 152px;
+
+}
+.parentcat h4{
+    height: 50px;
+    text-align: center;
 }
 
 .author {
     font-size: .8em;
     color: #333;
+}
+.factorlist a{
+    margin: 2px;
+    display: inline-block;
 }
 
 #newsimage {
@@ -760,5 +770,10 @@ label.error {
     }
     .nav-pink li{
         display: inline-block;
+    }
+    .parentcat a img {
+        width: 100%;
+        min-height: 85px;
+
     }
 }
