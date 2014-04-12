@@ -291,6 +291,11 @@ class ShopAdminController extends BaseController
         $this->data['oOrders'] = Orders::orderBy('order_status')->orderBy('id','desc')->paginate(Config::get('shop.tablepp'));
         return View::make('admin/order', $this->data);
     }
+    public function getSavetrackid($orderid,$val){
+        $order = Orders::find($orderid);
+        $order->latrackid = $val;
+        echo $order->save();
+    }
     public function getChangeorderstatus($orderid,$status){
         $order = Orders::find($orderid);
         $order->order_status = $status;

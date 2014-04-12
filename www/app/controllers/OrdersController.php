@@ -1,4 +1,5 @@
 <?php
+use Myhelper\Readhtml;
 class OrdersController extends BaseController
 {
     private $data = array(
@@ -267,5 +268,54 @@ class OrdersController extends BaseController
     public function getVieworderdetails($orderid){
         $data['orderitems'] = Orderitem::where('order_id',$orderid)->get();
         return Response::view('admin/orderitems',$data);
+    }
+    public function getFindtrackid($trackid){
+        if(strpos($trackid,"EG") !== false)
+        $html = file_get_contents("http://www.vnpost.vn/TrackandTrace/tabid/130/n/".$trackid."/t/3/s/1/Default.aspx");
+        if(strpos($trackid,"RB") !== false)
+        $html = file_get_contents("http://www.vnpost.vn/TrackandTrace/tabid/130/n/".$trackid."/t/8/s/1/Default.aspx");
+
+        $readhtml = new Readhtml\Readhtml();
+        $table = $readhtml->getElement($html,"table","class","mGrid");
+        $table = preg_replace('/width=".*?"/i', '', $table);
+        $table = preg_replace('/scope=".*?"/i', '', $table);
+        $table = preg_replace('/class=".*?"/i', '', $table);
+        $table = preg_replace('/style=".*?"/i', '', $table);
+        $table = preg_replace('/align=".*?"/i', '', $table);
+        $table = str_replace(array("\t","\r","\n"),"",$table);
+//        $table = preg_replace('\t', '', $table);
+        $table = preg_replace('/ >/i', '>', $table);
+
+        $trs = explode("<tr>",$table);
+        $provinces = Config::get("shop.province");
+        $newtable = "";
+        for($i=2;$i<count($trs);$i++){
+            $oldtr = "<tr>".$trs[$i];
+            $tds = explode("<td>",$trs[$i]);
+            $from = substr(trim($tds[4]),0,6);
+            $codefrom = substr($from,0,2);
+            $to =   substr(trim($tds[5]),0,6);
+            $codeto = substr($to,0,2);
+            $count=0;
+            foreach($provinces as $province){
+                $code = explode(",",$province['code']);
+                if(count($code)==1) $code[1] = $code[0];
+                if($code[0] <= $codefrom && $codefrom <= $code[1]){
+                    $oldtr = str_replace($from,$from.' ('.$province['title'].')',$oldtr);
+                    $count++;
+                }
+                if($code[0] <= $codeto && $code[1] >=$codeto){
+                    $oldtr = str_replace($to,$to.' ('.$province['title'].')',$oldtr);
+                    $count++;
+                }
+                if($count>=2) break;
+            }
+         $newtable .= $oldtr;
+
+
+//            echo $from.'@'.$to.'<br>';
+        }
+        $newtable = "<thead><tr>".$trs[1]."</thead><tbody>".$newtable."</tbody>";
+        echo $newtable;
     }
 }

@@ -1,3 +1,4 @@
+ALTER TABLE  `laorders` ADD COLUMN `latrackid` VARCHAR(20) NULL AFTER `laordernote`;
 ALTER TABLE  `laproducts` CHANGE  `ladatenew`  `ladatenew` VARCHAR( 50 ) NULL DEFAULT  '0';
 
 /* TANNER  7/4*/

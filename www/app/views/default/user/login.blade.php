@@ -4,9 +4,6 @@
     <div id="content">
 
         <div class="row-fluid loginbox" style="">
-            @if(Session::has('message'))
-            <div class="bg-danger text-center" style="margin-bottom: 20px">{{Session::get('message')}}</div>
-            @endif
         {{Form::open(array(
         "url" => "login",
         "autocomplete"=>"off",

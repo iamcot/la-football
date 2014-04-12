@@ -107,7 +107,7 @@ array(
     <div class="input-group">
         {{ Form::label('ladatenew','Ngày hàng mới',array("class"=>"input-group-addon"))
         }}
-        {{ Form::text('ladatenew',(($catedit != null)?date("Y-m-d",$catedit->ladatenew):''),array("class"=>"form-control",'title'=>'Sản phẩm sẽ hiện "mới" cho tới ngày này' ) ) }}
+        {{ Form::text('ladatenew',(($catedit != null && $catedit->ladatenew!='')?date("Y-m-d",$catedit->ladatenew):''),array("class"=>"form-control",'title'=>'Sản phẩm sẽ hiện "mới" cho tới ngày này' ) ) }}
     </div>
     <br>
     <div class="input-group">

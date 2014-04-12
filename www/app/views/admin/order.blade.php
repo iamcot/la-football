@@ -12,16 +12,18 @@
         <thead>
         <tr class="">
             <th>Mã đơn hàng</th>
+            <th>Ngày đặt</th>
             <th>Tổng giá trị</th>
             <th>Khách hàng</th>
             <th>SĐT</th>
             <th>Địa chỉ</th>
             <th>Giao hàng</th>
+            <th style="width: 185px">Mã Bưu phẩm</th>
             <th>Thanh toán</th>
             <th>Ghi chú</th>
             <th>Trạng thái</th>
-            <th>Ngày đặt</th>
             <th></th>
+            <th>Cập nhật lúc</th>
         </tr>
         </thead>
 
@@ -35,17 +37,19 @@
             {{--*/ $oProvince = Config::get('shop.province.'.$order->laorderprovince) /*--}}
             {{--*/ $oDistrict = Config::get('shop.hcm_district.'.$order->laorderdistrict) /*--}}
             <td><a class="label label-primary" id="a{{$order->id}}" href="javascript:viewDetail({{$order->id}})"> {{$order->id}} </a></td>
+            <td>{{date("H:i d/m/Y",strtotime($order->created_at))}}</td>
             <td><a class="sumpopup" title="{{$details}}" data-placement="right">{{number_format($order->sumsanpham - $order->giamvoucher + $order->lafeeshipping,0,',','.')}}</a></td>
             <td>{{$order->laordername}}</td>
             <td>{{$order->laordertel}}</td>
             <td>{{$order->laorderaddr}},
                 {{(($oDistrict!=null)?$oDistrict['title'].',':'')}}
                 {{$oProvince['title']}}</td>
-            <td>{{$oShipping['value']}}</td>
+<!--            <td>{{$oShipping['value']}}</td>-->
+            <td>{{$order->lashipping}}</td>
+            <td><input style="width: 130px" id="trackid{{$order->id}}" value="{{$order->latrackid}}"><a class="glyphicon glyphicon-save" href="javascript:savetrackid({{$order->id}})"></a><a class="glyphicon glyphicon-eye-open" href="javascript:findtrackid({{$order->id}})"></a></td>
             <td>{{$oPayment['value']}}</td>
             <td>{{nl2br($order->laordernote)}}</td>
             <td id="status{{$order->id}}"><span class="label label-{{Config::get('shop.orderstatus.'.$order->order_status.'.color')}}">{{Config::get('shop.orderstatus.'.$order->order_status.'.value')}}</span></td>
-            <td>{{$order->created_at}}</td>
             <td>
                 <select onchange="changestatus({{$order->id}},this.value)">
                     @foreach(Config::get('shop.orderstatus') as $key=>$status)
@@ -53,10 +57,14 @@
                     @endforeach
                 </select>
             </td>
+            <td>{{date("H:i d/m/Y",strtotime($order->updated_at))}}</td>
         </tr>
     @endforeach
     </table>
     {{$oOrders->links()}}
+    <div class="clearfix" id="loading" style="display: block;height: 20px;width: 100%"></div>
+    <table class="table table-responsive table-bordered" id="trackcontent">
+    </table>
 </div>
 @stop
 @section('jscript')
@@ -67,6 +75,16 @@
              type:"get",
              success:function(msg){
                 $("#status"+orderid).html(msg);
+             }
+         })
+     }
+     function savetrackid(orderid){
+         $.ajax({
+             url:"{{URL::to('/admin/savetrackid/')}}/"+orderid+"/"+$("#trackid"+orderid).val(),
+             type:"get",
+             success:function(msg){
+                if(msg==1) alert("OK");
+                 else alert("FAIL");
              }
          })
      }
@@ -84,5 +102,16 @@
          $("#append"+orderid).remove();
      }
      $('.sumpopup').tooltip({html:true});
+     function findtrackid(orderid){
+         $("#loading").addClass("ajaxload");
+         $("#trackcontent").html("");
+         $.ajax({
+             url:"{{URL::to('/cart/findtrackid/')}}/"+$("#trackid"+orderid).val(),
+             success:function(msg){
+                 $("#loading").removeClass("ajaxload");
+                 $("#trackcontent").html(msg);
+             }
+         });
+     }
      </script>
 @stop

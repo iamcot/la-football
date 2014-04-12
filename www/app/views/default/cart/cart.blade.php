@@ -107,6 +107,9 @@
         <br>
 
         <h3 class="text-right">Thông tin ship hàng</h3>
+        @if(!Session::has("uid"))
+            <div class="bg-warning" style="line-height: 20px;padding: 5px;margin-bottom: 10px;"><span class="glyphicon glyphicon-info-sign"></span> Bạn nên đăng nhập bằng facebook để có thể theo dõi trạng thái của các đơn hàng tốt hơn.</div>
+        @endif
         <div class="form-group">
             <span class="col-sm-3 control-label">Họ Tên</span>
             <div class="col-sm-9">

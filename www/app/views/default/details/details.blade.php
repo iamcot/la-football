@@ -51,7 +51,7 @@
                         @foreach($variants as $vari)
                         <li>
                             <a href="javascript:changevariant({{$vari->id}})">
-                                <img src="{{URL::to('/uploads/thumbnails/product/'.$vari->laimage)}}">
+                                <img src="{{URL::to('/uploads/thumbnails/product/'.$vari->laimage)}}" title="{{$vari->lashortinfo}}" class="variantthumb">
                             </a>
                         </li>
                         @endforeach
@@ -176,6 +176,7 @@
 @section('jscript')
     @parent
  <script>
+     $(".variantthumb").tooltip();
      $('#myTab a').click(function (e) {
          e.preventDefault()
          $(this).tab('show')
@@ -185,7 +186,7 @@
      }
      function changevariant(id){
          $("#variantselectname").html("");
-         $("#variantselectname").removeClass("bg-warning");
+         $("#variantselectname").removeClass("label label-warning");
          $("#variantselectname").addClass("ajaxload");
          $.ajax({
              url: "{{URL::to('/ajax/getvariant')}}/"+id,
@@ -195,7 +196,7 @@
                  $("#variantselect").val(msg.id);
                  $("#variantselectname").html(msg.lashortinfo);
                  $("#variantselectname").removeClass("ajaxload");
-                 $("#variantselectname").addClass("bg-warning");
+                 $("#variantselectname").addClass("label label-warning");
                  $("input[name=laproduct_id]").val(msg.id);
                  $("#variantselectnameinput").val(msg.lashortinfo);
                  $("#addtocart").removeAttr("disabled");

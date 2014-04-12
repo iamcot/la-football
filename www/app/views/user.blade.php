@@ -11,5 +11,5 @@
 <li><a href="{{URL::to('logout')}}">Logout</a> </li>
 
 @else
-<li><a href="{{URL::to('facelogin')}}">Login with Facebook</a></li>
+<li><a href="{{URL::to('facelogin')}}"><label  class="label label-primary" style="cursor: pointer">Đăng nhập bằng Facebook</label></a></li>
 @endif
