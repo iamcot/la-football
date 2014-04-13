@@ -669,7 +669,7 @@ img {
 
 .parentcat a img {
     width: 100%;
-    min-height: 152px;
+    height: 152px;
 
 }
 .parentcat h4{
@@ -774,7 +774,14 @@ label.error {
     }
     .parentcat a img {
         width: 100%;
-        min-height: 85px;
+        height: 130px !important;
+
+    }
+}
+@media screen and (max-width : 450px){
+    .parentcat a img {
+        width: 100%;
+        height: 80px !important;
 
     }
 }
