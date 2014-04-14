@@ -55,7 +55,7 @@
     <br>
     @endif
     @if($caturl !='tin-tuc')
-        @if(!$rootcat && isset($lists) && $lists != null && count($lists)>0 )
+        @if( isset($lists) && $lists != null && count($lists)>0 )
         <div class="row-fluid ">
             @foreach($lists as $list)
                 @include(Config::get('shop.theme').'/list/listitem')
@@ -66,7 +66,7 @@
             {{$lists->links()}}
             @endif
         </div>
-        @else
+        @elseif(!$rootcat)
         <div class="noproduct text-center"></div>
         @endif
     @endif
