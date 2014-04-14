@@ -47,4 +47,18 @@ class FacebookController extends BaseController
 
         return Redirect::to('/');
     }
+    public function anySavecomment(){
+        $data = array(
+//            'lafullname'=>Input::get('lafullname'),
+//            'lacontent'=>Input::get('lacontent'),
+            'laurl'=>Input::get('laurl'),
+        );
+        Facebookcomment::create($data);
+//        $facebook = new Facebook(Config::get('facebook'));
+//        $facebook->getAccessToken();
+//        $response = $facebook->api(
+//            "/".Input::get('commentid')
+//        );
+//        var_dump($response);
+    }
 }

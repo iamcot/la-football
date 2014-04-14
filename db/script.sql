@@ -1,3 +1,15 @@
+CREATE TABLE `lafacebookcomments`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `lafullname` TEXT,
+  `lacontent` TEXT,
+  `laurl` TEXT,
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+
+
 ALTER TABLE  `laorders` ADD COLUMN `latrackid` VARCHAR(20) NULL AFTER `laordernote`;
 ALTER TABLE  `laproducts` CHANGE  `ladatenew`  `ladatenew` VARCHAR( 50 ) NULL DEFAULT  '0';
 

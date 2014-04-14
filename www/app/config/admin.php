@@ -44,6 +44,11 @@ return array(
             'url'    =>  'user',
             'title' =>  'LDUser'
         ),
+        'comment'     =>  array(
+            'id'    =>  'comment',
+            'url'    =>  'comment',
+            'title' =>  'LDComment'
+        ),
 
     ),
 );
