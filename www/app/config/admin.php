@@ -44,6 +44,11 @@ return array(
             'url'    =>  'user',
             'title' =>  'LDUser'
         ),
+        'fanpage'     =>  array(
+            'id'    =>  'fanpage',
+            'url'    =>  'fanpage',
+            'title' =>  'LDFanpage'
+        ),
 
     ),
 );

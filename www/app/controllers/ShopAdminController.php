@@ -311,6 +311,58 @@ class ShopAdminController extends BaseController
         $this->data['aUsers'] = User::paginate(Config::get('shop.tablepp'));
         return View::make('admin/user',$this->data);
     }
+    public function anyFanpage(){
+        $this->data['actCat'] = 'fanpage';
+//        $this->data['aUsers'] = User::paginate(Config::get('shop.tablepp'));
+        return View::make('admin/fanpage',$this->data);
+    }
+    public function anyGetfanmember(){
+        /*
+         $matches = array();
+    $url = 'http://www.facebook.com/plugins/fan.php?connections=100&id=' . $fanpage_data['id'];
+    $context = stream_context_create(array('http' => array('header' => 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:22.0) Gecko/20100101 Firefox/22.0')));
+    for($a = 0; $a < $no_of_retries; $a++){
+        $like_html = file_get_contents($url, false, $context);
+        preg_match_all('{href="http://www\.facebook\.com/([a-zA-Z0-9._-]+)" data-jsid="anchor" target="_blank"}', $like_html, $matches);
+        if(empty($matches[1])){
+            // failed to fetch any fans - convert returning array, cause it might be not empty
+            return array_keys($ret);
+        }else{
+            // merge profiles as array keys so they will stay unique
+            $ret = array_merge($ret, array_flip($matches[1]));
+        }
+        // don't get banned as flooder
+        usleep($pause);
+    }
+         */
+    }
+    public function anySavefanpage($pageusername){
+        $fanpage_data = json_decode(file_get_contents('http://graph.facebook.com/' . $pageusername), true);
+        if(empty($fanpage_data['id'])){
+            echo -1;
+        }
+        else{
+            $find = new Fanpage();
+            if(count($find->where("pageid",$fanpage_data['id'])->get()) > 0){
+                echo -2;
+                return;
+            }
+            $arr = array(
+                'pageid' => $fanpage_data['id'],
+                'pageusername' => $fanpage_data['username'],
+                'pagename' => $fanpage_data['name'],
+                'likes' => $fanpage_data['likes'],
+                'category' => $fanpage_data['category'],
+                'about' => $fanpage_data['about'],
+            );
+            $fanpage = Fanpage::create($arr);
+            echo $fanpage->id;
+        }
+    }
+    public function anyLoadfanpage(){
+        $data['fanpage'] = Fanpage::all();
+        return Response::view('admin/fanpagelist',$data);
+    }
     public function getChangepass($id){
         $user = User::find($id);
         if($user!=null){
