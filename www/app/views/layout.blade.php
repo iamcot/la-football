@@ -73,20 +73,30 @@
                     xfbml      : true                                  // Look for social plugins on the page
                 });
                 FB.Event.subscribe('comment.create', comment_callback);
-                FB.Event.subscribe('comment.remove', comment_callback);
+//                FB.Event.subscribe('comment.remove', comment_callback);
                 // Additional initialization code such as adding Event Listeners goes here
             };
             var comment_callback = function(response) {
-        //        console.log("comment_callback");
-        //        console.log(response);
-        //        var accesstoken = "access_token=141133079404451|5mLCw1V_YriA32aJ10OhTdH2hO8";
-        //        $.ajax({
-        //            url:"https://graph.facebook.com/1669855124/notifications?"+accesstoken+"&template=Have a comment from webmypham&href={{Request::url()}}",
-        //            type:"post",
-        //            success:function(msg){
-        //                console.log(msg);
-        //            }
-        //        });
+//                console.log(response);
+                var url = response.href;
+                var commentid = response.commentID;
+//                FB.api(
+//                    "/"+response.commentID+"?"+accesstoken,
+//                    function (response) {
+//                        console.log(response);
+//                        if (response && !response.error) {
+//
+//                        }
+//                    }
+//                );
+                $.ajax({
+                    url:"{{URL::to('facelogin/savecomment')}}",
+                    data:"laurl="+encodeURIComponent(url)+"&commentid="+commentid,
+                    type:"post",
+                    success:function(msg){
+
+                    }
+                });
             }
         </script>
         <script>

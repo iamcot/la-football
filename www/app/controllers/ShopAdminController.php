@@ -420,4 +420,9 @@ class ShopAdminController extends BaseController
         $this->data['sidebarads'] = Myconfig::where('lavar', '=', 'sidebarads')->get();
         return View::make('admin/config', $this->data);
     }
+    public function anyComment(){
+       $this->data['actCat'] = 'comment';
+        $this->data['aComments'] = Facebookcomment::orderBy('id','desc')->paginate(Config::get('shop.tablepp'));
+        return View::make('admin/comment', $this->data);
+    }
 }
