@@ -1,7 +1,7 @@
 @extends(Config::get('shop.theme').'/layout/page')
 @section('pagecontent')
 <div id="details">
-    <div id="maininfo">
+    <div id="maininfo"  itemscope itemtype="http://schema.org/Product">
         {{--*/ $morepic = Image::where("laproduct_id",'=',$oProduct->id)
         ->where('lapic','!=',$oProduct->laimage)
         ->orderBy(DB::Raw('RAND()'))
@@ -10,7 +10,7 @@
 
 
         @if(count($morepic)>0)
-        <div id="picbox" class="col xs-12 col-sm-5 col-md-5">
+        <div id="picbox" class="col xs-12 col-sm-5 col-md-5" itemprop="image">
             <img id="mainpicimg" src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
         </div>
             <div  class="col-md-1 morepic hidden-sm hidden-xs">
@@ -25,7 +25,7 @@
 
         </div>
         @else
-        <div id="picbox" class="col-xs-12 col-sm-5 col-md-5">
+        <div id="picbox" class="col-xs-12 col-sm-5 col-md-5"  itemprop="image">
             <img src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
         </div>
         @endif
@@ -35,10 +35,10 @@
          @else
             <div id="productinfo" class="col-sm-7 col-md-7">
             @endif
-            <h3>{{$oProduct->latitle}}</h3>
+            <h3  itemprop="name">{{$oProduct->latitle}}</h3>
             <p >
                 <span class="glyphicon glyphicon-usd"></span>
-                <span id="detailsPrice">{{number_format($oProduct->laprice,0,',','.')}}</span>
+                <span id="detailsPrice" >{{number_format($oProduct->laprice,0,',','.')}}</span>
                 @if($oProduct->laprice < $oProduct->laoldprice)
             ( <span class="detailsOldPrice"> {{number_format($oProduct->laoldprice,0,',','.')}} </span> )
             @endif
@@ -84,7 +84,7 @@
              <dl class="dl-horizontal">
                  @if($oProduct->factorname != '')
                 <dt>Xuất xứ</dt>
-                <dd><a class="label label-success" href="{{URL::to('hastag/'.$oProduct->factorurl)}}">{{$oProduct->factorname}}</a></dd>
+                <dd  itemprop="manufacturer"><a class="label label-success" href="{{URL::to('hastag/'.$oProduct->factorurl)}}">{{$oProduct->factorname}}</a></dd>
                  @endif
                 @if($oProduct->lachucnang != '')
                 <dt>Chức năng</dt>

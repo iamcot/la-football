@@ -216,7 +216,7 @@ array(
         $('input[name=latitle]').friendurl({id : 'laurl'});
         $( '.ckeditor' ).ckeditor({
             language: 'vi',
-            height:80,
+            height:200,
             toolbarGroups: [
                { name: 'document',	   groups: [ 'mode', 'document' ] },
                 { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },

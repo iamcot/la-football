@@ -35,7 +35,9 @@
 @section('jscript')
 @parent
 <script>
-    $('.carousel').carousel();
+    $('.carousel').carousel({
+        animation: 'fast'
+    });
 </script>
 
 @stop

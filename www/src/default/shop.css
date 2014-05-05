@@ -499,7 +499,7 @@ img {
 }
 
 .product strong {
-    min-height: 50px;
+    min-height: 75px;
     display: block;
 }
 
@@ -630,6 +630,7 @@ img {
 
 #productcontent img {
     width: 100%;
+    max-width: 520px;
 }
 
 .tab-content {
@@ -744,8 +745,8 @@ label.error {
     margin: 0 auto;
 }
 .media a img{
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 80px !important;
+    max-height: 80px !important;
 }
 .bg404{
     background: url("img/error404.jpg") no-repeat center;
@@ -753,6 +754,10 @@ label.error {
     width: 600px;
     height: 450px;
     margin: 0 auto;
+}
+.tab-content img{
+    width: 100%;
+    max-width: 520px;
 }
 @media print{
     .body{

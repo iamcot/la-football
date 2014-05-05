@@ -1,6 +1,6 @@
 @extends(Config::get('shop.theme').'/layout/page')
 @section('pagecontent')
-<div class="container-fluid lists">
+<div class="container-fluid lists" itemscope itemtype="http://schema.org/ItemList">
     @if(!$rootcat && $caturl !='tin-tuc' && !isset($issearch))
     <div class="text-right container-fluid">
         {{ Form::open() }}

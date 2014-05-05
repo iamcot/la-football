@@ -14,13 +14,13 @@
             </dl>
         </div>
         <div class="col-xs-6 col-md-3">
-            <dl>
-                <dt><span class="glyphicon glyphicon-heart"></span> Thái Boutique</strong></dt>
+            <dl itemscope itemtype="http://schema.org/Organization">
+                <dt itemprop="legalName"><span class="glyphicon glyphicon-heart"></span> <strong>Thái Boutique</strong></dt>
                 <dl>
                     <address>
-                        <span class="glyphicon glyphicon-map-marker"></span> TP Hồ Chí Minh<br>
-                        <span class="glyphicon glyphicon-phone-alt"></span> 098.3717.098<br>
-                        <span class="glyphicon glyphicon-phone-alt"></span> 0933.81.64.18
+                        <div  itemprop="address"><span class="glyphicon glyphicon-map-marker"></span> TP Hồ Chí Minh</div>
+                        <div  itemprop="telephone"><span class="glyphicon glyphicon-phone-alt"></span> 098.3717.098</div>
+                        <div  itemprop="telephone"><span class="glyphicon glyphicon-phone-alt"></span> 0933.81.64.18</div>
                     </address>
 
                 </dl>

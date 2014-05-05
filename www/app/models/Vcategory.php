@@ -38,10 +38,10 @@ class Vcategory extends Eloquent
 
     public static function shopCatTree($id = 0, $categories = null, $level = 0)
     {
-        $html = "<ul class='" . (($level == 0) ? 'menu' : '') . "'>";
+        $html = "<ul class='" . (($level == 0) ? 'menu' : '') . "'  " . (($level == 0) ? 'itemscope itemtype="http://schema.org/ItemList"' : '') . ">";
         foreach ($categories as $cat) {
-            $html .= "<li>
-            <a ".(($cat['numproduct'] > 0)?"href='" . URL::to("/" . $cat['laurl']) . "' " . (($id == $cat['id']) ? "class='active'" : '') . "":"")." >
+            $html .= "<li " . (($level == 0) ? 'itemprop="name"' : 'itemprop="itemListElement"') . ">
+            <a itemprop='url' ".(($cat['numproduct'] > 0)?"href='" . URL::to("/" . $cat['laurl']) . "' " . (($id == $cat['id']) ? "class='active'" : '') . "":"")." >
                     " . (($level == 0) ? '<i class="' . $cat['laicon'] . '"></i>' : '') . " " . $cat['latitle'] . " <span><b>" . $cat['numproduct'] . "</b></span>
             </a>
             </li>";
