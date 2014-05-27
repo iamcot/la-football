@@ -11,7 +11,7 @@
 
         @if(count($morepic)>0)
         <div id="picbox" class="col xs-12 col-sm-5 col-md-5" itemprop="image">
-            <img id="mainpicimg" src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
+            <img rel="image_src" id="mainpicimg" src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
         </div>
             <div  class="col-md-1 morepic hidden-sm hidden-xs">
                 <a href="javascript:changepic('{{$oProduct->laimage}}')">
@@ -26,7 +26,7 @@
         </div>
         @else
         <div id="picbox" class="col-xs-12 col-sm-5 col-md-5"  itemprop="image">
-            <img src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
+            <img rel="image_src" src="{{URL::to('/uploads/product/'.$oProduct->laimage)}}">
         </div>
         @endif
 
