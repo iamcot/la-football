@@ -15,5 +15,10 @@ class ShopController extends BaseController
         $this->data['title'] = 'Thái Boutique';
         return View::make(Config::get('shop.theme')."/start/start",$this->data);
     }
+    public function getNewsletter(){
+        $this->data['sidebartype'] = 'none';
+        $this->data['emails'] = Newsletter::orderby('id','DESC')->paginate(50);
+        return View::make(Config::get('shop.theme')."/start/newsletter",$this->data);
+    }
 
 }

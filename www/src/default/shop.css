@@ -397,7 +397,7 @@ img {
     -webkit-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
     margin-top: 10px;
-    line-height: 0;
+    /*line-height: 0;*/
 }
 
 .sidebarBox img {
@@ -685,6 +685,9 @@ img {
 .factorlist a{
     margin: 2px;
     display: inline-block;
+}
+.factorlist{
+    line-height: 0;
 }
 
 #newsimage {

@@ -13,4 +13,16 @@ class AjaxController extends BaseController{
           else $variants['lapic'] = $variants->laimage;
         return Response::json($variants);
     }
+    public function postSavenewsletter($email){
+        $findemail = Newsletter::where('email',$email)->first();
+        if(!$findemail){
+            $newemail = Newsletter::create(array('email'=>$email));
+            if($newemail){
+                echo $newemail->id;
+            }
+            else echo 0;
+        }
+        else echo -1;
+
+    }
 }

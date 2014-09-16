@@ -25,6 +25,7 @@ Route::get('/{cat}/{product}.html','DetailsController@showDetails');
 Route::any('/fav/{type}','ListController@showfav');
 Route::any('/{cat}','ListController@showList');
 Route::controller('ajax','AjaxController');
+Route::controller('shop','ShopController');
 
 Route::get('/','ShopController@getIndex');
 
