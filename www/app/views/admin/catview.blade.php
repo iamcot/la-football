@@ -9,6 +9,7 @@
             <th style="width: 40%">Thông tin</th>
             <th>Ảnh</th>
             <th>Thứ tự</th>
+            <th>Tin tức</th>
         </tr>
     </thead>
     <tbody>

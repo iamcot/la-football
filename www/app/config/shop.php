@@ -7,7 +7,7 @@ return array(
     'description' => 'Thái Boutique - Webmypham - Chuyên sỉ và lẻ mỹ phẩm Hàn Quốc, Thai lan, USA - Kem trắng da - Trị mụn - son - trang điểm',
     'keywords'  => 'mỹ phẩm, my pham, thai lan, thailan, the face shop, kem trắng da, kem trị mụn, kem mọc tóc, white, skin, beauty, spa, laila, mood matcher, wet n wild, nyx, revlon, kem dna ',
     'treecatdeep' => 1,
-    'tablepp'    =>  18,
+    'tablepp'    =>  16,
     'theme' => 'default',
     'orderstatus' => array(
         '0' => array('value'=>'Mới đặt','color'=>'danger'),
@@ -23,24 +23,25 @@ return array(
             'title' => 'Trang chủ',
             'icon' => 'glyphicon glyphicon-home',
         ),
-        'moi-ve' => array(
-            'id' => 'moi-ve',
-            'url' => '/fav/moi-ve',
-            'title' => 'Hàng mới về',
-            'icon' => 'glyphicon glyphicon-star',
-        ),
         'dang-hot' => array(
             'id' => 'dang-hot',
             'url' => '/fav/dang-hot',
             'title' => 'Hàng đang hot',
             'icon' => 'glyphicon glyphicon-thumbs-up',
         ),
-        'dang-sale' => array(
-            'id' => 'dang-sale',
-            'url' => '/fav/dang-sale',
-            'title' => 'Hàng khuyến mãi',
-            'icon' => 'glyphicon glyphicon-gift',
+        'tips-lam-dep' => array(
+            'id' => 'tips-lam-dep',
+            'url' => 'tips-lam-dep',
+            'title' => 'Tips Làm đẹp',
+            'icon' => 'glyphicon glyphicon-fire',
         ),
+        'reviews' => array(
+            'id' => 'reviews',
+            'url' => 'reviews',
+            'title' => 'Review sản phẩm',
+            'icon' => 'glyphicon glyphicon-star-empty',
+        ),
+
     ),
     'shipping' => array(
         'ship_shop' => array(

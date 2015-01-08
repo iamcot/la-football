@@ -37,8 +37,7 @@
             @endif
             <h3  itemprop="name">{{$oProduct->latitle}}</h3>
             <p >
-                <span class="glyphicon glyphicon-usd"></span>
-                <span id="detailsPrice" >{{number_format($oProduct->laprice,0,',','.')}}</span>
+                <span id="detailsPrice" >{{number_format($oProduct->laprice,0,',','.')}} đ</span>
                 @if($oProduct->laprice < $oProduct->laoldprice)
             ( <span class="detailsOldPrice"> {{number_format($oProduct->laoldprice,0,',','.')}} </span> )
             @endif

@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'la_shop',
+			'database'  => 'shop',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'abc123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

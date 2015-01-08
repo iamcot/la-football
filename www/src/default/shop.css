@@ -1,6 +1,6 @@
 body {
     background: rgba(255, 119, 164, 0.1);
-    font: normal 16px/26px Arial, adelle-sans, sans-serif;
+    font: normal 16px Arial, adelle-sans, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     padding: 0;
@@ -48,19 +48,22 @@ img {
 .marginoverleft {
 }
 
+#topmenu{
+    height: 4px;
+    background: #000;
+}
 #header {
     height: 80px;
 }
 
 #header #search,
 #header #logo {
-    height: 80px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 #logo a{
-    background: url(img/logo.png) no-repeat bottom left;
-    width: 320px;
-    height: 90px;
+    background: url(img/logo.png) no-repeat top left;
+    width: 110px;
+    height: 120px;
     position: absolute;
     top:5px;
     left: 0;
@@ -69,7 +72,6 @@ img {
 }
 
 #logo {
-    line-height: 80px;
 }
 
 #search > div {
@@ -175,6 +177,10 @@ img {
     -webkit-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, 0.5);
     border: none;
+}
+
+.nav-pink>div{
+    padding-left: 140px;
 }
 
 .nav-pink a {
@@ -494,12 +500,14 @@ img {
 }
 
 .product p {
-    line-height: 1.5em;
+    line-height: 1.2em;
+    font-size: .9em;
     margin: 0;
 }
 
 .product strong {
     min-height: 75px;
+    max-height: 75px;
     display: block;
 }
 
@@ -772,7 +780,7 @@ label.error {
         float:none;
     }
     #logo a{
-        background-size: 60%;
+        background-size: 100%;
     }
     #productinfo .dl-horizontal dt{
         float:left;

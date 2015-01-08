@@ -37,3 +37,7 @@ ALTER TABLE `laproducts`
    ALTER TABLE `laproducts`
   ADD  UNIQUE INDEX `url` (`laurl`);
 
+/* 2014 01 08 */
+/* 12:07:51 AM localhost */ ALTER TABLE `lacategories` ADD `isnews` TINYINT  NOT NULL  DEFAULT '0'  AFTER `laicon`;
+
+

@@ -1,10 +1,13 @@
+<div id="topmenu">
+
+</div>
 <div id="header" class="container-fluid wrap">
     <div class="pull-left col-xs-8 col-sm-8">
 
-        <div id="logo" class="pull-left col-xs-12 col-sm-6">
+        <div id="logo" class="pull-left col-xs-12 col-sm-3">
             <a href="{{URL::to('/')}}"></a>
         </div>
-        <div id="search" class="pull-right col-sm-6 hidden-xs hidden-sm hidden-print">
+        <div id="search" class="pull-right col-sm-9 hidden-xs hidden-sm hidden-print">
             <div>
                 <div class="input-group">
                     {{ Form::open(array(
@@ -13,7 +16,7 @@
                     )) }}
                     <input type="text" class="form-control" name="search" placeholder="Tên sản phẩm, từ khóa ...">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" style=""></span></button>
+                        <button class="btn bgpink" type="submit"><span class="glyphicon glyphicon-search" style=""></span></button>
                       </span>
                     {{Form::close()}}
                 </div>

@@ -25,7 +25,7 @@ class Vcategory extends Eloquent
                 'laicon' => $categorie->laicon,
                 'laimage' => $categorie->laimage,
                 'path' => $path . $categorie->latitle,
-                'numproduct' => $categorie->numproduct,
+                'isnews' => $categorie->isnews,
 
                 'children' => array()
             );
@@ -40,9 +40,10 @@ class Vcategory extends Eloquent
     {
         $html = "<ul class='" . (($level == 0) ? 'menu' : '') . "'  " . (($level == 0) ? 'itemscope itemtype="http://schema.org/ItemList"' : '') . ">";
         foreach ($categories as $cat) {
+            if($cat['isnews']) continue;
             $html .= "<li " . (($level == 0) ? 'itemprop="name"' : 'itemprop="itemListElement"') . ">
-            <a itemprop='url' ".(($cat['numproduct'] > 0)?"href='" . URL::to("/" . $cat['laurl']) . "' " . (($id == $cat['id']) ? "class='active'" : '') . "":"")." >
-                    " . (($level == 0) ? '<i class="' . $cat['laicon'] . '"></i>' : '') . " " . $cat['latitle'] . " <span><b>" . $cat['numproduct'] . "</b></span>
+            <a itemprop='url' href='" . URL::to("/" . $cat['laurl']) . "' " . (($id == $cat['id']) ? "class='active'" : '')." >
+                    " . (($level == 0) ? '<i class="' . $cat['laicon'] . '"></i>' : '') . " " . $cat['latitle'] . "
             </a>
             </li>";
             $html .= Vcategory::shopCatTree($id, $cat['children'], $level + 1);

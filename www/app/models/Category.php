@@ -28,6 +28,7 @@ class Category extends Eloquent
                 'laicon' => $categorie->laicon,
                 'laimage' => $categorie->laimage,
                 'path' => $path . $categorie->latitle,
+                'isnews' => $categorie->isnews,
 
                 'children' => array()
             );
@@ -56,6 +57,7 @@ class Category extends Eloquent
                     <td>" . str_limit($cat['lainfo'],40) . "</td>
                     <td class='imgthumb'>" . HTML::image('uploads/cat/' . $cat['id'] . '/' . $cat['laimage'], 'IMG') . "</td>
                     <td>" . $cat['laorder'] . "</td>
+                    <td>" . $cat['isnews'] . "</td>
                 </tr>";
             $html .= Category::adminListCat($cat['children'],$level+1);
         }
