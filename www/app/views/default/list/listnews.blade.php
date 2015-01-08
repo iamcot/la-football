@@ -12,7 +12,9 @@
             <div class="media-body">
 
                 <h3 class="media-heading"><a href="{{URL::to('/tin-tuc/'.$news->laurl)}}.html">{{$news->latitle}} </a></h3>
-                <p class="shorinfo">{{$news->lashortinfo}}</p>
+                @if($news->lashortinfo)
+                <blockquote>{{$news->lashortinfo}}</blockquote>
+                @endif
                 <p class="small pull-right">{{ date("H:i d/m/Y",strtotime($news->created_at)) }}</p>
             </div>
         </div>

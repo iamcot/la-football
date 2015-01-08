@@ -3,10 +3,24 @@ class Vcategory extends Eloquent
 {
     protected $table = 'v_categories';
 
-    public static function getCategoriesTree($id = 0, $path = '', $last_path = '')
+    public static function getCategoriesTree($id = 0, $path = '', $last_path = '',$force = false)
     {
         $categories_array = array();
 
+        if(Cache::has('categories_tree') && !$force) {
+            $categories_array = Cache::get('categories_tree');
+        }
+        else {
+            $categories_array = static::buildCategoriesTree($id,$path,$last_path);
+            Cache::forget('categories_tree');
+            Cache::add('categories_tree',$categories_array,1);
+        }
+
+        return $categories_array;
+    }
+
+    public static function buildCategoriesTree($id = 0, $path = '', $last_path = ''){
+        $categories_array = array();
         $categories = Vcategory::where('laparent_id', '=', $id)
             ->orderBy('laorder')
             ->orderBy('latitle')
@@ -30,9 +44,8 @@ class Vcategory extends Eloquent
                 'children' => array()
             );
 
-            $categories_array[$categorie->id]['children'] = Vcategory::getCategoriesTree($categorie->id, $path, $categorie->latitle);
+            $categories_array[$categorie->id]['children'] = static::buildCategoriesTree($categorie->id, $path, $categorie->latitle);
         }
-
         return $categories_array;
     }
 
@@ -71,12 +84,16 @@ class Vcategory extends Eloquent
 
     public static function randCat()
     {
+        $array = array();
+
+        if(Cache::has('start_rand_cat')){
+            return Cache::get('start_rand_cat');
+        }
         $parentcat = DB::table('v_categories')
             ->where('laparent_id', '=', '0')
             ->where('laurl', '!=', 'tin-tuc')
             ->orderBy(DB::raw('RAND()'))
             ->get();
-        $array = array();
         foreach ($parentcat as $cat) {
             $ranproduct = DB::table('v_products')
                 ->where('ladeleted','!=','1')
@@ -91,6 +108,7 @@ class Vcategory extends Eloquent
             $array[$cat->id]['cat'] = $cat;
             $array[$cat->id]['product'] = $ranproduct;
         }
+        Cache::add('start_rand_cat',$array,5);
         return $array;
     }
 

@@ -15,13 +15,13 @@ class DetailsController extends BaseController
         $this->data['oProduct'] = null;
         $product = Vproduct::where('laurl','=',$product)
             ->where('ladeleted','!=','1')
-            ->get();
-        if($product->count()>0){
-            $this->data['oProduct'] = $product[0];
+            ->first();
+        if($product){
+            $this->data['oProduct'] = $product;
             $this->data['title'] =  $this->data['oProduct']->latitle.' - '.$this->data['oProduct']->cat1name;
             $this->data['description']=$this->data['oProduct']->lashortinfo;
             $this->data['keywords']=$this->data['oProduct']->lakeyword;
-            $uproduct = Product::find($product[0]->id);
+            $uproduct = Product::find($product->id);
             $uproduct->laview += 1;
             $uproduct->save();
         }
@@ -29,8 +29,7 @@ class DetailsController extends BaseController
             App::abort(404);
         }
 
-        if($cat != 'tin-tuc')
-
+        if($product->isnews == 0)
         return View::make(Config::get('shop.theme')."/details/details",$this->data);
         else
         return View::make(Config::get('shop.theme')."/details/news",$this->data);

@@ -49,6 +49,8 @@ class ShopAdminController extends BaseController
                 else $dbCat->isnews = 0;
 
                 $dbCat->save();
+                //rebuild cache
+                Vcategory::getCategoriesTree(0, '', '', true);
 
                 $id = $dbCat->id;
                 $flag = 'view';
