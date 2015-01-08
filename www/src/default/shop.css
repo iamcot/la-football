@@ -662,6 +662,15 @@ img {
     padding: 0;
 }
 
+.newsitem{
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #cccccc;
+    padding-bottom: 10px;
+}
+.shorinfo{
+    text-indent: 20px;
+}
+
 .ajaxload {
     background: url(img/ajax-loader.gif) no-repeat;
 }

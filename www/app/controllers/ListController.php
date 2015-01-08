@@ -24,7 +24,8 @@ class ListController extends  BaseController
                     ->Where('cat1url','=',$cat)
                     ->orWhere('cat2url','=',$cat)
                     ->orWhere('cat3url','=',$cat)
-                    ->paginate(Config::get('shop.tablepp'));
+                    ->orderby('id','desc')
+                    ->paginate(10);
                 $this->data['lists'] = $lists;
                 return View::make(Config::get('shop.theme')."/list/listnews",$this->data);
 
