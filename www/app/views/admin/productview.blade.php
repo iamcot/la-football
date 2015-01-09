@@ -1,11 +1,18 @@
 <div class="col-xs-8">
-    {{Form::text('filter','',array('class'=>'form-control','placeholder'=>'Lọc theo tên sản phẩm, thư mục, nhà sx ','style'=>'width:50%;display:inline-block'))}}
+    {{Form::open(array('method'=>'GET'))}}
+    {{Form::text('filter',( Input::has('filter')?Input::get('filter'):'' ),array('class'=>'form-control','placeholder'=>'Lọc theo tên sản phẩm, thư mục, nhà sx ','style'=>'width:50%;display:inline-block'))}}
     <button class="btn btn-primary btn-sm">Lọc</button>
+    {{Form::close()}}
 </div>
 <div class="col-xs-4">
     <a class="btn btn-success pull-right btn-sm"  href="{{url('admin/product/create')}}">Tạo sản phẩm mới </a>
 </div>
 <div class="clearfix"></div><br>
+@if(Input::has('filter'))
+    {{$products->appends(array('filter' => Input::get('filter')))->links()}}
+    @else
+    {{$products->links()}}
+@endif
 <table class="table mylist table-bordered table-responsive">
     <thead>
         <tr>
@@ -43,5 +50,5 @@
             </tr>
         @endforeach
     </tbody>
-    {{$products->links()}}
+
 </table>

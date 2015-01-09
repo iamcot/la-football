@@ -209,7 +209,7 @@ class ShopAdminController extends BaseController
         if ($sidecat == '') $sidecat = 'view';
         $flag = $sidecat;
         $input = Input::all();
-        if (count($input) > 0 && isset($input['_token'])) {
+        if (count($input) > 0 && isset($input['_token']) && !isset($input['filter']) ) {
 
             if ($input['id'] == '')
                 $dbCat = new Product();
@@ -270,7 +270,11 @@ class ShopAdminController extends BaseController
         $this->data['factors'] = Factory::adminSelectFactor();
         if ($flag == 'view') {
             $this->data['cats'] = Category::adminSelectCat($cats, true);
-            $this->data['products'] = Product::adminViewProduct();
+            $filter = '';
+            if(isset($input['filter'])) {
+                $filter = $input['filter'];
+            }
+            $this->data['products'] = Product::adminViewProduct($filter);
         }
         else {
 //            $upload_handler = new UploadHandler\UploadHandler();
