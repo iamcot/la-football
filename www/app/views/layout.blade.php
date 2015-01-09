@@ -77,7 +77,7 @@
                 // Additional initialization code such as adding Event Listeners goes here
             };
             var comment_callback = function(response) {
-//                console.log(response);
+                console.log(response);
                 var url = response.href;
                 var commentid = response.commentID;
 //                FB.api(

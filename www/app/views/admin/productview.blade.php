@@ -25,6 +25,7 @@
             <th>Klg (g)</th>
             <th style="width: 20%">Thông tin ngắn</th>
             <th>Ảnh</th>
+            <th>View</th>
             <th></th>
         </tr>
     </thead>
@@ -40,6 +41,7 @@
                 <td>{{$product->lakhoiluong}}</td>
                 <td>{{str_limit($product->lashortinfo,40)}}</td>
                 <td class='imgthumb'>{{ HTML::image('uploads/thumbnails/product/' . $product->laimage, 'IMG') }}</td>
+                <td>{{$product->laview}}</td>
                 <td>
                     @if($product->lavariant_id == 0)
                     {{link_to('admin/editproduct/' . $product->id.'/1', 'Tạo biến thể')}}
