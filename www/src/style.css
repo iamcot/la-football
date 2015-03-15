@@ -34,3 +34,10 @@ a{
     max-width: 40px;
     max-height: 40px;
 }
+p.oos {
+    position: absolute;
+    top:10%;
+    background: red;
+    color: #fff;
+    text-align: center;
+}

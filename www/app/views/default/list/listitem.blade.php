@@ -1,5 +1,8 @@
 <div class="col-sm-6 col-md-4 col-lg-3 " itemprop="itemListElement" itemscope itemtype="http://schema.org/Product">
     <div class="thumbnail product">
+        @if ($list->laamount <= 0 )
+            <p class="oos">Tạm hết</p>
+        @endif
         <a itemprop="url" href="{{URL::to($list->cat1url.'/'.$list->laurl.'.html')}}">
             <img itemprop="image" src="{{URL::to('/uploads/thumbnails/product/'.$list->laimage)}}"
                  alt="{{$list->latitle}}" title="{{$list->lashortinfo}}">

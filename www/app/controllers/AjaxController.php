@@ -25,4 +25,21 @@ class AjaxController extends BaseController{
         else echo -1;
 
     }
+
+    public function anyEditprice($productId, $editPrice)
+    {
+        echo Product::find($productId)
+            ->update(array('laprice'=>$editPrice));
+    }
+    public function anyEos($productId)
+    {
+        echo Product::find($productId)
+            ->update(array('laamount'=> 0));
+    }
+    public function anyFos($productId)
+    {
+        echo Product::find($productId)
+            ->update(array('laamount'=> 10));
+    }
+
 }

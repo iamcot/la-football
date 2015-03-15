@@ -810,3 +810,19 @@ label.error {
 
     }
 }
+
+p.oos {
+    position: absolute;
+    top:5%;
+    background: red;
+    color: #fff;
+    text-align: center;
+    z-index: 800;
+    font-weight: bold;
+    width: 81%;
+}
+
+p.oos-text {
+    font-weight: bold;
+    color: red;
+}

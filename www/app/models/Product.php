@@ -2,6 +2,7 @@
 class Product extends Eloquent
 {
     protected $table = 'laproducts';
+    protected $fillable = array('latitle','laprice','laamount');
     public static function adminViewProduct($filter = ''){
         $product =  DB::table('laproducts as p')
             ->leftJoin('lacategories as c', 'c.id', '=', 'p.lacategory_id')

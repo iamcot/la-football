@@ -1,5 +1,6 @@
 @extends(Config::get('shop.theme').'/layout/page')
 @section('pagecontent')
+    {{--*/ $user = Auth::user() /*--}}
 <div id="details">
     <div id="maininfo"  itemscope itemtype="http://schema.org/Product">
         {{--*/ $morepic = Image::where("laproduct_id",'=',$oProduct->id)
@@ -41,7 +42,15 @@
                 @if($oProduct->laprice < $oProduct->laoldprice)
             ( <span class="detailsOldPrice"> {{number_format($oProduct->laoldprice,0,',','.')}} </span> )
             @endif
+                @if($user && $user->isAdmin())
+                    <input name="editprice" id="editprice">
+                    <a href="javascript:editprice({{$oProduct->id}})" class="btn btn-warning">Sửa giá</a>
+                    <a href="javascript:eos({{$oProduct->id}})" class="btn btn-danger">Hết hàng</a>
+                    <a href="javascript:fos({{$oProduct->id}})" class="btn btn-primary">Có hàng</a>
+                    @endif
+                </p>
             @if($oProduct->sumvariant > 0)
+                <p>Vui lòng chon mẫu rồi mới đặt hàng</p>
                   {{--*/ $variants = Product::getVariants($oProduct->id) /*--}}
             <dl>
                 <dt>Chọn mẫu</dt>
@@ -62,6 +71,7 @@
                     </dd>
             </dl>
             @endif
+                @if ($oProduct->laamount > 0)
                 <div>
                     {{ Form::open(array(
                         'url' => '/cart/add',
@@ -78,6 +88,9 @@
                     {{ Form::close() }}
 
                 </div>
+                @else
+                    <p class="oos-text">TẠM HẾT HÀNG </p>
+                    @endif
                 <div class="clearfix"></div>
                 <br>
              <dl class="dl-horizontal">
@@ -201,6 +214,52 @@
                  $("#addtocart").removeAttr("disabled");
              }
          });
+     }
+
+     function editprice(id)
+     {
+         var editprice = $("#editprice").val();
+         if (!editprice || isNaN(editprice)) {
+             alert("Giá nhập không hợp lệ");
+             return false;
+         }
+
+         $.ajax({
+             url: "{{URL::to('ajax/editprice')}}/"+id+"/"+editprice,
+             success: function(msg){
+                if (msg) {
+                    window.location.reload();
+                } else {
+                    alert("Sửa giá thất bại, thử lại.");
+                }
+             }
+         })
+     }
+     function eos(id)
+     {
+         $.ajax({
+             url: "{{URL::to('ajax/eos')}}/"+id,
+             success: function(msg){
+                if (msg) {
+                    window.location.reload();
+                } else {
+                    alert("Cập nhật thất bại, thử lại.");
+                }
+             }
+         })
+     }
+     function fos(id)
+     {
+         $.ajax({
+             url: "{{URL::to('ajax/fos')}}/"+id,
+             success: function(msg){
+                if (msg) {
+                    window.location.reload();
+                } else {
+                    alert("Cập nhật thất bại, thử lại.");
+                }
+             }
+         })
      }
  </script>
 @stop

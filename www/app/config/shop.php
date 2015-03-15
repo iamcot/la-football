@@ -44,13 +44,13 @@ return array(
 
     ),
     'shipping' => array(
-        'ship_shop' => array(
-            'id' => 'ship_shop',
-            'value' => 'Nhận  tại cửa hàng',
-            'time' => '1',
-            'pay_allow' => array('pay_tienmat'),
-            'province_allow' => array('hcm'),
-        ),
+//        'ship_shop' => array(
+//            'id' => 'ship_shop',
+//            'value' => 'Nhận  tại cửa hàng',
+//            'time' => '1',
+//            'pay_allow' => array('pay_tienmat'),
+//            'province_allow' => array('hcm'),
+//        ),
         'ship_hcm' => array(
             'id' => 'ship_hcm',
             'value' => 'Ship Nội thành Sài Gòn',
@@ -58,13 +58,13 @@ return array(
             'pay_allow' => array('pay_tienmat'),
             'province_allow' => array('hcm'),
         ),
-        'ship_xe' => array(
-            'id' => 'ship_xe',
-            'value' => 'Gửi nhà xe',
-            'time' => '1~2',
-            'pay_allow' => array('pay_chuyenkhoan'),
-            'province_allow' => array('daklak','daknong','khanhhoa','danang','longan','kiengiang','tayninh','cantho','camau','dongthap','vungtau'),
-        ),
+//        'ship_xe' => array(
+//            'id' => 'ship_xe',
+//            'value' => 'Gửi nhà xe',
+//            'time' => '1~2',
+//            'pay_allow' => array('pay_chuyenkhoan'),
+//            'province_allow' => array('daklak','daknong','khanhhoa','danang','longan','kiengiang','tayninh','cantho','camau','dongthap','vungtau'),
+//        ),
         'ship_ems' => array(
             'id' => 'ship_ems',
             'value' => 'Gửi Chuyển phát NHANH',

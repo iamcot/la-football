@@ -37,7 +37,7 @@
             <a href="{{ URL::to('cart/uid/'.Session::get('uid')) }}">Các đơn hàng cũ</a>
             @endif
             </span> <br>
-            <span class="cartsum"><a href="javascript:showflybasket()"><strong class="text-success">{{$sumcart}}</strong> sản phẩm | <span class="glyphicon glyphicon-usd"></span> <strong  class="text-success">{{number_format(Orders::getSumPriceCart(),0,',','.')}}</strong></a></span>
+            <span class="cartsum"><a href="javascript:showflybasket()"><strong class="text-success">{{$sumcart}}</strong> sản phẩm | <strong  class="text-success">{{number_format(Orders::getSumPriceCart(),0,',','.')}}đ</strong></a></span>
         </div>
         @if(Session::has('cart'))
         <div id="basketflybox">
@@ -46,7 +46,7 @@
                 {{--*/ $sumprice = 0 /*--}}
 
                 @foreach(Session::get('cart') as $item)
-                <tr><td class="col-xs-8 text-left"><strong>{{$item['latitle']}}</strong> {{$item['variantname']}} x {{$item['amount']}}</td><td class="text-right"><span class="glyphicon glyphicon-usd"></span> {{number_format($item['amount'] * $item['laprice'],0,',','.')}}</td></tr>
+                <tr><td class="col-xs-8 text-left"><strong>{{$item['latitle']}}</strong> {{$item['variantname']}} x {{$item['amount']}}</td><td class="text-right">{{number_format($item['amount'] * $item['laprice'],0,',','.')}}đ</td></tr>
                 {{--*/ $sumprice += ($item['amount'] * $item['laprice']) /*--}}
                 @endforeach
 
@@ -57,29 +57,3 @@
 
     </div>
 </div>
-@section('jscript')
-<script>
-    @if(Session::get('actionstatus', 0) == Config::get('actionstatus.cart_has_new'))
-
-        $(document).ready(function() {
-            $("#basketflybox").show();
-        });
-
-    @endif
-
-
-         function showflybasket(){
-             $("#basketflybox").show();
-         }
-         function hideflybasket(){
-             $("#basketflybox").hide();
-         }
-         $('html').click(function() {
-             $("#basketflybox").hide();
-         });
-
-         $('#basketflybox').click(function(event){
-             event.stopPropagation();
-         });
-     </script>
-@stop
