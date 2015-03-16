@@ -7,7 +7,7 @@
         <div class="bg-success hidden-print"><strong>Đơn hàng đã được gửi đi, chúng tôi sẽ liên hệ giao hàng cho quý khách trong thời gian sớm nhất.</strong>
             <br>
             @if($orderinfo->laorderemail != '')
-            Thông tin hóa đơn cũng đã được gửi về email: {{$orderinfo->laorderemail}}
+            Thông tin hóa đơn cũng đã được gửi về email: {{$orderinfo->laorderemail}} (Nếu bạn không thấy mail trong inbox, vui lòng kiểm tra trong hộp thư spam)
             @endif
         </div>
         <h3>Mã Đơn hàng: <strong class="text-danger">{{$orderinfo->id}}</strong>

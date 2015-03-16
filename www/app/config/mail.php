@@ -14,8 +14,10 @@ return array(
 	| Supported: "smtp", "mail", "sendmail"
 	|
 	*/
+    'enable' => true,
 
-	'driver' => 'smtp',
+//	'driver' => 'smtp',
+	'driver' => 'mail',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +30,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+//	'host' => 'smtp.gmail.com',
+	'host' => 'mail.webmypham.vn',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +44,8 @@ return array(
 	|
 	*/
 
-	'port' => 587,
+//	'port' => 465,
+	'port' => 25,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +58,8 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+//	'from' => array('address' => 'pepsi1903@gmail.com', 'name' => 'Thái Boutique'),
+	'from' => array('address' => 'order@webmypham.vn', 'name' => 'Thái Boutique'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +85,8 @@ return array(
 	|
 	*/
 
-	'username' => null,
+//	'username' => 'pepsi1903@gmail.com',
+	'username' => 'order@webmypham.vn',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +99,8 @@ return array(
 	|
 	*/
 
-	'password' => null,
+//	'password' => 'pepsilovely',
+	'password' => 'abc123',
 
 	/*
 	|--------------------------------------------------------------------------

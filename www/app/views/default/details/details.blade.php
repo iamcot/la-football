@@ -145,7 +145,6 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#tabinfo" data-toggle="tab">Thông tin sản phẩm</a></li>
-            <li><a href="#tabhdsd" data-toggle="tab">Hướng dẫn sử dụng</a></li>
             <li><a href="#tabcomment" data-toggle="tab">Bình luận</a></li>
             <li><a href="#tabnews" data-toggle="tab">Tin tức liên quan </a></li>
         </ul>
@@ -154,7 +153,6 @@
         <div class="tab-content">
             <div class="tab-pane active" id="tabinfo">{{$oProduct->lainfo}}</div>
 
-            <div class="tab-pane" id="tabhdsd">{{$oProduct->lauseguide}}</div>
             <div class="tab-pane text-center" id="tabcomment">
                 <div class="fb-comments" data-href="{{Request::url()}}" data-numposts="5" data-colorscheme="light"></div>
             </div>

@@ -152,9 +152,24 @@ class OrdersController extends BaseController
             $this->data['orderinfo'] = Orders::find($orderid);
             $this->data['orderitems'] = Orderitem::where('order_id','=',$orderid)->get();
             $this->data['title'] = 'Đơn hàng '.$this->data['orderinfo']->id;
+
+            //send email
+            if (Config::get('mail.enable')) {
+                Mail::send("emails/checkoutinfo", $this->data, function ($message) {
+                    $message->to('pepsi1903@gmail.com', 'Pepsi')->subject('Đơn đặt hàng mới của Thái Boutique');
+                });
+                if ($input['orderemail']) {
+                    Mail::send("emails/checkoutinfo", $this->data, function ($message) {
+                        $message->to(Input::get('orderemail'), Input::get('ordername'))->subject('Đặt hàng thành công trên Thái Boutique');
+                    });
+                }
+            }
+
+
             Session::put('_token', md5(microtime()));
             Session::forget('cart');
             Session::forget('voucher');
+
             return View::make(Config::get('shop.theme')."/cart/checkoutinfo",$this->data);
         }
         else{
